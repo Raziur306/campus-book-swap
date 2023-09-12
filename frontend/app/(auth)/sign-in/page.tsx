@@ -9,9 +9,15 @@ import {
   StyledSignInTitleText,
 } from "@/styled/signInStyles";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 const SignIn = () => {
+  const router = useRouter();
+  const handleSignUpClick = () => {
+    router.push('/sign-up');
+  };
+
   return (
     <>
       <StyledSignInContainer>
@@ -25,7 +31,7 @@ const SignIn = () => {
           <div className="flex flex-col gap-3 m-3">
             <p className="text-center text-xl">Welcome Back !</p>
             <p className="text-center text-base text-gray-600">
-              Sign in to continue to yourDigital Library
+              Sign in to continue to your Digital Library
             </p>
           </div>
 
@@ -45,6 +51,15 @@ const SignIn = () => {
             <StyledForgetPassText>Forgot password?</StyledForgetPassText>
           </div>
           <StyledSignInBtn>Sign In</StyledSignInBtn>
+          <p className="mb-10">
+            New User?{" "}
+            <span
+              onClick={handleSignUpClick}
+              className="underline cursor-pointer font-bold"
+            >
+              Register Here
+            </span>
+          </p>
         </div>
       </StyledSignInContainer>
     </>
