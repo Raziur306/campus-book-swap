@@ -8,14 +8,14 @@ import {
   StyledSignInSubTitle,
   StyledSignInTitleText,
 } from "@/styled/signInStyles";
-import Image from "next/image";
+
 import { useRouter } from "next/navigation";
 import React from "react";
 
 const SignIn = () => {
   const router = useRouter();
   const handleSignUpClick = () => {
-    router.push('/sign-up');
+    router.push("/sign-up");
   };
 
   return (

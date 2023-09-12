@@ -10,20 +10,20 @@ export const StyledSignInContainer = styled.div`
 `;
 
 export const StyledSignInTitleText = styled.p`
-text-align:center;
-font-family:Headland One;
-font-weight:bold;
-font-size:1.9rem;
-& span{
-    color:#fa7c54;
-}
+  text-align: center;
+  font-family: Headland One;
+  font-weight: bold;
+  font-size: 1.9rem;
+  & span {
+    color: #fa7c54;
+  }
 `;
 
 export const StyledSignInSubTitle = styled.p`
-text-align:center;
-font-family:Headland One;
-font-weight:bold;
-font-size:1.9rem;
+  text-align: center;
+  font-family: Headland One;
+  font-weight: bold;
+  font-size: 1.9rem;
 `;
 
 export const StyledInputField = styled.input`
@@ -65,15 +65,15 @@ export const StyledSignInBtn = styled.button`
   background: #fa7c54;
   border: 1px solid #fa7c54;
   color: #fff;
-  margin-top:1rem;
+  margin-top: 1rem;
   text-align: center;
   font-family: Inter;
   font-size: 1rem;
   font-style: normal;
   font-weight: 600;
   line-height: 100%;
-  &:hover{
-    background:#f5835f;
+  &:hover {
+    background: #f5835f;
   }
 `;
 
@@ -86,5 +86,5 @@ export const StyledForgetPassText = styled.p`
   font-weight: 400;
   line-height: 100%;
   text-decoration-line: underline;
-  cursor:pointer;
+  cursor: pointer;
 `;
