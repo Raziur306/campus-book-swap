@@ -9,23 +9,6 @@ export const StyledSignInContainer = styled.div`
   background-attachment: fixed;
 `;
 
-export const StyledSignInTitleText = styled.p`
-  text-align: center;
-  font-family: Headland One;
-  font-weight: bold;
-  font-size: 1.9rem;
-  & span {
-    color: #fa7c54;
-  }
-`;
-
-export const StyledSignInSubTitle = styled.p`
-  text-align: center;
-  font-family: Headland One;
-  font-weight: bold;
-  font-size: 1.9rem;
-`;
-
 export const StyledInputField = styled.input`
   width: 100%;
   display: flex;

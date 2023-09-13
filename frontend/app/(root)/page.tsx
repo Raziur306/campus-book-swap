@@ -1,9 +1,8 @@
-import Image from 'next/image'
+"use client";
+import React from "react";
 
-export default function Home() {
-  return (
-   <> 
-   Campus Book Swap
-   </>
-  )
-}
+const Home = () => {
+  return <></>;
+};
+
+export default Home;

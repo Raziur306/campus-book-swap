@@ -9,22 +9,6 @@ export const StyledVerifyContainer = styled.div`
   background-attachment: fixed;
 `;
 
-export const StyledVerifyTitleText = styled.p`
-  text-align: center;
-  font-family: Headland One;
-  font-weight: bold;
-  font-size: 1.9rem;
-  & span {
-    color: #fa7c54;
-  }
-`;
-
-export const StyledVerifySubTitle = styled.p`
-  text-align: center;
-  font-family: Headland One;
-  font-weight: bold;
-  font-size: 1.9rem;
-`;
 
 export const StyledVerifyLoginBtn = styled.button`
   margin-bottom: 2rem;

@@ -1,8 +1,7 @@
 "use client";
+import { StyledSubTitleText, StyledTitleText } from "@/styled/common";
 import {
-  StyledVerifyTitleText,
   StyledVerifyContainer,
-  StyledVerifySubTitle,
   StyledVerifyLoginBtn,
 } from "@/styled/emailVerificationStyles";
 import Image from "next/image";
@@ -24,10 +23,10 @@ const EamilVerification = () => {
       <StyledVerifyContainer>
         <div className=" flex flex-col bg-white rounded-lg p-10 m-auto gap-5 shadow-xl">
           <div className="m-5">
-            <StyledVerifyTitleText>
+            <StyledTitleText>
               Campus <span>Book</span>
-            </StyledVerifyTitleText>
-            <StyledVerifySubTitle>Swap</StyledVerifySubTitle>
+            </StyledTitleText>
+            <StyledSubTitleText>Swap</StyledSubTitleText>
           </div>
           <div className="flex flex-col gap-3 m-3">
             <p className="text-center text-xl">Email Verification</p>

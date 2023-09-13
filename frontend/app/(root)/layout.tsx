@@ -1,4 +1,5 @@
-import '../../styles/globals.css';
+import { Leftbar, Topbar } from "@/components";
+import "../../styles/globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 
@@ -16,7 +17,16 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <div className="flex flex-row gap-5 bg-gray-200">
+          <Leftbar />
+          <div className="flex flex-col w-full h-full">
+            <Topbar />
+            {children}
+          </div>
+          l
+        </div>
+      </body>
     </html>
   );
 }

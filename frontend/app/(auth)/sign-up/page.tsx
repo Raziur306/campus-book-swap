@@ -1,11 +1,10 @@
 "use client";
+import { StyledSubTitleText, StyledTitleText } from "@/styled/common";
 import {
   StyledInputField,
   StyledLabel,
   StyledSignUpBtn,
   StyledSignUpContainer,
-  StyledSignUpSubTitle,
-  StyledSignUpTitleText,
 } from "@/styled/signUpStyles";
 
 import { useRouter } from "next/navigation";
@@ -24,10 +23,10 @@ const SignUp = () => {
       <StyledSignUpContainer>
         <div className=" flex flex-col bg-white rounded-lg p-10 m-auto gap-5 shadow-md">
           <div className="m-1">
-            <StyledSignUpTitleText>
+            <StyledTitleText>
               Campus <span>Book</span>
-            </StyledSignUpTitleText>
-            <StyledSignUpSubTitle>Swap</StyledSignUpSubTitle>
+            </StyledTitleText>
+            <StyledSubTitleText>Swap</StyledSubTitleText>
           </div>
           <div className="flex flex-col gap-3 m-3">
             <p className="text-center text-xl">Create Your Account</p>

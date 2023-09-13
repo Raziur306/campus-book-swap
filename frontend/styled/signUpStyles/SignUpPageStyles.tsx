@@ -9,22 +9,7 @@ export const StyledSignUpContainer = styled.div`
   background-attachment: fixed;
 `;
 
-export const StyledSignUpTitleText = styled.p`
-text-align:center;
-font-family:Headland One;
-font-weight:bold;
-font-size:1.9rem;
-& span{
-    color:#fa7c54;
-}
-`;
 
-export const StyledSignUpSubTitle = styled.p`
-text-align:center;
-font-family:Headland One;
-font-weight:bold;
-font-size:1.9rem;
-`;
 
 export const StyledInputField = styled.input`
   width: 100%;
