@@ -1,5 +1,5 @@
 "use client";
-import { StyledSubTitleText, StyledTitleText } from "@/styled/common";
+import { StyledSubTitleText, StyledTitleText } from "@/styled";
 import {
   StyledVerifyContainer,
   StyledVerifyLoginBtn,

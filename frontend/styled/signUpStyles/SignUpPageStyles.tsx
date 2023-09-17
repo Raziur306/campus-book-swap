@@ -9,9 +9,7 @@ export const StyledSignUpContainer = styled.div`
   background-attachment: fixed;
 `;
 
-
-
-export const StyledInputField = styled.input`
+export const StyledSignUpInputField = styled.input`
   width: 100%;
   display: flex;
   padding: 1rem;
@@ -29,7 +27,7 @@ export const StyledInputField = styled.input`
   line-height: 1.5rem;
 `;
 
-export const StyledLabel = styled.label`
+export const StyledSignUpLabel = styled.label`
   color: #4d4d4d;
   font-family: Inter;
   font-size: 1rem;
@@ -50,16 +48,14 @@ export const StyledSignUpBtn = styled.button`
   background: #fa7c54;
   border: 1px solid #fa7c54;
   color: #fff;
-  margin-top:1rem;
+  margin-top: 1rem;
   text-align: center;
   font-family: Inter;
   font-size: 1rem;
   font-style: normal;
   font-weight: 600;
   line-height: 100%;
-  &:hover{
-    background:#f5835f;
+  &:hover {
+    background: #f5835f;
   }
 `;
-
-

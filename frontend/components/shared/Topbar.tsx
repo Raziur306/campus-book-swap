@@ -1,39 +1,49 @@
 "use client";
 import {
-  StyledTopbarAvatarWrapper,
-  StyledTopbarDateTimetext,
-  StyledTopbarDateWrapper,
-  StyledTopbarProfileText,
-  StyledTopbarProfileWrapper,
-  StyledTopbarSeach,
+  StyledTopBarAvatarWrapper,
+  StyledTopBarDateTimeText,
+  StyledTopBarDateWrapper,
+  StyledTopBarProfileText,
+  StyledTopBarProfileWrapper,
+  StyledTopBarSearch,
 } from "@/styled/topbarStyles";
 import Image from "next/image";
-import React from "react";
+import React, { useState, useContext } from "react";
 import Calendar from "../../public/svg/calendar.svg";
 import Clock from "../../public/svg/clock.svg";
 import ArrowDown from "../../public/svg/arrowDown.svg";
+import { NavControllerContext } from "@/app/context";
 
-const Topbar = () => {
-
+const TopBar = () => {
+  const { updateSideBarState } = useContext(NavControllerContext);
 
   return (
-    <div className="flex flex-row justify-between mt-5  items-center">
+    <div className="flex flex-row justify-between mt-5  items-center p-5 sticky top-0 backdrop-blur-sm z-10">
+      <Image
+        onClick={() => updateSideBarState()}
+        className="cursor-pointer lg:hidden"
+        priority
+        width={40}
+        height={40}
+        alt="hamburger"
+        src={"/svg/hamburger.svg"}
+      />
       <div>
-        <StyledTopbarSeach placeholder="Search.." type="text" />
+        <StyledTopBarSearch placeholder="Search.." type="text" />
       </div>
-      <StyledTopbarDateWrapper className="flex flex-row gap-10">
+      <StyledTopBarDateWrapper className="flex flex-row gap-10">
         <div className="flex flex-row gap-2 items-center">
           <Clock />
-          <StyledTopbarDateTimetext>09:00 hrs</StyledTopbarDateTimetext>
+          <StyledTopBarDateTimeText>09:00 hrs</StyledTopBarDateTimeText>
         </div>
         <div className="flex flex-row gap-2 items-center">
           <Calendar />
-          <StyledTopbarDateTimetext>4-Mar-2023</StyledTopbarDateTimetext>
+          <StyledTopBarDateTimeText>4-Mar-2023</StyledTopBarDateTimeText>
         </div>
-      </StyledTopbarDateWrapper>
+      </StyledTopBarDateWrapper>
 
-      <StyledTopbarProfileWrapper className="flex flex-row gap-1 items-center">
-        <StyledTopbarAvatarWrapper>
+      <StyledTopBarProfileWrapper className="flex flex-row gap-1 items-center">
+        <StyledTopBarAvatarWrapper>
           <Image
             fill
             priority
@@ -41,12 +51,12 @@ const Topbar = () => {
             src="/images/avatar.jpg"
             alt="Rounded avatar"
           />
-        </StyledTopbarAvatarWrapper>
-        <StyledTopbarProfileText>Raziur Rahaman</StyledTopbarProfileText>
-        <ArrowDown className={"mr-[1rem] ml-[1rem] rotate-0 transition"}/>
-      </StyledTopbarProfileWrapper>
+        </StyledTopBarAvatarWrapper>
+        <StyledTopBarProfileText>Raziur Rahaman</StyledTopBarProfileText>
+        <ArrowDown className={"mr-[1rem] ml-[1rem] rotate-0 transition"} />
+      </StyledTopBarProfileWrapper>
     </div>
   );
 };
 
-export default Topbar;
+export default TopBar;

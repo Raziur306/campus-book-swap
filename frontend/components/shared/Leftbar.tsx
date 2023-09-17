@@ -3,12 +3,13 @@
 import { StyledSubTitleText, StyledTitleText } from "@/styled/common";
 import { LeftbarContainer, StyledMenuDiv } from "@/styled/leftbarStyles";
 import Image from "next/image";
-import React from "react";
+import React, { useState, useContext } from "react";
 import Home from "../../public/svg/home.svg";
 import Search from "../../public/svg/search.svg";
 import Shelf from "../../public/svg/shelf.svg";
 import Contribute from "../../public/svg/contribute.svg";
 import { useRouter, usePathname } from "next/navigation";
+import { NavControllerContext } from "@/app/context";
 
 export const LeftBarItems = [
   {
@@ -34,11 +35,26 @@ export const LeftBarItems = [
 ];
 
 const Leftbar = () => {
+  const { isSidebarOpen, updateSideBarState } =
+    useContext(NavControllerContext);
+
   const router = useRouter();
   const pathName = usePathname();
 
   return (
-    <LeftbarContainer>
+    <LeftbarContainer
+      className={`md:hidden lg:flex lg:flex-col md:w-0 ${
+        isSidebarOpen ? "display-nav" : ""
+      }`}
+    >
+      <Image
+        className="cursor-pointer absolute right-1 lg:hidden"
+        onClick={() => updateSideBarState()}
+        width={40}
+        height={40}
+        src={"/svg/cancel.svg"}
+        alt="Close Leftbar"
+      />
       <StyledTitleText>
         Campus <span>Book</span>
       </StyledTitleText>

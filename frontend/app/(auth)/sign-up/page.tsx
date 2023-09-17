@@ -1,11 +1,11 @@
 "use client";
 import { StyledSubTitleText, StyledTitleText } from "@/styled/common";
 import {
-  StyledInputField,
-  StyledLabel,
+  StyledSignUpInputField,
+  StyledSignUpLabel,
   StyledSignUpBtn,
   StyledSignUpContainer,
-} from "@/styled/signUpStyles";
+} from "@/styled";
 
 import { useRouter } from "next/navigation";
 import React from "react";
@@ -19,7 +19,6 @@ const SignUp = () => {
 
   return (
     <>
-    
       <StyledSignUpContainer>
         <div className=" flex flex-col bg-white rounded-lg p-10 m-auto gap-5 shadow-md">
           <div className="m-1">
@@ -38,20 +37,26 @@ const SignUp = () => {
           </div>
 
           <div className="flex flex-col gap-3">
-            <StyledLabel>Full Name</StyledLabel>
-            <StyledInputField placeholder="Enter your full name" type="text" />
+            <StyledSignUpLabel>Full Name</StyledSignUpLabel>
+            <StyledSignUpInputField
+              placeholder="Enter your full name"
+              type="text"
+            />
           </div>
           <div className="flex flex-col gap-3">
-            <StyledLabel>University Email ID</StyledLabel>
-            <StyledInputField placeholder="example@iubat.edu" type="email" />
+            <StyledSignUpLabel>University Email ID</StyledSignUpLabel>
+            <StyledSignUpInputField
+              placeholder="example@iubat.edu"
+              type="email"
+            />
           </div>
           <div className="flex flex-col gap-3">
-            <StyledLabel>Password</StyledLabel>
-            <StyledInputField placeholder="**********" type="password" />
+            <StyledSignUpLabel>Password</StyledSignUpLabel>
+            <StyledSignUpInputField placeholder="**********" type="password" />
           </div>
           <div className="flex flex-col gap-3">
-            <StyledLabel>Confirm Password</StyledLabel>
-            <StyledInputField placeholder="**********" type="password" />
+            <StyledSignUpLabel>Confirm Password</StyledSignUpLabel>
+            <StyledSignUpInputField placeholder="**********" type="password" />
           </div>
           <StyledSignUpBtn>Sign Up</StyledSignUpBtn>
           <p className="mb-10">

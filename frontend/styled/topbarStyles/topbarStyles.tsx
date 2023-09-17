@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
-export const StyledTopbarContainer = styled.div`
+export const StyledTopBarContainer = styled.div`
 
 
 `;
 
 
-export const StyledTopbarSeach = styled.input`
+export const StyledTopBarSearch = styled.input`
 border-radius: 40px;
 font-size:1.25rem;
 background: #FFF;
@@ -17,7 +17,7 @@ background-repeat: no-repeat;
 background-position: 95% center;
 `;
 
-export const StyledTopbarDateWrapper = styled.div`
+export const StyledTopBarDateWrapper = styled.div`
 border-radius: 40px;
 cursor:pointer;
 background: #FFF;
@@ -25,7 +25,7 @@ box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
 padding:0.7rem;
 `;
 
-export const StyledTopbarDateTimetext = styled.p`
+export const StyledTopBarDateTimeText = styled.p`
 color: #4D4D4D;
 text-align: center;
 font-family: Headland One;
@@ -36,14 +36,14 @@ line-height: 128.523%; /* 19.278px */
 letter-spacing: -0.675px;
 `;
 
-export const StyledTopbarAvatarWrapper = styled.div`
+export const StyledTopBarAvatarWrapper = styled.div`
 position:relative;
 align-items:center;
 height:2.5rem;
 aspect-ratio:100/100;
 `;
 
-export const StyledTopbarProfileWrapper =styled.div`
+export const StyledTopBarProfileWrapper =styled.div`
 cursor:pointer;
 border-radius: 33px;
 background: #FFF;
@@ -51,7 +51,7 @@ box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
 padding:0.7rem
 `;
 
-export const StyledTopbarProfileText = styled.p`
+export const StyledTopBarProfileText = styled.p`
 color: #4D4D4D;
 max-width:14ch;
 font-family: Inter;

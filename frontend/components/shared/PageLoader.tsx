@@ -7,7 +7,7 @@ const PageLoader = () => {
 
   useEffect(() => {
     if (document.readyState == "complete") {
-        setIsLoaded(true)
+      setIsLoaded(true);
     }
   }, []);
 
@@ -19,10 +19,10 @@ const PageLoader = () => {
     <>
       <div
         role="status"
-        className="flex absolute backdrop-blur-sm w-full h-screen justify-center items-center  "
+        className="flex absolute backdrop-blur-sm w-full h-screen justify-center items-center z-50"
       >
         <Image
-        priority={true}
+          priority={true}
           width={500}
           height={500}
           alt="Loading Animation"

@@ -6,7 +6,7 @@ import {
   StyledLabel,
   StyledSignInBtn,
   StyledSignInContainer,
-} from "@/styled/signInStyles";
+} from "@/styled";
 
 import { useRouter } from "next/navigation";
 import React from "react";
