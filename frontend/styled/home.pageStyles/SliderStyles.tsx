@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const StyledSliderContainer = styled.div`
+width:30%;
 border-radius: 0.625rem;
 background: linear-gradient(0deg, rgba(0, 0, 0, 0.10) 0%, rgba(0, 0, 0, 0.10) 100%), linear-gradient(141deg, #EB5231 -29.15%, #571FCF 151.64%);
 color:#fff;

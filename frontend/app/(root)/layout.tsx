@@ -24,11 +24,11 @@ export default function RootLayout({
         <StyledComponentsRegistry>
           <NavControllerContextProvider>
             <PageLoader />
-            <div className="flex gap-5 bg-gray-200 items-start ">
+            <div className="flex gap-5 bg-gray-200 items-start">
               <Leftbar />
-              <div className="flex flex-col w-full h-full">
+              <div className="w-full overflow-hidden">
                 <Topbar />
-                {children}
+                <div className="flex flex-col w-full h-full">{children}</div>
               </div>
             </div>
           </NavControllerContextProvider>

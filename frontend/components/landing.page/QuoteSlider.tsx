@@ -40,7 +40,7 @@ const QuoteSlider = () => {
   };
 
   return (
-    <StyledSliderContainer className="w-full">
+    <StyledSliderContainer>
       <Slider {...settings}>
         {qouteList.map((qoute, index) => {
           return (
