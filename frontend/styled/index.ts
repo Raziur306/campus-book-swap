@@ -4,4 +4,5 @@ export * from "./leftbarStyles";
 export * from "./signInStyles";
 export * from "./topbarStyles";
 export * from "./signUpStyles";
-export * from './home.pageStyles'
+export * from "./home.pageStyles";
+export * from "./bookDetailsStyles";
