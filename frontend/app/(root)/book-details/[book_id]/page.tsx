@@ -57,7 +57,7 @@ const BookDetails = () => {
             <p className="mt-5 text-lg">Steve Krug</p>
             <Image width={88} height={101} alt="Author" src={'/images/author.jpg'} />
           </div>
-          <p className="text-justify">Steve Krug is a usability consultant who has more than 30 years of experience as a user advocate for companies like Apple, Netscape, AOL, Lexus, and others. Based in part on the success of his first book, Don't Make Me Think, he has become a highly sought-after speaker on usability design.</p>
+          <p className="text-justify">Steve Krug is a usability consultant who has more than 30 years of experience as a user advocate for companies like Apple, Netscape, AOL, Lexus, and others. Based in part on the success of his first book, Don&apos;t Make Me Think, he has become a highly sought-after speaker on usability design.</p>
 
        
         <div className="flex flex-row gap-5 mt-10"> 
