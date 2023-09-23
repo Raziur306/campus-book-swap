@@ -1,36 +1,36 @@
 "use client";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
+import { Metronome } from "@uiball/loaders";
+import { Metadata } from "next";
 
 const PageLoader = () => {
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (document.readyState == "complete") {
-      setIsLoaded(true);
-    }
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 3000);
+    return () => {
+      clearTimeout(timer);
+    };
   }, []);
 
-  if (isLoaded) {
+  if (!loading) {
     return <></>;
   }
 
   return (
-    <>
-      <div
-        role="status"
-        className="flex absolute backdrop-blur-sm w-full h-screen justify-center items-center z-50"
-      >
-        <Image
-          priority={true}
-          width={500}
-          height={500}
-          alt="Loading Animation"
-          src={"./svg/loading.svg"}
-        />
-        <span className="sr-only">Loading...</span>
-      </div>
-    </>
+    <div
+      role="status"
+      className="flex sticky flex-col h-screen z-50 right-0 left-0 top-0 bg-white bottom-0 items-center justify-center overflow-hidden gap-10"
+    >
+      <p className="font-semibold text-5xl font-mono">
+        Welcome to Campus <span className="text-[#F27851]">Book</span> Swap
+      </p>
+      <Metronome size={100} color="#F27851" />
+      <span className="sr-only">Loading...</span>
+    </div>
   );
 };
 
