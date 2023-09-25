@@ -1,7 +1,7 @@
 "use client";
 import { ProfilePageContainer, StyledProfileMenuUl } from "@/styled/profilePageStyles";
 import React, { useState } from "react";
-import { AccountSetting } from ".";
+import { AccountSetting, LoginSecurity } from ".";
 
 const ProfileComponent=()=> {
     const [selectedMenu, setSelectedMenu] = useState(0);
@@ -13,6 +13,7 @@ const ProfileComponent=()=> {
             <li onClick={()=>setSelectedMenu(1)} className={`${selectedMenu==1?'active':''} cursor-pointer`}>Login & Security</li>
         </StyledProfileMenuUl>
       {selectedMenu==0 &&  <AccountSetting/>}
+      {selectedMenu==1 &&  <LoginSecurity/>}
       
 
     </ProfilePageContainer>
