@@ -76,9 +76,9 @@ const Leftbar = () => {
       </div>
 
       <div className="flex flex-col mt-auto mb-10 gap-3">
-        <Link href={'/about'}>About </Link>
-        <Link href={'/support'}>Support</Link>
-        <Link href={'/terms&condition'}>Terms & Condition</Link>
+        <Link className="hover:text-gray-500" href={'/about'}>About </Link>
+        <Link className="hover:text-gray-500" href={'/support'}>Support</Link>
+        <Link className="hover:text-gray-500" href={'/terms&condition'}>Terms & Condition</Link>
       </div>
     </LeftbarContainer>
   );

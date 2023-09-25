@@ -14,9 +14,13 @@ import Clock from "../../public/svg/clock.svg";
 import ArrowDown from "../../public/svg/arrowDown.svg";
 import { NavControllerContext } from "@/app/context";
 import Link from "next/link";
+import { usePathname, } from "next/navigation";
 
 const TopBar = () => {
   const { updateSideBarState } = useContext(NavControllerContext);
+  const pathName = usePathname();
+
+  
 
   return (
     <div className="flex flex-row justify-between mt-5  items-center p-5 sticky top-0 backdrop-blur-sm z-10">
@@ -43,20 +47,20 @@ const TopBar = () => {
         </div>
       </StyledTopBarDateWrapper>
 
-      <Link href={'/profile'}>
-      <StyledTopBarProfileWrapper className="flex flex-row gap-1 items-center">
-        <StyledTopBarAvatarWrapper>
-          <Image
-            fill
-            priority
-            className=" max-w-[2.5rem] max-h-[2.5rem] rounded-full"
-            src="/images/avatar.jpg"
-            alt="Rounded avatar"
-          />
-        </StyledTopBarAvatarWrapper>
-        <StyledTopBarProfileText>Raziur Rahaman</StyledTopBarProfileText>
-        <ArrowDown className={"mr-[1rem] ml-[1rem] rotate-0 transition"} />
-      </StyledTopBarProfileWrapper>
+      <Link href={"/profile"}>
+        <StyledTopBarProfileWrapper $isProfileActive={pathName} className="flex flex-row gap-1 items-center">
+          <StyledTopBarAvatarWrapper>
+            <Image
+              fill
+              priority
+              className=" max-w-[2.5rem] max-h-[2.5rem] rounded-full"
+              src="/images/avatar.jpg"
+              alt="Rounded avatar"
+            />
+          </StyledTopBarAvatarWrapper>
+          <StyledTopBarProfileText>Raziur Rahaman</StyledTopBarProfileText>
+          <ArrowDown className={"mr-[1rem] ml-[1rem] rotate-0 transition"} />
+        </StyledTopBarProfileWrapper>
       </Link>
     </div>
   );
