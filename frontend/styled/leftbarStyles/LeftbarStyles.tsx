@@ -43,6 +43,8 @@ export const StyledMenuDiv = styled.div`
   font-weight: 400;
   line-height: normal;
   cursor: pointer;
+  position: relative;
+  transition: 0.3s ease-in-out;
   &.active {
     color: #fa7c54 !important;
     font-family: Inter;
@@ -50,5 +52,21 @@ export const StyledMenuDiv = styled.div`
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+  }
+  & :after {
+    content: "";
+    width: 0%;
+    height: 1px;
+    background: #fa7c54;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    
+    transition: 0.7s ease-in-out;
+  }
+  &:hover {
+    & :after {
+      width: 50%;
+    }
   }
 `;

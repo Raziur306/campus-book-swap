@@ -10,6 +10,7 @@ import Shelf from "../../public/svg/shelf.svg";
 import Contribute from "../../public/svg/contribute.svg";
 import { useRouter, usePathname } from "next/navigation";
 import { NavControllerContext } from "@/app/context";
+import Link from "next/link";
 
 export const LeftBarItems = [
   {
@@ -72,6 +73,12 @@ const Leftbar = () => {
             </StyledMenuDiv>
           );
         })}
+      </div>
+
+      <div className="flex flex-col mt-auto mb-10 gap-3">
+        <Link href={'/about'}>About </Link>
+        <Link href={'/support'}>Support</Link>
+        <Link href={'/terms&condition'}>Terms & Condition</Link>
       </div>
     </LeftbarContainer>
   );

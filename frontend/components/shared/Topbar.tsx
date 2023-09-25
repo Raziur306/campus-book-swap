@@ -13,6 +13,7 @@ import Calendar from "../../public/svg/calendar.svg";
 import Clock from "../../public/svg/clock.svg";
 import ArrowDown from "../../public/svg/arrowDown.svg";
 import { NavControllerContext } from "@/app/context";
+import Link from "next/link";
 
 const TopBar = () => {
   const { updateSideBarState } = useContext(NavControllerContext);
@@ -42,6 +43,7 @@ const TopBar = () => {
         </div>
       </StyledTopBarDateWrapper>
 
+      <Link href={'/profile'}>
       <StyledTopBarProfileWrapper className="flex flex-row gap-1 items-center">
         <StyledTopBarAvatarWrapper>
           <Image
@@ -55,6 +57,7 @@ const TopBar = () => {
         <StyledTopBarProfileText>Raziur Rahaman</StyledTopBarProfileText>
         <ArrowDown className={"mr-[1rem] ml-[1rem] rotate-0 transition"} />
       </StyledTopBarProfileWrapper>
+      </Link>
     </div>
   );
 };
