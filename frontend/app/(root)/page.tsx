@@ -1,6 +1,10 @@
-"use client";
 import { BookCard, NewArrival, QuoteSlider } from "@/components";
+import { Metadata } from "next";
 import React from "react";
+
+export const metadata: Metadata = {
+  title: "Home | Campus Book Swap",
+};
 
 const Home = () => {
   return (
