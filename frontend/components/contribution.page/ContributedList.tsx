@@ -22,7 +22,7 @@ const ContributedList = () => {
         <BookCard/>
         <BookCard/>
       </div>
-      <Link className="hover:underline" href={'/all-contribution'}>View All</Link>
+      <Link className="hover:underline" href={'/my-contribution'}>View All</Link>
     </div>
   );
 };
