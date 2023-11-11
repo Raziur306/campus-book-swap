@@ -11,17 +11,16 @@ export const StyledContributionTextField = styled.input`
   border: 1px solid #dcd9d9;
   background: #fff;
   color: #4d4d4d;
-  font-family: Inter;
+  font-family: ${(props: any) => props.theme.fonts.$poppins};
   font-size: 1rem;
   font-style: normal;
   font-weight: 400;
   line-height: 1.5rem;
 `;
 
-
 export const StyledContributeInputLabel = styled.label`
   color: #4c535f;
-  font-family: Inter;
+  font-family: ${(props: any) => props.theme.fonts.$poppins};
   font-size: 1rem;
   font-style: normal;
   font-weight: 500;
@@ -29,21 +28,21 @@ export const StyledContributeInputLabel = styled.label`
 `;
 
 export const StyledContributionTextArea = styled.textarea`
-resize:none;
-padding:16px;
-min-height:200px;
-border-radius: 8px;
-gap: 0.5rem;
-align-self: stretch;
-border-radius: 0.5rem;
-border: 1px solid #dcd9d9;
-background: #fff;
-color: #4d4d4d;
-font-family: Inter;
-font-size: 1rem;
-font-style: normal;
-font-weight: 400;
-line-height: 1.5rem;
+  resize: none;
+  padding: 16px;
+  min-height: 200px;
+  border-radius: 8px;
+  gap: 0.5rem;
+  align-self: stretch;
+  border-radius: 0.5rem;
+  border: 1px solid #dcd9d9;
+  background: #fff;
+  color: #4d4d4d;
+  font-family: ${(props: any) => props.theme.fonts.$poppins};
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.5rem;
 `;
 
 export const StyledBookSubmitBtn = styled.button`
@@ -51,7 +50,7 @@ export const StyledBookSubmitBtn = styled.button`
   height: 49px;
   flex-shrink: 0;
   color: #fff;
-  font-family: Inter;
+  font-family: ${(props: any) => props.theme.fonts.$poppins};
   font-size: 1.125rem;
   font-style: normal;
   font-weight: 700;

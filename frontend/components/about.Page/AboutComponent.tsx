@@ -45,7 +45,7 @@ const AboutComponent = () => {
         </div>
         <AboutMotiveText>
           Empower minds, ignite connections! Join us in spreading the joy of
-          learning through book donations. Together, let&apos;s build bridges of
+          learning through book donations.Together, let&apos;s build bridges of
           knowledge and create a community where the love for education knows no
           bounds.
         </AboutMotiveText>

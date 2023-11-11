@@ -20,7 +20,7 @@ export const BookCardContainer = styled.div`
   }
 `;
 
-export const BookImageWarapper = styled.div`
+export const BookImageWrapper = styled.div`
   width: 100%;
   max-width: 12rem;
   height: 14rem;
@@ -40,7 +40,7 @@ export const StyledBookTitleText = styled.p`
   line-height: 128.523%;
 `;
 
-export const StyeledBookWriterText = styled.p`
+export const StyledBookWriterText = styled.p`
   color: #4d4d4d;
   font-family: Inter;
   font-size: 0.85rem;

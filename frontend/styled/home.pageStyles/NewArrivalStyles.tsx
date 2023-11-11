@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const NewArrivalContainer = styled.div`
+  width:100%;
   overflow: hidden;
   background: #fff;
   border: 1px solid #eb5231;
@@ -11,7 +12,7 @@ export const NewArrivalContainer = styled.div`
 `;
 
 export const NewArrivalWrapper = styled.div`
-  width: 100%;
+  width: 18%;
   color: white;
   display: block;
   padding: 1rem;
@@ -31,7 +32,7 @@ export const NewArrivalWrapper = styled.div`
     transform: rotate(-90deg);
     color: #fff;
     font-family: Inter;
-    font-size: 1rem;
+    font-size: 1.5rem;
     font-style: normal;
     font-weight: 500;
     border-radius: 10px;

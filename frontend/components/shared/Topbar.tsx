@@ -8,19 +8,17 @@ import {
   StyledTopBarSearch,
 } from "@/styled/topbarStyles";
 import Image from "next/image";
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import Calendar from "../../public/svg/calendar.svg";
 import Clock from "../../public/svg/clock.svg";
 import ArrowDown from "../../public/svg/arrowDown.svg";
 import { NavControllerContext } from "@/app/context";
 import Link from "next/link";
-import { usePathname, } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 const TopBar = () => {
   const { updateSideBarState } = useContext(NavControllerContext);
   const pathName = usePathname();
-
-  
 
   return (
     <div className="flex flex-row justify-between mt-5  items-center p-5 sticky top-0 backdrop-blur-sm z-10">
@@ -48,10 +46,14 @@ const TopBar = () => {
       </StyledTopBarDateWrapper>
 
       <Link href={"/profile"}>
-        <StyledTopBarProfileWrapper $isProfileActive={pathName} className="flex flex-row gap-1 items-center">
+        <StyledTopBarProfileWrapper
+          $isProfileActive={pathName}
+          className="flex flex-row gap-1 items-center"
+        >
           <StyledTopBarAvatarWrapper>
             <Image
               fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               priority
               className=" max-w-[2.5rem] max-h-[2.5rem] rounded-full"
               src="/images/avatar.jpg"

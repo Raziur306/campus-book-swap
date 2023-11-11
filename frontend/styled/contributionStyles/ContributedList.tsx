@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const ContributedListTitleText = styled.h1`
   width: 443px;
   color: #4d4d4d;
-  font-family: Inter;
+  font-family: ${(props:any)=>props.theme.fonts.$poppins};
   font-size: 2rem;
   font-style: normal;
   font-weight: 700;
@@ -11,7 +11,7 @@ export const ContributedListTitleText = styled.h1`
   text-align: left;
   & span {
     color: #f4683c;
-    font-family: Inter;
+    font-family: ${(props:any)=>props.theme.fonts.$poppins};
     font-size: 2rem;
     font-style: normal;
     font-weight: 700;
@@ -21,7 +21,7 @@ export const ContributedListTitleText = styled.h1`
 
 export const PreviousContributionText = styled.h4`
   color: #4d4d4d;
-  font-family: Inter;
+  font-family: ${(props:any)=>props.theme.fonts.$poppins};
   font-size: 1.5625rem;
   font-style: normal;
   font-weight: 400;

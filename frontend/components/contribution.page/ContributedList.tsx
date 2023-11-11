@@ -4,8 +4,8 @@ import {
   PreviousContributionText,
 } from "@/styled/contributionStyles";
 import React from "react";
-import { BookCard } from "..";
 import Link from "next/link";
+import { BookCard } from "../shared";
 
 const ContributedList = () => {
   return (
@@ -19,10 +19,12 @@ const ContributedList = () => {
         </PreviousContributionText>
       </div>
       <div className="grid grid-cols-2 gap-5 p-5 items-center">
-        <BookCard/>
-        <BookCard/>
+        <BookCard />
+        <BookCard />
       </div>
-      <Link className="hover:underline" href={'/my-contribution'}>View All</Link>
+      <Link className="hover:underline" href={"/my-contribution"}>
+        View All
+      </Link>
     </div>
   );
 };
