@@ -1,10 +1,8 @@
-import { Leftbar, PageLoader, Topbar } from "@/components";
+import { PageLoader } from "@/components";
 import "../../styles/globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import StyledComponentsRegistry from "@/components/StyledComponentsRegistry";
-import Image from "next/image";
-import { NavControllerContextProvider } from "../context";
 import Theme from "@/context/FontContext";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -24,16 +22,8 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
       <body className={inter.className}>
         <StyledComponentsRegistry>
           <Theme>
-            <NavControllerContextProvider>
-              <PageLoader />
-              <div className="flex gap-5 bg-gray-200 items-start">
-                <Leftbar />
-                <div className="w-full overflow-hidden">
-                  <Topbar />
-                  <div className="flex flex-col w-full h-full">{children}</div>
-                </div>
-              </div>
-            </NavControllerContextProvider>
+            <PageLoader />
+            {children}
           </Theme>
         </StyledComponentsRegistry>
       </body>
