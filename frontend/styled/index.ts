@@ -6,3 +6,4 @@ export * from "./topbarStyles";
 export * from "./signUpStyles";
 export * from "./home.pageStyles";
 export * from "./bookDetailsStyles";
+export * from "./admin.pageStyles";

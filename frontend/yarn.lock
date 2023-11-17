@@ -1594,6 +1594,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@kurkle/color@npm:^0.3.0":
+  version: 0.3.2
+  resolution: "@kurkle/color@npm:0.3.2"
+  checksum: 79e97b31f8f6efb28c69d373f94b0c7480226fe8ec95221f518ac998e156444a496727ce47de6d728eb5c3369288e794cba82cae34253deb0d472d3bfe080e49
+  languageName: node
+  linkType: hard
+
 "@next/env@npm:13.4.19":
   version: 13.4.19
   resolution: "@next/env@npm:13.4.19"
@@ -2526,6 +2533,15 @@ __metadata:
     ansi-styles: ^4.1.0
     supports-color: ^7.1.0
   checksum: fe75c9d5c76a7a98d45495b91b2172fa3b7a09e0cc9370e5c8feb1c567b85c4288e2b3fded7cfdd7359ac28d6b3844feb8b82b8686842e93d23c827c417e83fc
+  languageName: node
+  linkType: hard
+
+"chart.js@npm:^4.4.0":
+  version: 4.4.0
+  resolution: "chart.js@npm:4.4.0"
+  dependencies:
+    "@kurkle/color": ^0.3.0
+  checksum: 5ee2d99b78608025525b5790af17178fdaa5adc3294e082deba2718029b0496109ba124f1b08dd1e4c8a04d6e842be7f384f2cfe9a11df8d1c6fe884acece52b
   languageName: node
   linkType: hard
 
@@ -4616,11 +4632,13 @@ __metadata:
     "@types/react-dom": 18.2.7
     "@uiball/loaders": ^1.3.0
     autoprefixer: 10.4.15
+    chart.js: ^4.4.0
     eslint: 8.49.0
     eslint-config-next: 13.4.19
     next: 13.4.19
     postcss: 8.4.29
     react: 18.2.0
+    react-chartjs-2: ^5.2.0
     react-dom: 18.2.0
     styled-components: ^6.0.7
     tailwindcss: 3.3.3
@@ -5177,6 +5195,16 @@ __metadata:
   version: 1.2.3
   resolution: "queue-microtask@npm:1.2.3"
   checksum: b676f8c040cdc5b12723ad2f91414d267605b26419d5c821ff03befa817ddd10e238d22b25d604920340fd73efd8ba795465a0377c4adf45a4a41e4234e42dc4
+  languageName: node
+  linkType: hard
+
+"react-chartjs-2@npm:^5.2.0":
+  version: 5.2.0
+  resolution: "react-chartjs-2@npm:5.2.0"
+  peerDependencies:
+    chart.js: ^4.1.1
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: ace702185be1450e5888a8bcd8b5fc1995067e3b11d236764a67f5567a3d7c32ff16923b8d48d3d39bda6e45135da6c044c9b43fbe8e1978f95aca9d2c0ce348
   languageName: node
   linkType: hard
 
