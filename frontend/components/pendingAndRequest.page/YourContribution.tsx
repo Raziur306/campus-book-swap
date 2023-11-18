@@ -146,7 +146,7 @@ const YourContribution = () => {
                   <td>{makeTextShort(desc)}</td>
                   <td>{date}</td>
                   <td className="flex flex-row gap-4">
-                    <span onClick={handleChatClick} className={status}>
+                    <span onClick={handleChatClick} className={"chat"}>
                       Chat
                     </span>
                     <span onClick={handleViewClick} className={"view"}>
