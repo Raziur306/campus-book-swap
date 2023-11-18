@@ -7,7 +7,7 @@ export const NewArrivalContainer = styled.div`
   border: 1px solid #eb5231;
   border-radius: 10px;
   display: flex;
-  flex direction:row;
+  flex-direction:row;
   justify-content:space-between;
 `;
 
@@ -31,7 +31,7 @@ export const NewArrivalWrapper = styled.div`
     text-align: center;
     transform: rotate(-90deg);
     color: #fff;
-    font-family: Inter;
+    font-family: ${(props: any) => props.theme.fonts.$poppins};
     font-size: 1.5rem;
     font-style: normal;
     font-weight: 500;

@@ -14,7 +14,7 @@ export const RequestOwnerBtn = styled.button`
   height: 50px;
   color: #fff;
   text-align: center;
-  font-family: Inter;
+  font-family: ${(props: any) => props.theme.fonts.$poppins};
   font-style: normal;
   font-weight: 600;
   line-height: 12px;
@@ -28,7 +28,7 @@ export const RequestOwnerBtn = styled.button`
 
 export const AboutAuthorTextStyle = styled.p`
   color: #f27851;
-  font-family: Inter;
+  font-family: ${(props: any) => props.theme.fonts.$poppins};
   font-size: 1.25rem;
   font-style: normal;
   font-weight: 600;
@@ -43,7 +43,7 @@ export const BookMenuItemP = styled.p`
   color: #f27851;
   font-weight: bold;
   position: relative;
-  cursor:pointer;
+  cursor: pointer;
   &:after {
     content: "";
     width: 100%;
@@ -56,15 +56,15 @@ export const BookMenuItemP = styled.p`
 `;
 
 export const OverViewItemBox = styled.div`
-width:100%;
-max-width:300px;
-display: flex;
-padding: 10px 57px;
-flex-direction: column;
-align-items: center;
-gap: 3px;
-flex: 1 0 0;
-border-radius: 5px;
-border: 1px solid #DDD;
-background: #FFF;
+  width: 100%;
+  max-width: 300px;
+  display: flex;
+  padding: 10px 57px;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  flex: 1 0 0;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  background: #fff;
 `;

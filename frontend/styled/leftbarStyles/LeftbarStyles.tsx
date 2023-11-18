@@ -37,7 +37,7 @@ export const StyledMenuDiv = styled.div`
   flex-direction: row;
   gap: 1rem;
   color: #8a8a8a;
-  font-family: Inter;
+  font-family: ${(props: any) => props.theme.fonts.$poppins};
   font-size: 20px;
   font-style: normal;
   font-weight: 400;
@@ -47,7 +47,7 @@ export const StyledMenuDiv = styled.div`
   transition: 0.3s ease-in-out;
   &.active {
     color: #fa7c54 !important;
-    font-family: Inter;
+    font-family: ${(props: any) => props.theme.fonts.$poppins};
     font-size: 20px;
     font-style: normal;
     font-weight: 400;
@@ -61,8 +61,8 @@ export const StyledMenuDiv = styled.div`
     position: absolute;
     left: 0;
     bottom: 0;
-    
-    transition: 0.7s ease-in-out;
+
+    transition: 0.3s ease-in-out;
   }
   &:hover {
     & :after {

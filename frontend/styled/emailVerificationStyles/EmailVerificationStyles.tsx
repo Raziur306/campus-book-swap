@@ -24,7 +24,7 @@ export const StyledVerifyLoginBtn = styled.button`
   color: #fff;
   margin-top: 1rem;
   text-align: center;
-  font-family: Inter;
+  font-family: ${(props: any) => props.theme.fonts.$poppins};
   font-size: 1rem;
   font-style: normal;
   font-weight: 600;

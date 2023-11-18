@@ -30,7 +30,7 @@ export const StyledSettingsTextField = styled.input`
   align-self: stretch;
   border-radius: 0.5rem;
   border: 1px solid #dcd9d9;
-  background:${props=>(props.disabled?'#fff' :'#8D98AA')}
+  background:${(props) => (props.disabled ? "#fff" : "#8D98AA")}
   color: #4d4d4d;
   font-family: Inter;
   font-size: 1rem;
@@ -47,14 +47,14 @@ export const StyledSettingsBioTextArea = styled.textarea`
   align-self: stretch;
   border-radius: 0.5rem;
   border: 1px solid #dcd9d9;
-  background:${props=>(props.disabled?'#fff' :'#8D98AA')}
+  background: ${(props) => (props.disabled ? "#fff" : "#8D98AA")};
   color: #4d4d4d;
-  font-family: Inter;
+  font-family: ${(props: any) => props.theme.fonts.$poppins};
   font-size: 1rem;
   font-style: normal;
   font-weight: 400;
   line-height: 1.5rem;
-  resize:none;
+  resize: none;
 `;
 
 export const StyledProfileUpdateBtn = styled.button`
@@ -62,7 +62,7 @@ export const StyledProfileUpdateBtn = styled.button`
   height: 49px;
   flex-shrink: 0;
   color: #fff;
-  font-family: Inter;
+  font-family: ${(props: any) => props.theme.fonts.$poppins};
   font-size: 1.125rem;
   font-style: normal;
   font-weight: 700;
@@ -82,7 +82,7 @@ export const AccountEditPenWrapper = styled.div`
   border-radius: 20px;
   background: #fff;
   box-shadow: 0px 0px 10px 0px rgba(225, 225, 225, 0.64);
-  transition:0.7s ease-in-out;
+  transition: 0.7s ease-in-out;
   &:hover {
     transform: scale(1.1);
   }

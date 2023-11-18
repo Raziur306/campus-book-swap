@@ -8,7 +8,7 @@ import {
   StyledTopBarSearch,
 } from "@/styled/topbarStyles";
 import Image from "next/image";
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Calendar from "../../public/svg/calendar.svg";
 import Clock from "../../public/svg/clock.svg";
 import ArrowDown from "../../public/svg/arrowDown.svg";
@@ -19,6 +19,26 @@ import { usePathname } from "next/navigation";
 const TopBar = () => {
   const { updateSideBarState } = useContext(NavControllerContext);
   const pathName = usePathname();
+
+  const [currentTime, setCurrentTime] = useState(new Date());
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const formattedTime = currentTime.toLocaleTimeString([], {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+  const formattedDate = currentTime.toLocaleDateString("en-US", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  });
 
   return (
     <div className="flex flex-row justify-between mt-5  items-center p-5 sticky top-0 backdrop-blur-sm z-10">
@@ -37,11 +57,11 @@ const TopBar = () => {
       <StyledTopBarDateWrapper className="flex flex-row gap-10">
         <div className="flex flex-row gap-2 items-center">
           <Clock />
-          <StyledTopBarDateTimeText>09:00 hrs</StyledTopBarDateTimeText>
+          <StyledTopBarDateTimeText>{formattedTime}</StyledTopBarDateTimeText>
         </div>
         <div className="flex flex-row gap-2 items-center">
           <Calendar />
-          <StyledTopBarDateTimeText>4-Mar-2023</StyledTopBarDateTimeText>
+          <StyledTopBarDateTimeText>{formattedDate}</StyledTopBarDateTimeText>
         </div>
       </StyledTopBarDateWrapper>
 

@@ -10,7 +10,7 @@ export const ProfilePageContainer = styled.div`
 export const StyledProfileMenuUl = styled.ul`
   & li {
     color: #717b8c;
-    font-family: Inter;
+    font-family: ${(props: any) => props.theme.fonts.$poppins};
     font-size: 1.25rem;
     font-style: normal;
     font-weight: 500;

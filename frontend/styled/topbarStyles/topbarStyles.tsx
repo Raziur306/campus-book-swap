@@ -24,7 +24,7 @@ export const StyledTopBarDateWrapper = styled.div`
 export const StyledTopBarDateTimeText = styled.p`
   color: #4d4d4d;
   text-align: center;
-  font-family: Headland One;
+  font-family: ${(props: any) => props.theme.fonts.$poppins};
   font-size: 1.35rem;
   font-style: normal;
   font-weight: 400;
@@ -57,7 +57,7 @@ export const StyledTopBarProfileWrapper = styled.div<{
 export const StyledTopBarProfileText = styled.p`
   color: #4d4d4d;
   max-width: 14ch;
-  font-family: Inter;
+  font-family: ${(props: any) => props.theme.fonts.$poppins};
   font-size: 1.25rem;
   font-style: normal;
   font-weight: 400;

@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const StyledTitleText = styled.p`
   text-align: center;
-  font-family: Headland One;
+  font-family: ${(props: any) => props.theme.fonts.$poppins};
   font-weight: bold;
   font-size: 1.9rem;
   & span {
@@ -12,7 +12,7 @@ export const StyledTitleText = styled.p`
 
 export const StyledSubTitleText = styled.p`
   text-align: center;
-  font-family: Headland One;
+  font-family: ${(props: any) => props.theme.fonts.$poppins};
   font-weight: bold;
   font-size: 1.9rem;
 `;

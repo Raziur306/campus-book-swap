@@ -7,7 +7,7 @@ export const StyledSecurityInputFieldWrapper = styled.div`
 `;
 export const StyledSecurityInputLabel = styled.label`
 color: #4C535F;
-font-family: Inter;
+font-family: ${(props: any) => props.theme.fonts.$poppins};
 font-size: 1rem;
 font-style: normal;
 font-weight: 500;
@@ -25,7 +25,7 @@ border-radius: 0.5rem;
 border: 1px solid #dcd9d9;
 background: #fff;
 color: #4d4d4d;
-font-family: Inter;
+font-family: ${(props: any) => props.theme.fonts.$poppins};
 font-size: 1rem;
 font-style: normal;
 font-weight: 400;
@@ -37,7 +37,7 @@ width: 201px;
 height: 49px;
 flex-shrink: 0;
 color: #FFF;
-font-family: Inter;
+font-family: ${(props: any) => props.theme.fonts.$poppins};
 font-size: 1.125rem;
 font-style: normal;
 font-weight: 700;

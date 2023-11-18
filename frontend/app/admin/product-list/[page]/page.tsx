@@ -2,7 +2,6 @@
 import { AdminTopBar, SideBar } from "@/components/admin.page";
 import {
   ItemActionBtn,
-  PaginationWrapper,
   ProductAddBtnStyle,
   ProductDeleteBtnStyle,
   ProductImageWrapper,
@@ -20,6 +19,7 @@ import ArrowRight from "@/public/admin/arrowRight";
 import ArrowLeft from "@/public/admin/arrowLeft";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { PaginationWrapper } from "@/styled";
 
 const itemList = [
   {
@@ -123,7 +123,7 @@ const ProductList = ({ params }: { params: string }) => {
   const router = useRouter();
   const [dataPerPage, setDataPerPage] = useState(5);
   const [selectedProducts, setSelectedProducts] = useState<number | any>([]);
-  const currentPage = Number(params.page) || 1;
+  const currentPage = 1; //Number(params.page) | 1;
   const offset = (currentPage - 1) * dataPerPage;
 
   const totalPages = Math.ceil(itemList.length / dataPerPage);

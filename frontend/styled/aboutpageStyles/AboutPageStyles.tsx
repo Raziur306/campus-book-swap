@@ -2,7 +2,6 @@ import styled, { keyframes } from "styled-components";
 
 export const MainTitleTextStyle = styled.h1`
   color: #fec536;
-  font-family: Barlow;
   font-size: 2.25rem;
   font-style: normal;
   font-weight: 700;
@@ -12,10 +11,8 @@ export const MainTitleTextStyle = styled.h1`
 
 export const AboutMainTitleText = styled.h2`
   color: rgba(255, 255, 255, 0.9);
-  font-family: Barlow;
   font-size: 4rem;
   font-style: normal;
-  font-family: Poppins;
   font-weight: 900;
   line-height: normal;
   font-family: ${(props: any) => props.theme.fonts.$poppins};
@@ -23,7 +20,6 @@ export const AboutMainTitleText = styled.h2`
 
 export const AboutParagraph = styled.p`
   color: rgba(255, 255, 255, 0.9);
-  font-family: Barlow;
   font-size: 2.25rem;
   font-style: normal;
   font-weight: 400;
@@ -34,7 +30,6 @@ export const AboutParagraph = styled.p`
 export const AboutMotiveText = styled.p`
   color: rgba(255, 255, 255, 0.9);
   width: 50%;
-  font-family: Barlow;
   font-size: 1.25rem;
   font-style: normal;
   font-weight: 400;

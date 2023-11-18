@@ -31,7 +31,7 @@ export const BookImageWrapper = styled.div`
 
 export const StyledBookTitleText = styled.p`
   color: #4d4d4d;
-  font-family: Inter;
+  font-family: ${(props: any) => props.theme.fonts.$poppins};
   width: 100%;
   font-size: 1rem;
   font-style: normal;
@@ -42,7 +42,7 @@ export const StyledBookTitleText = styled.p`
 
 export const StyledBookWriterText = styled.p`
   color: #4d4d4d;
-  font-family: Inter;
+  font-family: ${(props: any) => props.theme.fonts.$poppins};
   font-size: 0.85rem;
   font-style: normal;
   width: 100%;
@@ -52,7 +52,7 @@ export const StyledBookWriterText = styled.p`
 
 export const StyledBookRatingText = styled.p`
   color: #4d4d4d;
-  font-family: Inter;
+  font-family: ${(props: any) => props.theme.fonts.$poppins};
   font-size: 0.8rem;
   font-style: normal;
   width: 100%;

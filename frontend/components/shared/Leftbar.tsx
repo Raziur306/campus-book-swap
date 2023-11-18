@@ -24,14 +24,14 @@ export const LeftBarItems = [
     icon: Search,
   },
   {
-    name: "My Shelf",
-    route: "/my-shelf",
-    icon: Shelf,
-  },
-  {
     name: "Contribute",
     route: "/contribute",
     icon: Contribute,
+  },
+  {
+    name: "Pending & Requests",
+    route: "/pending-and-requests",
+    icon: Shelf,
   },
 ];
 
@@ -76,9 +76,15 @@ const Leftbar = () => {
       </div>
 
       <div className="flex flex-col mt-auto mb-10 gap-3">
-        <Link className="hover:text-gray-500" href={'/about'}>About </Link>
-        <Link className="hover:text-gray-500" href={'/support'}>Support</Link>
-        <Link className="hover:text-gray-500" href={'/terms&condition'}>Terms & Condition</Link>
+        <Link className="hover:text-gray-500" href={"/about"}>
+          About{" "}
+        </Link>
+        <Link className="hover:text-gray-500" href={"/support"}>
+          Support
+        </Link>
+        <Link className="hover:text-gray-500" href={"/terms&condition"}>
+          Terms & Condition
+        </Link>
       </div>
     </LeftbarContainer>
   );
