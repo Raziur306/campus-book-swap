@@ -193,10 +193,23 @@ const getAllBooks = async (req: express.Request, res: express.Response) => {
       return res.status(403).json({ status: false, message: "Access denied." });
     }
 
+    const userEmail = decoded?.email || "";
+    const userDomain = userEmail.split("@")[1];
 
-    res
-      .status(201)
-      .json({ response: true, message: "Request send successfully." });
+    const books = await prisma.book.findMany({
+      where: {
+        userId: {
+          not: decoded?.id,
+        },
+        author: {
+          email: {
+            endsWith: userDomain,
+          },
+        },
+      },
+    });
+
+    res.status(201).json({ response: true, result: books });
   } catch (error) {
     res
       .status(500)
@@ -204,4 +217,50 @@ const getAllBooks = async (req: express.Request, res: express.Response) => {
   }
 };
 
-export { registerUser, loginUser, verifyEmail, contributeBook, requestBook };
+//user contribution
+const getContribution = async (req: express.Request, res: express.Response) => {
+  try {
+    let token = req.headers.authorization;
+    token = token.split(" ")[1];
+
+    const decoded = jwt.verify(token, JWT_KEY) as JwtDecodedType;
+
+    if (!decoded?.id) {
+      return res.status(403).json({ status: false, message: "Access denied." });
+    }
+
+    const books = await prisma.book.findMany({
+      where: {
+        userId: decoded?.id,
+      },
+      include: {
+        request: {
+          include: {
+            User: {
+              select: {
+                name:true,
+                email:true,
+              },
+            },
+          },
+        },
+      },
+    });
+
+    res.status(201).json({ response: true, result: books });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ response: false, message: error.message, result: [] });
+  }
+};
+
+export {
+  registerUser,
+  loginUser,
+  verifyEmail,
+  contributeBook,
+  requestBook,
+  getAllBooks,
+  getContribution,
+};

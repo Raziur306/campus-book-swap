@@ -1,6 +1,8 @@
 import auth from "../middleware/auth";
 import {
   contributeBook,
+  getAllBooks,
+  getContribution,
   loginUser,
   registerUser,
   requestBook,
@@ -20,5 +22,9 @@ userRouter.post("/verify-email/:id", verifyEmail);
 userRouter.post("/donate-book", auth, contributeBook);
 
 userRouter.post("/request-book", auth, requestBook);
+
+userRouter.get("/books", auth, getAllBooks);
+
+userRouter.get("/contribution", auth, getContribution);
 
 export { userRouter };
