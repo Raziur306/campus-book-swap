@@ -38,3 +38,5 @@ next-env.d.ts
 .yarn/
 .yarnrc.yml
 yarn.lock
+
+.env

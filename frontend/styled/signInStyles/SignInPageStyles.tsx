@@ -7,6 +7,7 @@ export const StyledSignInContainer = styled.div`
   background-image: url("/bg/background.svg");
   background-repeat: no-repeat;
   background-attachment: fixed;
+  font-family: ${(props: any) => props.theme.fonts.$poppins};
 `;
 
 export const StyledInputField = styled.input`

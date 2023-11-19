@@ -7,9 +7,10 @@ export const StyledSignUpContainer = styled.div`
   background-image: url("/bg/background.svg");
   background-repeat: no-repeat;
   background-attachment: fixed;
+  font-family: ${(props: any) => props.theme.fonts.$poppins};
 `;
 
-export const StyledSignUpInputField = styled.input`
+export const StyledSignUpInputField = styled.input<{ $error?: boolean }>`
   width: 100%;
   display: flex;
   padding: 1rem;
@@ -17,7 +18,6 @@ export const StyledSignUpInputField = styled.input`
   gap: 0.5rem;
   align-self: stretch;
   border-radius: 0.5rem;
-  border: 1px solid #dcd9d9;
   background: #fff;
   color: #4d4d4d;
   font-family: ${(props: any) => props.theme.fonts.$poppins};
@@ -25,6 +25,11 @@ export const StyledSignUpInputField = styled.input`
   font-style: normal;
   font-weight: 400;
   line-height: 1.5rem;
+  border: 1px solid ${(props: any) => (props.$error ? "red" : "")};
+  &:focus {
+    outline: none !important;
+    border: 2px solid ${(props: any) => (props.$error ? "red" : "black")};
+  }
 `;
 
 export const StyledSignUpLabel = styled.label`

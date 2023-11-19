@@ -1,3 +1,5 @@
+import React from "react";
+
 export interface LayoutProps {
   children: React.ReactNode;
 }
@@ -19,4 +21,14 @@ export interface ActionDialogProps {
 
 export interface ViewBookDetailsDialogProps {
   handleDialogClose: () => void;
+}
+
+export interface ContextChildrenPropsType {
+  children: React.ReactNode;
+}
+
+export interface UserContextPropsType {
+  isLoading: boolean;
+  registerUserCall: () => void;
+  loginCall: () => void;
 }
