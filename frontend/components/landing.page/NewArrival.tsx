@@ -1,10 +1,11 @@
 "use client";
 import { NewArrivalContainer, NewArrivalWrapper } from "@/styled";
 import React from "react";
-import { CustomSlider, SliderBookCard } from ".";
+import SliderBookCard from "./SliderBookCard";
+import { CustomSlider } from ".";
 
 const sliderItem: any[] = [
-  <SliderBookCard key={0} />,
+  <SliderBookCard key={10} />,
   <SliderBookCard key={1} />,
   <SliderBookCard key={2} />,
   <SliderBookCard key={3} />,
