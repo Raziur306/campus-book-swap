@@ -3,7 +3,7 @@ import { ProfileComponent } from "@/components/profile.page";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Profile | Campus Book Swap",
+  title: "Profile",
 };
 
 

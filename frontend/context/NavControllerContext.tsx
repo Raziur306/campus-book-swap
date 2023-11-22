@@ -7,7 +7,9 @@ export type NavControllerType = {
   updateSideBarState: () => void;
 };
 
-export const NavControllerContext = createContext<NavControllerType>({} as NavControllerType);
+export const NavControllerContext = createContext<NavControllerType>(
+  {} as NavControllerType
+);
 
 export const NavControllerContextProvider = ({
   children,
@@ -17,7 +19,6 @@ export const NavControllerContextProvider = ({
   const [isSidebarOpen, setIsSideBarOpen] = useState<boolean>(false);
 
   const updateSideBarState = () => {
-    console.log("Hello");
     setIsSideBarOpen(!isSidebarOpen);
   };
 

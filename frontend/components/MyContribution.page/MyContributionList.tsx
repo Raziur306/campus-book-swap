@@ -1,5 +1,5 @@
 import React from "react";
-import { MyContributionCard } from ".";
+import MyContributionCard from "./MyContributionCard";
 
 const MyContributionList = () => {
   return (

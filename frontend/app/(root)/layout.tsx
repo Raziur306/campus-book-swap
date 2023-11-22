@@ -1,13 +1,9 @@
-import { Leftbar, PageLoader, Topbar } from "@/components";
-import "../../styles/globals.css";
+import "@/styles/globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import StyledComponentsRegistry from "@/components/StyledComponentsRegistry";
-import Image from "next/image";
-import { NavControllerContextProvider } from "../context";
 import Theme from "@/context/FontContext";
-
-const inter = Inter({ subsets: ["latin"] });
+import { Topbar, Leftbar } from "@/components/shared";
 
 export const metadata: Metadata = {
   title: {
@@ -21,21 +17,19 @@ export const metadata: Metadata = {
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body>
         <StyledComponentsRegistry>
           <Theme>
-            <NavControllerContextProvider>
-              {/* <PageLoader /> */}
-              <div className="flex gap-5 bg-gray-200 items-start">
-                <Leftbar />
-                <div className="w-full overflow-hidden">
-                  <Topbar />
-                  <div className="flex flex-col w-full h-full px-14">
-                    {children}
-                  </div>
+            {/* <PageLoader /> */}
+            <div className="flex gap-5 bg-gray-200 items-start">
+              <Leftbar />
+              <div className="w-full overflow-hidden">
+                <Topbar />
+                <div className="flex flex-col w-full h-full px-14">
+                  {children}
                 </div>
               </div>
-            </NavControllerContextProvider>
+            </div>
           </Theme>
         </StyledComponentsRegistry>
       </body>

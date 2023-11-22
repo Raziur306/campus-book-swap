@@ -10,7 +10,7 @@ export const StyledSignInContainer = styled.div`
   font-family: ${(props: any) => props.theme.fonts.$poppins};
 `;
 
-export const StyledInputField = styled.input`
+export const StyledInputField = styled.input<{ $error?: boolean }>`
   width: 100%;
   display: flex;
   padding: 1rem;
@@ -18,7 +18,6 @@ export const StyledInputField = styled.input`
   gap: 0.5rem;
   align-self: stretch;
   border-radius: 0.5rem;
-  border: 1px solid #dcd9d9;
   background: #fff;
   color: #4d4d4d;
   font-family: ${(props: any) => props.theme.fonts.$poppins};
@@ -26,6 +25,11 @@ export const StyledInputField = styled.input`
   font-style: normal;
   font-weight: 400;
   line-height: 1.5rem;
+  border: 1px solid ${(props: any) => (props.$error ? "red" : "#dcd9d9")};
+  &:focus {
+    outline: none !important;
+    border: 2px solid ${(props: any) => (props.$error ? "red" : "black")};
+  }
 `;
 
 export const StyledLabel = styled.label`

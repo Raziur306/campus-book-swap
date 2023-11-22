@@ -1,9 +1,9 @@
-import { PageLoader } from "@/components";
-import "../../styles/globals.css";
+import "@/styles/globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import StyledComponentsRegistry from "@/components/StyledComponentsRegistry";
 import Theme from "@/context/FontContext";
+import { PageLoader } from "@/components/shared";
 
 const inter = Inter({ subsets: ["latin"] });
 

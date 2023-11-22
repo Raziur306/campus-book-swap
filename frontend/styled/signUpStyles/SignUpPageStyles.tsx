@@ -25,7 +25,7 @@ export const StyledSignUpInputField = styled.input<{ $error?: boolean }>`
   font-style: normal;
   font-weight: 400;
   line-height: 1.5rem;
-  border: 1px solid ${(props: any) => (props.$error ? "red" : "")};
+  border: 1px solid ${(props: any) => (props.$error ? "red" : "#dcd9d9")};
   &:focus {
     outline: none !important;
     border: 2px solid ${(props: any) => (props.$error ? "red" : "black")};

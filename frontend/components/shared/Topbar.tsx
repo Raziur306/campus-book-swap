@@ -12,7 +12,7 @@ import React, { useContext, useEffect, useState } from "react";
 import Calendar from "../../public/svg/calendar.svg";
 import Clock from "../../public/svg/clock.svg";
 import ArrowDown from "../../public/svg/arrowDown.svg";
-import { NavControllerContext } from "@/app/context";
+import { NavControllerContext } from "@/context";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 

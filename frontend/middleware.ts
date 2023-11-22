@@ -21,6 +21,9 @@ export const middleware = async (request: NextRequest) => {
     }
   }
 
+  if (pathname.includes("/email-verification") && userToken) {
+    return NextResponse.redirect(new URL("/", request.nextUrl));
+  }
   const isLoginSignUpRoute = pathname == "/sign-in" || pathname == "/sign-up";
 
   if (isLoginSignUpRoute) {

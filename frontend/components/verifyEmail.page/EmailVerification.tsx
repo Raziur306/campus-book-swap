@@ -1,15 +1,44 @@
 "use client";
-import React, { useReducer } from "react";
+import React, { useEffect, useReducer } from "react";
 import {
   StyledSubTitleText,
   StyledTitleText,
   StyledVerifyContainer,
 } from "@/styled";
 import VerifiedEmail from "@/public/svg/verifiedEmail";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 const EmailVerification = () => {
   const { userId } = useParams();
+  const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+  const router = useRouter();
+
+  const verificationCall = async () => {
+    const emailVerifier = () =>
+      fetch(`${BASE_URL}/verify-email/${userId}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+    await toast.promise(emailVerifier(), {
+      loading: "Verifying Email...",
+      success: (res: any) => {
+        if (!res.ok) {
+          throw new Error(res.json());
+        }
+        router.push("/sign-in");
+        return <b>Verification Successful!</b>;
+      },
+      error: (err) => <b>{"Something went wrong"}</b>,
+    });
+  };
+
+  useEffect(() => {
+    verificationCall();
+  }, []);
 
   return (
     <StyledVerifyContainer>

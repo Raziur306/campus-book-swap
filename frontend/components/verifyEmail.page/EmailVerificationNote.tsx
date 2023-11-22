@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { StyledSubTitleText, StyledTitleText } from "@/styled";
+import { StyledSubTitleText, StyledTitleText } from "@/styled/common";
 import {
   StyledVerifyContainer,
   StyledVerifyLoginBtn,

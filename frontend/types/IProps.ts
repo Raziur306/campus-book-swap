@@ -26,9 +26,3 @@ export interface ViewBookDetailsDialogProps {
 export interface ContextChildrenPropsType {
   children: React.ReactNode;
 }
-
-export interface UserContextPropsType {
-  isLoading: boolean;
-  registerUserCall: () => void;
-  loginCall: () => void;
-}

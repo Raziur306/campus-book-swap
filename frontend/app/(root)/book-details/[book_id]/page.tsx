@@ -3,7 +3,13 @@ import { useParams, useRouter } from "next/navigation";
 import React from "react";
 import ArrowLeft from "../../../../public/svg/arrowLeft.svg";
 import Image from "next/image";
-import { AboutAuthorTextStyle, BookDetailsImageWrapper, BookMenuItemP, OverViewItemBox, RequestOwnerBtn } from "@/styled";
+import {
+  AboutAuthorTextStyle,
+  BookDetailsImageWrapper,
+  BookMenuItemP,
+  OverViewItemBox,
+  RequestOwnerBtn,
+} from "@/styled/bookDetailsStyles";
 import Checked from "../../../../public/svg/checked.svg";
 
 const BookDetails = () => {
@@ -11,14 +17,16 @@ const BookDetails = () => {
   const router = useRouter();
   const bookId = params.book_id;
 
-  const handleGoBackClick = ()=>{
+  const handleGoBackClick = () => {
     router.back();
-  }
-
+  };
 
   return (
     <div className="w-full p-5">
-      <div className="flex flex-row gap-2 items-center cursor-pointer mb-10" onClick={handleGoBackClick}>
+      <div
+        className="flex flex-row gap-2 items-center cursor-pointer mb-10"
+        onClick={handleGoBackClick}
+      >
         <ArrowLeft />
         <p>Back to results</p>
       </div>
@@ -52,27 +60,56 @@ const BookDetails = () => {
         </div>
 
         <div className="w-4/12 bg-white rounded-md py-10 px-14">
-          <AboutAuthorTextStyle>About<span> Author</span></AboutAuthorTextStyle>
+          <AboutAuthorTextStyle>
+            About<span> Author</span>
+          </AboutAuthorTextStyle>
           <div className="flex flex-row gap-40">
             <p className="mt-5 text-lg">Steve Krug</p>
-            <Image width={88} height={101} alt="Author" src={'/images/author.jpg'} />
+            <Image
+              width={88}
+              height={101}
+              alt="Author"
+              src={"/images/author.jpg"}
+            />
           </div>
-          <p className="text-justify">Steve Krug is a usability consultant who has more than 30 years of experience as a user advocate for companies like Apple, Netscape, AOL, Lexus, and others. Based in part on the success of his first book, Don&apos;t Make Me Think, he has become a highly sought-after speaker on usability design.</p>
+          <p className="text-justify">
+            Steve Krug is a usability consultant who has more than 30 years of
+            experience as a user advocate for companies like Apple, Netscape,
+            AOL, Lexus, and others. Based in part on the success of his first
+            book, Don&apos;t Make Me Think, he has become a highly sought-after
+            speaker on usability design.
+          </p>
 
-       
-        <div className="flex flex-row gap-5 mt-10"> 
-             <Image className="cursor-pointer"  width={100} height={0} alt="Book" src={'/images/bookImg.jpg'}/>
-             <Image className="cursor-pointer" width={100} height={0} alt="Book" src={'/images/bookImg.jpg'}/>
-             <Image className="cursor-pointer"  width={100} height={0} alt="Book" src={'/images/bookImg.jpg'}/>
-        </div>
+          <div className="flex flex-row gap-5 mt-10">
+            <Image
+              className="cursor-pointer"
+              width={100}
+              height={0}
+              alt="Book"
+              src={"/images/bookImg.jpg"}
+            />
+            <Image
+              className="cursor-pointer"
+              width={100}
+              height={0}
+              alt="Book"
+              src={"/images/bookImg.jpg"}
+            />
+            <Image
+              className="cursor-pointer"
+              width={100}
+              height={0}
+              alt="Book"
+              src={"/images/bookImg.jpg"}
+            />
+          </div>
         </div>
       </div>
 
       <div className="w-full bg-white flex items-center mt-10">
         <BookMenuItemP>OverView</BookMenuItemP>
       </div>
-      
-      
+
       <div className="grid grid-cols-4 gap-5 mt-5">
         <OverViewItemBox>
           <p className="font-semibold text-gray-600">Publish Date</p>
@@ -90,9 +127,7 @@ const BookDetails = () => {
           <p className="font-semibold text-gray-600">Pages</p>
           <p className="font-semibold">216</p>
         </OverViewItemBox>
-
       </div>
-
     </div>
   );
 };

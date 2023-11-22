@@ -9,7 +9,7 @@ import Search from "../../public/svg/search.svg";
 import Shelf from "../../public/svg/shelf.svg";
 import Contribute from "../../public/svg/contribute.svg";
 import { useRouter, usePathname } from "next/navigation";
-import { NavControllerContext } from "@/app/context";
+import { NavControllerContext } from "@/context";
 import Link from "next/link";
 
 export const LeftBarItems = [

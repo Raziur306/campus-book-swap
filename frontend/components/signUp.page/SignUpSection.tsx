@@ -11,15 +11,38 @@ import { useRouter } from "next/navigation";
 import React, { ReactNode, useContext } from "react";
 import { useFormik } from "formik";
 import { object, string, ref } from "yup";
-import { UserContext } from "@/context";
+import toast from "react-hot-toast";
 
 const SignUpSection = () => {
-  const { registerUserCall } = useContext(UserContext);
+  const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
   const router = useRouter();
 
   const handleSignInBtnClick = () => {
     router.push("/sign-in");
+  };
+
+  const signUpCall = async (values: Object) => {
+    const signUp = () =>
+      fetch(`${BASE_URL}/register`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
+
+    await toast.promise(signUp(), {
+      loading: "Registering user...",
+      success: (res: any) => {
+        if (!res.ok) {
+          throw new Error(res.json());
+        }
+        router.push("/email-verification");
+        return <b>Registration Successful!</b>;
+      },
+      error: (err) => <b>{"Something went wrong"}</b>,
+    });
   };
 
   const formik = useFormik({
@@ -56,7 +79,7 @@ const SignUpSection = () => {
         .oneOf([ref("password")], "Passwords must match"),
     }),
     onSubmit: (values: any) => {
-       registerUserCall(values);
+      signUpCall(values);
     },
   });
 
