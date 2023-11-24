@@ -1,0 +1,28 @@
+"use client";
+import NextButton from "@/components/shared/next-button";
+import {
+  ErrorPageContainer,
+  ErrorPageSubContainer,
+} from "@/styled/error.page.styles";
+import Link from "next/link";
+import Error from "../public/errorPage/error";
+import { useRouter } from "next/navigation";
+const NotFound = () => {
+  const router = useRouter();
+  const handleClick = () => {
+    router.push("/");
+  };
+
+  return (
+    <ErrorPageContainer>
+      <ErrorPageSubContainer>
+        <Error />
+        <h3>Uh-oh!</h3>
+        <h5>The page you want is missing.</h5>
+        <p>We will have it back soon,promise!</p>
+        <NextButton onClick={handleClick}>Go Back Home</NextButton>
+      </ErrorPageSubContainer>
+    </ErrorPageContainer>
+  );
+};
+export default NotFound;

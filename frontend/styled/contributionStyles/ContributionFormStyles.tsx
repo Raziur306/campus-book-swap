@@ -1,5 +1,16 @@
 import styled from "styled-components";
 
+export const ContributionFormContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 28px;
+  border-radius: 8px;
+  background: #fff;
+  width: 66.666667%;
+  padding: 40px;
+  font-family: ${(props: any) => props.theme.fonts.$poppins};
+`;
+
 export const StyledContributionTextField = styled.input`
   height: 100%;
   min-height: 52px;
@@ -61,4 +72,15 @@ export const StyledBookSubmitBtn = styled.button`
   &:hover {
     background: #ff8761;
   }
+`;
+
+export const ContributionSuccessContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 28px;
+  border-radius: 8px;
+  background: #fff;
+  width: 66.666667%;
+  padding: 40px;
+  font-family: ${(props: any) => props.theme.fonts.$poppins};
 `;

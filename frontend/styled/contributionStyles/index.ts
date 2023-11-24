@@ -1,2 +1,2 @@
-export * from "./ContributedList";
-export * from "./ContributionForm";
+export * from "./ContributedListStyles";
+export * from "./ContributionFormStyles";
