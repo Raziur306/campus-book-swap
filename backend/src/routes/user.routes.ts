@@ -1,4 +1,6 @@
+import multer from "multer";
 import auth from "../middleware/auth";
+
 import {
   contributeBook,
   getAllBooks,
@@ -15,16 +17,21 @@ const userRouter = express.Router();
 
 userRouter.post("/register", registerUser);
 
-userRouter.get("/login", loginUser);
+userRouter.post("/login", loginUser);
 
 userRouter.post("/verify-email/:id", verifyEmail);
-
-userRouter.post("/donate-book", auth, contributeBook);
 
 userRouter.post("/request-book", auth, requestBook);
 
 userRouter.get("/books", auth, getAllBooks);
 
-userRouter.get("/contribution", auth, getContribution);
-
+//upload file and store contribute data
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
+userRouter.post(
+  "/donate-book",
+  auth,
+  upload.single("book-cover"),
+  contributeBook
+);
 export { userRouter };

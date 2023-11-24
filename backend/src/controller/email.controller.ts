@@ -16,6 +16,7 @@ export const sendVerificationEmail = async (
       },
     });
 
+    const VERIFICATION_EMAIL_ROUTE = process.env.VERIFICATION_ROUTE;
     const info = await transporter.sendMail({
       from: process.env.GOOGLE_GMAIL,
       to: email,
@@ -24,7 +25,7 @@ export const sendVerificationEmail = async (
       <p style="color: #555555;">Dear,<br/>${name}, please verify your email to continue logging in and using our system.</p>
     <h2 style="color: #333333;">Email Verification</h2>
     <p style="color: #555555;">Thank you for registering with our service. To verify your email address, please click the link below:</p>
-    <a href="http://localhost:3000/email-verification/${id}" style="display: inline-block; padding: 10px 20px; background-color: #3498db; color: #ffffff; text-decoration: none; border-radius: 3px;">Verify Email</a>
+    <a href="${VERIFICATION_EMAIL_ROUTE}/${id}" style="display: inline-block; padding: 10px 20px; background-color: #3498db; color: #ffffff; text-decoration: none; border-radius: 3px;">Verify Email</a>
     <p style="color: #555555;">If you didn't register on our platform, you can safely ignore this email.</p>
   </div>`,
     });

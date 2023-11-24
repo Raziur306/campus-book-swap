@@ -4,6 +4,13 @@ import { prisma } from "../config";
 import jwt from "jsonwebtoken";
 import { sendVerificationEmail } from "./email.controller";
 import { JwtDecodedType } from "types";
+import { v4 as uuidv4 } from "uuid";
+import {
+  getDownloadURL,
+  getStorage,
+  ref,
+  uploadBytesResumable,
+} from "firebase/storage";
 
 const JWT_KEY = process.env.JWT_PRIVATE_KEY;
 const saltRound = 10;
@@ -11,6 +18,7 @@ const saltRound = 10;
 const registerUser = async (req: express.Request, res: express.Response) => {
   try {
     const { name, email, password } = req.body;
+    console.log(req.body);
     const findUser = await prisma.user.findUnique({
       where: {
         email: email,
@@ -97,44 +105,66 @@ const verifyEmail = async (req: express.Request, res: express.Response) => {
 };
 
 //contribute books
-
 const contributeBook = async (req: express.Request, res: express.Response) => {
   try {
+    console.log(req.body);
     let token = req.headers.authorization;
-    token = token.split(" ")[1];
+    token = token.split(" ").pop();
+    const { id } = jwt.verify(token, JWT_KEY) as JwtDecodedType;
 
-    const decoded = jwt.verify(token, JWT_KEY) as JwtDecodedType;
+    const file = req.file;
+    if (!file) {
+      return res.status(400).send("No file uploaded");
+    }
+    const fileExtension = file.originalname.split(".").pop();
+    const fileName = Date.now() + uuidv4();
+    const storage = getStorage();
+    const storageRef = ref(storage, `cover-page/${fileName}.${fileExtension}`);
+    const metadata = {
+      contentType: req.file.mimetype,
+    };
+    const snapshot = await uploadBytesResumable(
+      storageRef,
+      req.file.buffer,
+      metadata
+    );
 
-    if (!decoded?.id) {
-      return res.status(403).json({ status: false, message: "Access denied." });
+    const downloadUrl = await getDownloadURL(snapshot.ref);
+    if (!downloadUrl) {
+      return res
+        .status(404)
+        .json({ status: false, message: "Something went wrong" });
     }
 
     const {
+      title,
       bookEdition,
       authorName,
-      publisher,
       publishedYear,
+      publisher,
+      price,
       purpose,
-      coverImg,
     } = req.body;
 
     await prisma.book.create({
       data: {
-        bookEdition,
-        authorName,
-        publishedYear,
-        purpose,
-        coverImg,
-        publisher,
-        userId: decoded.id,
+        title: title,
+        bookEdition: Number(bookEdition),
+        authorName: authorName,
+        publisher: publisher,
+        publishedYear: Number(publishedYear),
+        price: Number(price),
+        purpose: purpose,
+        coverImg: downloadUrl,
+        userId: "655cf417e0f39cb02b7f1ff2",
       },
     });
 
-    res
+    return res
       .status(201)
-      .json({ response: true, message: "Contribution successful." });
+      .json({ status: true, message: "Book donation successful." });
   } catch (error) {
-    res.status(500).json({ response: false, message: error.message });
+    return res.status(500).json({ status: false, message: error });
   }
 };
 
@@ -145,10 +175,6 @@ const requestBook = async (req: express.Request, res: express.Response) => {
     token = token.split(" ")[1];
 
     const decoded = jwt.verify(token, JWT_KEY) as JwtDecodedType;
-
-    if (!decoded?.id) {
-      return res.status(403).json({ status: false, message: "Access denied." });
-    }
 
     const { bookId } = req.body;
 
@@ -189,10 +215,6 @@ const getAllBooks = async (req: express.Request, res: express.Response) => {
 
     const decoded = jwt.verify(token, JWT_KEY) as JwtDecodedType;
 
-    if (!decoded?.id) {
-      return res.status(403).json({ status: false, message: "Access denied." });
-    }
-
     const userEmail = decoded?.email || "";
     const userDomain = userEmail.split("@")[1];
 
@@ -200,6 +222,9 @@ const getAllBooks = async (req: express.Request, res: express.Response) => {
       where: {
         userId: {
           not: decoded?.id,
+        },
+        status: {
+          not: "Pending",
         },
         author: {
           email: {
@@ -238,8 +263,8 @@ const getContribution = async (req: express.Request, res: express.Response) => {
           include: {
             User: {
               select: {
-                name:true,
-                email:true,
+                name: true,
+                email: true,
               },
             },
           },

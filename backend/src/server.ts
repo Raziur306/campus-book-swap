@@ -3,6 +3,10 @@ import cors from "cors";
 
 import { app } from "./config";
 import { userRouter } from "./routes";
+import { initializeApp } from "firebase/app";
+import { firebaseConfig } from "./config/firebase";
+
+initializeApp(firebaseConfig);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
