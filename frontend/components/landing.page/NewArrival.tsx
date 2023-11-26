@@ -1,4 +1,3 @@
-"use client";
 import { NewArrivalContainer, NewArrivalWrapper } from "@/styled";
 import React from "react";
 import SliderBookCard from "./SliderBookCard";

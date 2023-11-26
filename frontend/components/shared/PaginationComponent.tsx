@@ -1,4 +1,3 @@
-"use client";
 import React, { useEffect, useState } from "react";
 import ArrowRight from "@/public/admin/arrowRight";
 import ArrowLeft from "@/public/admin/arrowLeft";

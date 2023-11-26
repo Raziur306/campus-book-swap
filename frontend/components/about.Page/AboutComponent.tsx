@@ -1,4 +1,3 @@
-"use client";
 import ArrowLeft from "@/public/about/arrowLeft";
 import Books from "@/public/about/books";
 import ReadToKnowledge from "@/public/about/readToKnowledge";

@@ -15,6 +15,7 @@ export const LeftbarContainer = styled.div`
   background: white;
   padding: 2rem;
   flex: 0 0 auto;
+  font-family: ${(props: any) => props.theme.fonts.$poppins};
   position: sticky;
   top: 0;
   &.display-nav {

@@ -5,6 +5,7 @@ export const ProfilePageContainer = styled.div`
   border-radius: 10px;
   padding: 20px;
   margin: 20px;
+  font-family: ${(props: any) => props.theme.fonts.$poppins};
 `;
 
 export const StyledProfileMenuUl = styled.ul`

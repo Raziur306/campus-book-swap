@@ -1,4 +1,5 @@
 import { SignUpSection } from "@/components/signUp.page";
+import SharedLayout from "@/layout/SharedLayout";
 import React from "react";
 
 export const metadata = {
@@ -6,7 +7,11 @@ export const metadata = {
 };
 
 const SignUp = () => {
-  return <SignUpSection />;
+  return (
+    <SharedLayout title="Sign Up">
+      <SignUpSection />;
+    </SharedLayout>
+  );
 };
 
 export default SignUp;

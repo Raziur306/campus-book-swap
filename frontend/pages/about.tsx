@@ -1,16 +1,13 @@
 import { AboutComponent } from "@/components/about.Page";
+import SharedLayout from "@/layout/SharedLayout";
 import { Metadata } from "next";
 import React from "react";
 
-export const metadata: Metadata = {
-  title: "About",
-};
-
 const About = () => {
   return (
-    <div>
+    <SharedLayout title="About">
       <AboutComponent />
-    </div>
+    </SharedLayout>
   );
 };
 

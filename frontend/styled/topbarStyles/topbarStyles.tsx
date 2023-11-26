@@ -1,4 +1,5 @@
-import styled from "styled-components";
+"use client";
+import styled, { keyframes } from "styled-components";
 
 export const StyledTopBarContainer = styled.div``;
 
@@ -40,8 +41,9 @@ export const StyledTopBarAvatarWrapper = styled.div`
 `;
 
 export const StyledTopBarProfileWrapper = styled.div<{
-  $isProfileActive?: String;
+  $isFloatingMenuOpen?: boolean;
 }>`
+  position: relative;
   cursor: pointer;
   border-radius: 33px;
   background: #fff;
@@ -50,7 +52,7 @@ export const StyledTopBarProfileWrapper = styled.div<{
   & svg {
     transition: 0.5s ease-in-out;
     transform: ${(props) =>
-      props.$isProfileActive=='/profile' ? "rotate(180deg)" : "rotate(0)"};
+      props.$isFloatingMenuOpen ? "rotate(180deg)" : "rotate(0)"};
   }
 `;
 
@@ -66,4 +68,59 @@ export const StyledTopBarProfileText = styled.p`
   display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
+`;
+const expandIn = keyframes`
+  0% {
+    transform: scale(0);
+    transform-origin: top right;
+  }
+  100% {
+    transform: scale(1);
+    transform-origin: top right;
+  }
+`;
+
+export const StyledFloatingMenuContainer = styled.div<{
+  $isFloatingMenuOpen: boolean;
+}>`
+  display: ${(props: any) => (props.$isFloatingMenuOpen ? "flex" : "none")};
+  padding: 10px;
+  flex-direction: column;
+  height: 130px;
+  gap: 20px;
+  position: absolute;
+  bottom: -140px;
+  left: 0;
+  right: 0;
+  width: 90%;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 4px 11px black;
+  animation: ${expandIn} 0.7s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+`;
+
+export const StyledFloatingMenuItem = styled.div`
+  gap: 10px;
+  height: 15px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  border-radius: 10px;
+  padding: 20px;
+  font-family: ${(props: any) => props.theme.fonts.$poppins};
+  & span {
+    width: 100%;
+    transition: all 0.2s ease-in-out;
+  }
+  & svg {
+    transition: all 0.2s ease-in-out;
+    width: 15%;
+  }
+  &:hover {
+    background: #f27951c9;
+    color: white;
+    & svg {
+      color: white;
+    }
+  }
 `;

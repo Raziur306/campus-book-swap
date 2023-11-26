@@ -1,4 +1,3 @@
-"use client";
 import { ContributionStyledTable } from "@/styled/pendingAndRequests.pageStyles";
 import React, { useState } from "react";
 import { PaginationComponent } from "../shared";

@@ -1,4 +1,3 @@
-"use client";
 import { StyledSubTitleText, StyledTitleText } from "@/styled/common";
 import {
   StyledSignUpInputField,
@@ -23,26 +22,30 @@ const SignUpSection = () => {
   };
 
   const signUpCall = async (values: Object) => {
-    const signUp = () =>
-      fetch(`${BASE_URL}/register`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
-      });
+    try {
+      const signUp = () =>
+        fetch(`${BASE_URL}/register`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(values),
+        });
 
-    await toast.promise(signUp(), {
-      loading: "Registering user...",
-      success: (res: any) => {
-        if (!res.ok) {
-          throw new Error(res.json());
-        }
-        router.push("/email-verification");
-        return <b>Registration Successful!</b>;
-      },
-      error: (err) => <b>{"Something went wrong"}</b>,
-    });
+      await toast.promise(signUp(), {
+        loading: "Registering user...",
+        success: (res: any) => {
+          if (!res.ok) {
+            throw new Error(res.json());
+          }
+          router.push("/open-your-email");
+          return <b>Registration Successful!</b>;
+        },
+        error: (err) => <b>{"Something went wrong"}</b>,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const formik = useFormik({

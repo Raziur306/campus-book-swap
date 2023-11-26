@@ -1,7 +1,4 @@
-"use client";
-import { useParams, useRouter } from "next/navigation";
 import React from "react";
-import ArrowLeft from "../../../../public/svg/arrowLeft.svg";
 import Image from "next/image";
 import {
   AboutAuthorTextStyle,
@@ -10,12 +7,13 @@ import {
   OverViewItemBox,
   RequestOwnerBtn,
 } from "@/styled/bookDetailsStyles";
-import Checked from "../../../../public/svg/checked.svg";
+import CheckedBox from "@/public/admin/checkedBox";
+import ArrowLeft from "@/public/admin/arrowLeft";
+import { useRouter } from "next/router";
 
 const BookDetails = () => {
-  const params = useParams();
   const router = useRouter();
-  const bookId = params.book_id;
+  const bookId = router.query.book_id;
 
   const handleGoBackClick = () => {
     router.back();
@@ -47,7 +45,7 @@ const BookDetails = () => {
             <div className="flex flex-col gap-3">
               <p className="font-bold">Availability</p>
               <div className="flex flex-row gap-2 items-center">
-                <Checked />
+                <CheckedBox />
                 <p>Hard Copy</p>
               </div>
             </div>

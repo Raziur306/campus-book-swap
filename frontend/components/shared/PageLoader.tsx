@@ -1,4 +1,3 @@
-"use client";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { Metronome } from "@uiball/loaders";

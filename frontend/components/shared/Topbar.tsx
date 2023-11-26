@@ -1,5 +1,6 @@
-"use client";
 import {
+  StyledFloatingMenuContainer,
+  StyledFloatingMenuItem,
   StyledTopBarAvatarWrapper,
   StyledTopBarDateTimeText,
   StyledTopBarDateWrapper,
@@ -8,49 +9,77 @@ import {
   StyledTopBarSearch,
 } from "@/styled/topbarStyles";
 import Image from "next/image";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import Calendar from "../../public/svg/calendar.svg";
 import Clock from "../../public/svg/clock.svg";
 import ArrowDown from "../../public/svg/arrowDown.svg";
-import { NavControllerContext } from "@/context";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import Settings from "@/public/svg/settings";
+import Logout from "@/public/svg/logout";
+import { cookies } from "@/config/Cookies";
+import { useRouter } from "next/navigation";
 
 const TopBar = () => {
-  const { updateSideBarState } = useContext(NavControllerContext);
-  const pathName = usePathname();
-
-  const [currentTime, setCurrentTime] = useState(new Date());
+  const [isOpen, setIsOpen] = useState(false);
+  const modalRef = useRef<HTMLDivElement>(null);
+  const [formattedDate, setFormattedDate] = useState("");
+  const [formattedTime, setFormattedTime] = useState("");
+  const router = useRouter();
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentTime(new Date());
+      const currentTime = new Date();
+      setFormattedTime(
+        currentTime.toLocaleTimeString([], {
+          hour: "2-digit",
+          minute: "2-digit",
+        })
+      );
+      setFormattedDate(
+        currentTime.toLocaleDateString("en-US", {
+          day: "numeric",
+          month: "short",
+          year: "numeric",
+        })
+      );
     }, 1000);
 
     return () => clearInterval(interval);
   }, []);
 
-  const formattedTime = currentTime.toLocaleTimeString([], {
-    hour: "2-digit",
-    minute: "2-digit",
-  });
-  const formattedDate = currentTime.toLocaleDateString("en-US", {
-    day: "numeric",
-    month: "short",
-    year: "numeric",
-  });
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const handleClickOutside = useCallback(
+    (event: any) => {
+      if (
+        isOpen &&
+        modalRef.current &&
+        !modalRef.current.contains(event.target)
+      ) {
+        toggleMenu();
+      }
+    },
+    [isOpen, toggleMenu]
+  );
+
+  useEffect(() => {
+    if (isOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isOpen, handleClickOutside]);
+
+  const handleLogoutClick = () => {
+    cookies.remove("user_token");
+    router.refresh();
+  };
 
   return (
     <div className="flex flex-row justify-between mt-5  items-center p-5 sticky top-0 backdrop-blur-sm z-10">
-      <Image
-        onClick={() => updateSideBarState()}
-        className="cursor-pointer lg:hidden"
-        priority
-        width={40}
-        height={40}
-        alt="hamburger"
-        src={"/svg/hamburger.svg"}
-      />
       <div>
         <StyledTopBarSearch placeholder="Search.." type="text" />
       </div>
@@ -65,25 +94,37 @@ const TopBar = () => {
         </div>
       </StyledTopBarDateWrapper>
 
-      <Link href={"/profile"}>
-        <StyledTopBarProfileWrapper
-          $isProfileActive={pathName}
-          className="flex flex-row gap-1 items-center"
-        >
-          <StyledTopBarAvatarWrapper>
-            <Image
-              fill
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              priority
-              className=" max-w-[2.5rem] max-h-[2.5rem] rounded-full"
-              src="/images/avatar.jpg"
-              alt="Rounded avatar"
-            />
-          </StyledTopBarAvatarWrapper>
-          <StyledTopBarProfileText>Raziur Rahaman</StyledTopBarProfileText>
-          <ArrowDown className={"mr-[1rem] ml-[1rem] rotate-0 transition"} />
-        </StyledTopBarProfileWrapper>
-      </Link>
+      <StyledTopBarProfileWrapper
+        ref={modalRef}
+        onClick={toggleMenu}
+        $isFloatingMenuOpen={isOpen}
+        className="flex flex-row gap-1 items-center"
+      >
+        <StyledTopBarAvatarWrapper>
+          <Image
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            priority
+            className=" max-w-[2.5rem] max-h-[2.5rem] rounded-full"
+            src="/images/avatar.jpg"
+            alt="Rounded avatar"
+          />
+        </StyledTopBarAvatarWrapper>
+        <StyledTopBarProfileText>Raziur Rahaman</StyledTopBarProfileText>
+        <ArrowDown className={"mr-[1rem] ml-[1rem] rotate-0 transition"} />
+        <StyledFloatingMenuContainer $isFloatingMenuOpen={isOpen}>
+          <Link href="/profile">
+            <StyledFloatingMenuItem>
+              <Settings />
+              <span>Settings</span>
+            </StyledFloatingMenuItem>
+          </Link>
+          <StyledFloatingMenuItem onClick={handleLogoutClick}>
+            <Logout />
+            <span>Logout</span>
+          </StyledFloatingMenuItem>
+        </StyledFloatingMenuContainer>
+      </StyledTopBarProfileWrapper>
     </div>
   );
 };

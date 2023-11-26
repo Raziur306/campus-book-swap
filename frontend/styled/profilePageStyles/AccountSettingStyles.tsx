@@ -8,6 +8,7 @@ export const SettingsCardWrapper = styled.div`
   cursor: pointer;
   border-radius: 10px;
   transition: 0.8s ease-in-out;
+  font-family: ${(props: any) => props.theme.fonts.$poppins};
   &:hover {
     transform: scale(1.1);
   }
@@ -19,6 +20,7 @@ export const StyledSettingInputLabel = styled.label`
   font-size: 1rem;
   font-style: normal;
   font-weight: 500;
+  font-family: ${(props: any) => props.theme.fonts.$poppins};
   line-height: 112.4%;
 `;
 export const StyledSettingsTextField = styled.input`
@@ -30,9 +32,8 @@ export const StyledSettingsTextField = styled.input`
   align-self: stretch;
   border-radius: 0.5rem;
   border: 1px solid #dcd9d9;
-  background:${(props) => (props.disabled ? "#fff" : "#8D98AA")}
   color: #4d4d4d;
-  font-family: Inter;
+  font-family: ${(props: any) => props.theme.fonts.$poppins};
   font-size: 1rem;
   font-style: normal;
   font-weight: 400;
@@ -47,7 +48,6 @@ export const StyledSettingsBioTextArea = styled.textarea`
   align-self: stretch;
   border-radius: 0.5rem;
   border: 1px solid #dcd9d9;
-  background: ${(props) => (props.disabled ? "#fff" : "#8D98AA")};
   color: #4d4d4d;
   font-family: ${(props: any) => props.theme.fonts.$poppins};
   font-size: 1rem;

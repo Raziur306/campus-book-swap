@@ -1,4 +1,3 @@
-"use client";
 import {
   StyledForgetPassText,
   StyledInputField,
@@ -26,26 +25,30 @@ const SignInSection = () => {
   };
 
   const loginCall = async (values: Object) => {
-    const login = () =>
-      fetch(`${BASE_URL}/login`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
-      });
+    try {
+      const login = () =>
+        fetch(`${BASE_URL}/login`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(values),
+        });
 
-    await toast.promise(login(), {
-      loading: "Logging in...",
-      success: (res: any) => {
-        if (!res.ok) {
-          throw new Error(res.json());
-        }
-        generateCookie(res, values);
-        return <b>Login Successful!</b>;
-      },
-      error: (err) => <b>{"Something went wrong"}</b>,
-    });
+      await toast.promise(login(), {
+        loading: <b>Logging in...</b>,
+        success: (res: any) => {
+          if (!res.ok) {
+            throw new Error(res.json());
+          }
+          generateCookie(res, values);
+          return <b>Login Successful!</b>;
+        },
+        error: (err) => <b>{"Something went wrong"}</b>,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const generateCookie = async (res: any, values: any) => {

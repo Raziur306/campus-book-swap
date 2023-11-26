@@ -1,4 +1,3 @@
-"use client";
 import React from "react";
 import Success from "@/public/success";
 import { ContributionSuccessContainer } from "@/styled/contributionStyles";
