@@ -9,7 +9,13 @@ import {
   StyledTopBarSearch,
 } from "@/styled/topbarStyles";
 import Image from "next/image";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import Calendar from "../../public/svg/calendar.svg";
 import Clock from "../../public/svg/clock.svg";
 import ArrowDown from "../../public/svg/arrowDown.svg";
@@ -18,6 +24,7 @@ import Settings from "@/public/svg/settings";
 import Logout from "@/public/svg/logout";
 import { cookies } from "@/config/Cookies";
 import { useRouter } from "next/navigation";
+import { CommonApiContext } from "@/context/CommonApiContext";
 
 const TopBar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,6 +32,11 @@ const TopBar = () => {
   const [formattedDate, setFormattedDate] = useState("");
   const [formattedTime, setFormattedTime] = useState("");
   const router = useRouter();
+  const { getProfileInfoCall, profileInfo } = useContext(CommonApiContext);
+
+  useEffect(() => {
+    getProfileInfoCall();
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -106,11 +118,11 @@ const TopBar = () => {
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             priority
             className=" max-w-[2.5rem] max-h-[2.5rem] rounded-full"
-            src="/images/avatar.jpg"
+            src={profileInfo?.image || "/images/default.jpg"}
             alt="Rounded avatar"
           />
         </StyledTopBarAvatarWrapper>
-        <StyledTopBarProfileText>Raziur Rahaman</StyledTopBarProfileText>
+        <StyledTopBarProfileText>{profileInfo?.name}</StyledTopBarProfileText>
         <ArrowDown className={"mr-[1rem] ml-[1rem] rotate-0 transition"} />
         <StyledFloatingMenuContainer $isFloatingMenuOpen={isOpen}>
           <Link href="/profile">

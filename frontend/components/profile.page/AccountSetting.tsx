@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import Donation from "@/public/Settings/Donation";
 import Book from "@/public/Settings/Book";
 import EditPen from "@/public/Settings/EditPen";
@@ -15,8 +15,10 @@ import { cookies } from "@/config/Cookies";
 import { useFormik } from "formik";
 import { number, object, string } from "yup";
 import toast from "react-hot-toast";
+import { CommonApiContext } from "@/context/CommonApiContext";
 
 const AccountSetting = () => {
+  const { getProfileInfoCall, profileInfo } = useContext(CommonApiContext);
   const [isDisable, setIsDisable] = useState(true);
   const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
   const token = cookies.get("user_token");
@@ -48,23 +50,9 @@ const AccountSetting = () => {
     },
   });
 
-  const getProfileInfo = async () => {
-    try {
-      const res = await fetch(`${BASE_URL}/profile`, {
-        headers: {
-          "Content-Type": "application/json",
-          authorization: `Bearer ${token}`,
-        },
-        method: "GET",
-      });
-      if (res.ok) {
-        const data = await res.json();
-        formik.setValues(data.result);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  useEffect(() => {
+    formik.setValues(profileInfo);
+  }, [profileInfo]);
 
   const updateProfile = async (value: Object) => {
     try {
@@ -120,7 +108,7 @@ const AccountSetting = () => {
 
   useEffect(() => {
     if (isDisable) {
-      getProfileInfo();
+      getProfileInfoCall();
     }
   }, [isDisable]);
 

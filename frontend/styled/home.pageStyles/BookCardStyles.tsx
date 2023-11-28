@@ -13,10 +13,9 @@ export const BookCardContainer = styled.div`
   border-radius: 0.625rem;
   gap: 0.75rem;
   box-shadow: 1px 2px 10px black;
-  transition:transform .2s;
+  transition: transform 0.2s;
   &:hover {
-    transform:scale(1.1);
-
+    transform: scale(1.1);
   }
 `;
 
@@ -26,7 +25,7 @@ export const BookImageWrapper = styled.div`
   height: 14rem;
   position: relative;
   align-items: center;
-  aspect-ratio: 100/100;
+  aspect-ratio: 1/1;
 `;
 
 export const StyledBookTitleText = styled.p`
@@ -50,7 +49,10 @@ export const StyledBookWriterText = styled.p`
   line-height: 128.523%;
 `;
 
-export const StyledBookRatingText = styled.p`
+export const StyledInfoTextWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   color: #4d4d4d;
   font-family: ${(props: any) => props.theme.fonts.$poppins};
   font-size: 0.8rem;
@@ -59,6 +61,12 @@ export const StyledBookRatingText = styled.p`
   font-weight: 400;
   line-height: 128.523%;
   & span {
-    color: #a7a7a7;
+    color: #5e5c5c;
+  }
+  & .free {
+    color: #fff;
+    background: #0aba0a;
+    padding: 5px;
+    border-radius: 5px;
   }
 `;

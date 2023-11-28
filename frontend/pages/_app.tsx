@@ -17,7 +17,9 @@ function MyApp({ Component, pageProps }: AppProps) {
           }}
         />
         <PageLoader />
-        <Component {...pageProps} />
+        <CommonApiContextProvider>
+          <Component {...pageProps} />
+        </CommonApiContextProvider>
       </CommonApiContextProvider>
     </Theme>
   );

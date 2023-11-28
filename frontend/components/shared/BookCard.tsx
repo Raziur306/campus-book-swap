@@ -2,18 +2,26 @@ import {
   BookCardContainer,
   BookImageWrapper,
   StyledBookWriterText,
-  StyledBookRatingText,
   StyledBookTitleText,
+  StyledInfoTextWrapper,
 } from "@/styled";
+import { BookCardPropsType } from "@/types";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React from "react";
 
-const BookCard = () => {
+const BookCard = ({
+  title,
+  id,
+  authorName,
+  bookEdition,
+  coverImg,
+  price,
+}: BookCardPropsType) => {
   const router = useRouter();
 
   const handleClick = () => {
-    router.push("/book-details/100");
+    router.push(`/book-details/${id}`);
   };
 
   return (
@@ -23,14 +31,15 @@ const BookCard = () => {
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           fill
           alt="Book Image"
-          src={"/images/bookImg.jpg"}
+          src={coverImg || "/images/bookImg.jpg"}
         />
       </BookImageWrapper>
-      <StyledBookTitleText>Don’t Make Me think</StyledBookTitleText>
-      <StyledBookWriterText>Steve Krug, 2000</StyledBookWriterText>
-      <StyledBookRatingText>
-        4.5<span>/5</span>
-      </StyledBookRatingText>
+      <StyledBookTitleText>{title}</StyledBookTitleText>
+      <StyledBookWriterText>{authorName}</StyledBookWriterText>
+      <StyledInfoTextWrapper>
+        <span>Edition {bookEdition}</span>
+        {price == 0 && <span className="free">Free</span>}
+      </StyledInfoTextWrapper>
     </BookCardContainer>
   );
 };

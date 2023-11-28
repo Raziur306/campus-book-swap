@@ -58,7 +58,7 @@ export const StyledTopBarProfileWrapper = styled.div<{
 
 export const StyledTopBarProfileText = styled.p`
   color: #4d4d4d;
-  max-width: 14ch;
+  max-width: 120px;
   font-family: ${(props: any) => props.theme.fonts.$poppins};
   font-size: 1.25rem;
   font-style: normal;

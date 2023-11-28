@@ -38,4 +38,20 @@ export interface ContextChildrenPropsType {
 export interface CommonApiContextPropsType {
   bookList: any[];
   getAllBooks: () => void;
+  getProfileInfoCall: () => void;
+  profileInfo: any;
+}
+
+export interface BookCardPropsType {
+  title?: string;
+  id?: string;
+  authorName?: string;
+  bookEdition?: string;
+  coverImg?: string;
+  price?: number;
+}
+
+export interface SliderPropsType {
+  coverImg: string;
+  id: string;
 }

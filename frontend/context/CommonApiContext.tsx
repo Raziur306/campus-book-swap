@@ -12,14 +12,15 @@ export const CommonApiContextProvider = ({
 }: ContextChildrenPropsType) => {
   const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
   const [bookList, setBookList] = useState<any>([]);
-  const token = cookies.get("student_token");
+  const [profileInfo, setProfileInfo] = useState<any>();
+  const token = cookies.get("user_token");
 
   const getAllBookCall = async () => {
     try {
       const res = await fetch(`${BASE_URL}/books`, {
         headers: {
           "Content-Type": "application/json",
-          authorization: token,
+          authorization: `Bearer ${token}`,
         },
       });
       if (res.ok) {
@@ -31,8 +32,28 @@ export const CommonApiContextProvider = ({
     }
   };
 
+  const getProfileInfoCall = async () => {
+    try {
+      const res = await fetch(`${BASE_URL}/profile`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: `Bearer ${token}`,
+        },
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setProfileInfo(data.result);
+      }
+    } catch (error) {
+      console.log("Fetching profile info", error);
+    }
+  };
+
   return (
-    <CommonApiContext.Provider value={{ bookList, getAllBookCall }}>
+    <CommonApiContext.Provider
+      value={{ bookList, getAllBookCall, getProfileInfoCall, profileInfo }}
+    >
       {children}
     </CommonApiContext.Provider>
   );

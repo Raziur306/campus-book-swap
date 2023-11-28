@@ -1,5 +1,7 @@
-import React, { useState, useRef, useEffect } from "react";
+import { CommonApiContext } from "@/context/CommonApiContext";
+import React, { useState, useRef, useEffect, useContext } from "react";
 import styled from "styled-components";
+import { SliderBookCard } from ".";
 
 const SliderContainer = styled.div`
   position: relative;
@@ -18,43 +20,54 @@ const Slide = styled.div<{ $slidesToShow: number }>`
 `;
 
 interface PropsType {
-  slides: any[];
   slidesToShow: number;
 }
 
-const CustomSlider = ({ slides, slidesToShow }: PropsType) => {
-    const [currentIndex, setCurrentIndex] = useState(0);
-    const sliderRef = useRef(null);
-  
-    const totalSlides = slides.length;
-  
-    const nextSlide = () => {
-      setCurrentIndex((prevIndex) =>
-        prevIndex === totalSlides - slidesToShow ? 0 : prevIndex + 1
-      );
-    };
-  
-    useEffect(() => {
-      const interval = setInterval(nextSlide, 3000);
-      return () => clearInterval(interval);
-    }, []);
-  
-    return (
-      <SliderContainer>
-        <Slider
-          ref={sliderRef}
-          style={{
-            transform: `translateX(${-currentIndex * (100 / slidesToShow)}%)`,
-          }}
-        >
-          {slides.map((slide, index) => (
-            <Slide key={index} $slidesToShow={slidesToShow}>
-              {slide}
-            </Slide>
-          ))}
-        </Slider>
-      </SliderContainer>
-    );
+const CustomSlider = ({ slidesToShow }: PropsType) => {
+  const { bookList } = useContext(CommonApiContext);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
+  const sliderRef = useRef(null);
+  const visibleBooks = bookList.slice(0, 0 + 10);
+  const totalSlides = 10;
+
+  const nextSlide = () => {
+    setCurrentIndex((prevIndex) => {
+      if (isHovered) {
+        return prevIndex;
+      } else {
+        return prevIndex === totalSlides - slidesToShow ? 0 : prevIndex + 1;
+      }
+    });
   };
-  
-  export default CustomSlider;
+
+  useEffect(() => {
+    const interval = setInterval(nextSlide, 3000);
+    return () => clearInterval(interval);
+  }, [isHovered]);
+
+  return (
+    <SliderContainer
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <Slider
+        ref={sliderRef}
+        style={{
+          transform: `translateX(${-currentIndex * (100 / slidesToShow)}%)`,
+        }}
+      >
+        {visibleBooks.map((item: any, index: number) => {
+          const { id, coverImg } = item;
+          return (
+            <Slide key={index} $slidesToShow={slidesToShow}>
+              <SliderBookCard id={id} coverImg={coverImg} key={10} />,
+            </Slide>
+          );
+        })}
+      </Slider>
+    </SliderContainer>
+  );
+};
+
+export default CustomSlider;

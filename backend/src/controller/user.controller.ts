@@ -18,7 +18,6 @@ const saltRound = 10;
 const registerUser = async (req: express.Request, res: express.Response) => {
   try {
     const { name, email, password } = req.body;
-    console.log(req.body);
     const findUser = await prisma.user.findUnique({
       where: {
         email: email,
@@ -107,7 +106,6 @@ const verifyEmail = async (req: express.Request, res: express.Response) => {
 //contribute books
 const contributeBook = async (req: express.Request, res: express.Response) => {
   try {
-    console.log(req.body);
     let token = req.headers.authorization;
     token = token.split(" ").pop();
     const { id } = jwt.verify(token, JWT_KEY) as JwtDecodedType;
@@ -306,7 +304,6 @@ const updateProfile = async (req: express.Request, res: express.Response) => {
   try {
     let token = req.headers.authorization;
     token = token.split(" ")[1];
-    console.log(token);
 
     const decoded = jwt.verify(token, JWT_KEY) as JwtDecodedType;
 
@@ -326,7 +323,6 @@ const updateProfile = async (req: express.Request, res: express.Response) => {
     });
     res.status(204).json({ response: true, message: "Successfully updated" });
   } catch (error) {
-    console.log(error);
     res.status(500).json({ response: false, message: error.message });
   }
 };
@@ -369,7 +365,6 @@ const updatePassword = async (req: express.Request, res: express.Response) => {
       .status(204)
       .json({ response: true, message: "Password successfully updated" });
   } catch (error) {
-    console.log(error);
     res.status(500).json({ response: false, message: error.message });
   }
 };
