@@ -9,12 +9,13 @@ import {
   MainTitleTextStyle,
   StyledPrevBtn,
 } from "@/styled/aboutpageStyles";
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
 const AboutComponent = () => {
   return (
-    <div className="w-full h-screen bg-[#006B75] px-40 py-32 flex flex-col gap-16">
+    <div className="w-full bg-[#2a4187] px-40 py-32 flex flex-col gap-16">
       <div className="flex flex-col gap-10">
         <Link href={"/"}>
           <StyledPrevBtn>
@@ -33,7 +34,12 @@ const AboutComponent = () => {
               impact of traditional book consumption.
             </AboutParagraph>
             <div className="w-full h-full">
-              <Books />
+              <Image
+                alt={"main logo"}
+                width={500}
+                height={500}
+                src="/main-logo.jpg"
+              />
             </div>
           </div>
         </div>

@@ -5,10 +5,13 @@ import {
   contributeBook,
   getAllBooks,
   getContribution,
+  getProfileData,
   loginUser,
   registerUser,
   requestBook,
   verifyEmail,
+  updateProfile,
+  updatePassword,
 } from "../controller";
 
 import express from "express";
@@ -24,6 +27,12 @@ userRouter.post("/verify-email/:id", verifyEmail);
 userRouter.post("/request-book", auth, requestBook);
 
 userRouter.get("/books", auth, getAllBooks);
+
+userRouter.get("/profile", auth, getProfileData);
+
+userRouter.put("/profile", auth, updateProfile);
+
+userRouter.put("/password-update", auth, updatePassword);
 
 //upload file and store contribute data
 const storage = multer.memoryStorage();

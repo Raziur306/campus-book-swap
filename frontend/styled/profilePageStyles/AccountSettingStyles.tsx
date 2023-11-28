@@ -7,10 +7,10 @@ export const SettingsCardWrapper = styled.div`
   justify-content: space-between;
   cursor: pointer;
   border-radius: 10px;
-  transition: 0.8s ease-in-out;
+  transition: 0.3s ease-in-out;
   font-family: ${(props: any) => props.theme.fonts.$poppins};
   &:hover {
-    transform: scale(1.1);
+    transform: scale(1.02);
   }
 `;
 
@@ -23,7 +23,7 @@ export const StyledSettingInputLabel = styled.label`
   font-family: ${(props: any) => props.theme.fonts.$poppins};
   line-height: 112.4%;
 `;
-export const StyledSettingsTextField = styled.input`
+export const StyledSettingsTextField = styled.input<{ $error?: boolean }>`
   height: 100%;
   min-height: 52px;
   padding: 16px;
@@ -38,9 +38,14 @@ export const StyledSettingsTextField = styled.input`
   font-style: normal;
   font-weight: 400;
   line-height: 1.5rem;
+  border: 1px solid ${(props: any) => (props.$error ? "red" : "#dcd9d9")};
+  &:focus {
+    outline: none !important;
+    border: 2px solid ${(props: any) => (props.$error ? "red" : "black")};
+  }
 `;
 
-export const StyledSettingsBioTextArea = styled.textarea`
+export const StyledSettingsBioTextArea = styled.textarea<{ $error: boolean }>`
   min-height: 158px;
   padding: 16px;
   border-radius: 8px;
@@ -55,6 +60,11 @@ export const StyledSettingsBioTextArea = styled.textarea`
   font-weight: 400;
   line-height: 1.5rem;
   resize: none;
+  border: 1px solid ${(props: any) => (props.$error ? "red" : "#dcd9d9")};
+  &:focus {
+    outline: none !important;
+    border: 2px solid ${(props: any) => (props.$error ? "red" : "black")};
+  }
 `;
 
 export const StyledProfileUpdateBtn = styled.button`

@@ -2,8 +2,9 @@ import {
   ProfilePageContainer,
   StyledProfileMenuUl,
 } from "@/styled/profilePageStyles";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AccountSetting, LoginSecurity } from ".";
+import { cookies } from "@/config/Cookies";
 
 const ProfileComponent = () => {
   const [selectedMenu, setSelectedMenu] = useState(0);

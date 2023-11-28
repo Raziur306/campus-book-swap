@@ -11,7 +11,7 @@ const LadingPageSection = () => {
   }, []);
 
   return (
-    <div className="p-5 ">
+    <div className="p-5">
       <div className="flex flex-row gap-10 ">
         <QuoteSlider />
         <NewArrival />

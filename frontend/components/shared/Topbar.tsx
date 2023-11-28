@@ -47,9 +47,9 @@ const TopBar = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
+  const toggleMenu = useCallback(() => {
+    setIsOpen((prevIsOpen) => !prevIsOpen);
+  }, []);
 
   const handleClickOutside = useCallback(
     (event: any) => {

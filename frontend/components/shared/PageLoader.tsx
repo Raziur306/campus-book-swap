@@ -1,7 +1,6 @@
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { Metronome } from "@uiball/loaders";
-import { Metadata } from "next";
 
 const PageLoader = () => {
   const [loading, setLoading] = useState(true);

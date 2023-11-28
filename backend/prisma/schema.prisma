@@ -11,10 +11,11 @@ model User {
   id        String    @id @default(auto()) @map("_id") @db.ObjectId
   name      String?
   email     String    @unique
-  studetnId Int?
+  studentId Int?
   password  String?
   bio       String?
-  imgUrl    String?
+  image     String?
+  phone     String?
   verified  Boolean   @default(false)
   book      Book[]
   Request   Request[]
@@ -30,7 +31,7 @@ model Book {
   price         Int?      @default(0)
   purpose       String
   coverImg      String
-  status        String?    @default("Pending")
+  status        String?   @default("Pending")
   userId        String    @db.ObjectId
   author        User      @relation(fields: [userId], references: [id])
   request       Request[]

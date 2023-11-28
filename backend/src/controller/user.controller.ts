@@ -97,7 +97,7 @@ const verifyEmail = async (req: express.Request, res: express.Response) => {
     });
 
     res
-      .status(201)
+      .status(204)
       .json({ response: true, message: "Email verification successful." });
   } catch (error) {
     res.status(500).json({ response: false, message: error.message });
@@ -236,9 +236,7 @@ const getAllBooks = async (req: express.Request, res: express.Response) => {
 
     res.status(201).json({ response: true, result: books });
   } catch (error) {
-    res
-      .status(500)
-      .json({ response: false, message: error.message, result: [] });
+    res.status(500).json({ response: false, message: error.message });
   }
 };
 
@@ -274,9 +272,105 @@ const getContribution = async (req: express.Request, res: express.Response) => {
 
     res.status(201).json({ response: true, result: books });
   } catch (error) {
+    res.status(500).json({ response: false, message: error.message });
+  }
+};
+
+const getProfileData = async (req: express.Request, res: express.Response) => {
+  try {
+    let token = req.headers.authorization;
+    token = token.split(" ")[1];
+    const decoded = jwt.verify(token, JWT_KEY) as JwtDecodedType;
+
+    const data = await prisma.user.findFirst({
+      where: {
+        id: decoded.id,
+      },
+      select: {
+        name: true,
+        image: true,
+        studentId: true,
+        email: true,
+        phone: true,
+        bio: true,
+      },
+    });
+
+    res.status(201).json({ response: true, result: data });
+  } catch (error) {
+    res.status(500).json({ response: false, message: error.message });
+  }
+};
+
+const updateProfile = async (req: express.Request, res: express.Response) => {
+  try {
+    let token = req.headers.authorization;
+    token = token.split(" ")[1];
+    console.log(token);
+
+    const decoded = jwt.verify(token, JWT_KEY) as JwtDecodedType;
+
+    const { name, email, studentId, phone, bio, image } = req.body;
+    await prisma.user.update({
+      where: {
+        id: decoded.id,
+      },
+      data: {
+        name,
+        email,
+        studentId,
+        bio,
+        image: image,
+        phone: String(phone),
+      },
+    });
+    res.status(204).json({ response: true, message: "Successfully updated" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ response: false, message: error.message });
+  }
+};
+
+const updatePassword = async (req: express.Request, res: express.Response) => {
+  try {
+    let token = req.headers.authorization;
+    token = token.split(" ")[1];
+
+    const decoded = jwt.verify(token, JWT_KEY) as JwtDecodedType;
+
+    const exitingUser = await prisma.user.findFirst({
+      where: {
+        id: decoded.id,
+      },
+    });
+
+    const { prevPassword, newPassword } = req.body;
+
+    const matching = await bcrypt.compare(prevPassword, exitingUser.password);
+
+    if (!matching) {
+      return res
+        .status(403)
+        .json({ response: false, message: "Password mismatched" });
+    }
+
+    const hashedPassword = await bcrypt.hash(newPassword, saltRound);
+
+    await prisma.user.update({
+      where: {
+        id: decoded.id,
+      },
+      data: {
+        password: hashedPassword,
+      },
+    });
+
     res
-      .status(500)
-      .json({ response: false, message: error.message, result: [] });
+      .status(204)
+      .json({ response: true, message: "Password successfully updated" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ response: false, message: error.message });
   }
 };
 
@@ -288,4 +382,7 @@ export {
   requestBook,
   getAllBooks,
   getContribution,
+  getProfileData,
+  updateProfile,
+  updatePassword,
 };
