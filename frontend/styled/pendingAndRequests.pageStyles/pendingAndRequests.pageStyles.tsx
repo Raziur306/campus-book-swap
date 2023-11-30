@@ -21,7 +21,7 @@ export const PendingPageMenuWrapper = styled.ul`
     cursor: pointer;
     position: relative;
     &.active {
-      color: #314f8c;
+      color: #fa7c54;
       &:after {
         width: 100%;
       }
@@ -30,7 +30,7 @@ export const PendingPageMenuWrapper = styled.ul`
       content: "";
       width: 0;
       height: 2px;
-      background: #314f8c;
+      background: #fa7c54;
       position: absolute;
       bottom: 0;
       left: 0;
@@ -67,7 +67,6 @@ export const ContributionStyledTable = styled.table`
   }
   & td {
     padding: 20px 10px;
-    text-align: start;
     font-weight: 400;
     font-size: 1rem;
     & span {
@@ -97,8 +96,8 @@ export const ContributionStyledTable = styled.table`
         cursor: pointer;
       }
       &.view {
-        background: #2b00ff48;
-        color: #2b00ffe3;
+        background: #fa7b547c;
+        color: #2b00ffaa;
         cursor: pointer;
         cursor: pointer;
         transition: all 0.3s ease-in-out;

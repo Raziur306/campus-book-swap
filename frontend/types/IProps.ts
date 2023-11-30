@@ -41,6 +41,8 @@ export interface CommonApiContextPropsType {
   getAllBooks: () => void;
   getProfileInfoCall: () => void;
   profileInfo: any;
+  getYourContributionCall: () => void;
+  yourContributionList: any[];
 }
 
 export interface BookCardPropsType {

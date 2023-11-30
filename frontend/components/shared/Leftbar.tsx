@@ -16,11 +16,6 @@ export const LeftBarItems = [
     icon: Home,
   },
   {
-    name: "Search",
-    route: "/search",
-    icon: Search,
-  },
-  {
     name: "Contribute",
     route: "/contribute",
     icon: Contribute,

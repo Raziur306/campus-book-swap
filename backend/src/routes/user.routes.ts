@@ -37,6 +37,8 @@ userRouter.put("/password-update", auth, updatePassword);
 
 userRouter.get("/requests", auth, getBookRequest);
 
+userRouter.get("/contribution", auth, getContribution);
+
 //upload file and store contribute data
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });

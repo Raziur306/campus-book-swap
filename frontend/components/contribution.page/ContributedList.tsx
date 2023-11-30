@@ -21,7 +21,7 @@ const ContributedList = () => {
         <BookCard />
         <BookCard />
       </div>
-      <Link className="hover:underline" href={"/my-contribution"}>
+      <Link className="hover:underline" href={"/pending-and-requests"}>
         View All
       </Link>
     </div>

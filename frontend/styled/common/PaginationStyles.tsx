@@ -5,7 +5,7 @@ export const PaginationWrapper = styled.div`
   flex-direction: row;
   gap: 40px;
   align-items: center;
-  color: #314f8c;
+  color: #fa7c54;
   text-align: center;
   font-family: ${(props: any) => props.theme.fonts.$poppins};
   font-size: 0.875rem;
@@ -27,7 +27,7 @@ export const PaginationWrapper = styled.div`
     &.active {
       flex-shrink: 0;
       border-radius: 3px;
-      background: #314f8c;
+      background: #fa7c54;
       color: #fff;
     }
     &.disabled {

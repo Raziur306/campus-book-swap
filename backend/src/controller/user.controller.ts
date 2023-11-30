@@ -292,6 +292,9 @@ const getContribution = async (req: express.Request, res: express.Response) => {
           },
         },
       },
+      orderBy: {
+        createdAt: "desc",
+      },
     });
 
     res.status(201).json({ response: true, result: books });
