@@ -31,7 +31,9 @@ model Book {
   price         Int?      @default(0)
   purpose       String
   coverImg      String
+  inStock       Boolean   @default(true)
   status        String?   @default("Pending")
+  createdAt     DateTime? @default(now())
   userId        String    @db.ObjectId
   author        User      @relation(fields: [userId], references: [id])
   request       Request[]

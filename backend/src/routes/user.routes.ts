@@ -24,7 +24,7 @@ userRouter.post("/login", loginUser);
 
 userRouter.post("/verify-email/:id", verifyEmail);
 
-userRouter.post("/request-book", auth, requestBook);
+userRouter.post("/request-book/:bookId", auth, requestBook);
 
 userRouter.get("/books", auth, getAllBooks);
 

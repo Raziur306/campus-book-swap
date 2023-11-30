@@ -173,8 +173,7 @@ const requestBook = async (req: express.Request, res: express.Response) => {
     token = token.split(" ")[1];
 
     const decoded = jwt.verify(token, JWT_KEY) as JwtDecodedType;
-
-    const { bookId } = req.body;
+    const { bookId } = req.params;
 
     const isUserBookOwner = await prisma.book.findFirst({
       where: {
@@ -188,6 +187,19 @@ const requestBook = async (req: express.Request, res: express.Response) => {
         status: false,
         message: "You can't make request on your own book.",
       });
+    }
+
+    const existingRequest = await prisma.request.findFirst({
+      where: {
+        bookId,
+        userId: decoded?.id,
+      },
+    });
+
+    if (existingRequest) {
+      return res
+        .status(409)
+        .json({ error: "Request already exists for this book and user." });
     }
 
     await prisma.request.create({
@@ -217,6 +229,9 @@ const getAllBooks = async (req: express.Request, res: express.Response) => {
     const userDomain = userEmail.split("@")[1];
 
     const books = await prisma.book.findMany({
+      orderBy: {
+        createdAt: "desc",
+      },
       where: {
         userId: {
           not: decoded?.id,
@@ -227,6 +242,17 @@ const getAllBooks = async (req: express.Request, res: express.Response) => {
         author: {
           email: {
             endsWith: userDomain,
+          },
+        },
+      },
+      include: {
+        request: {
+          where: {
+            userId: decoded.id,
+          },
+          select: {
+            createdAt: true,
+            status: true,
           },
         },
       },
