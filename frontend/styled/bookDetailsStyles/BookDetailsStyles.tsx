@@ -1,15 +1,22 @@
 import styled from "styled-components";
 
+export const BookDetailsContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  font-family: ${(props: any) => props.theme.fonts.$poppins};
+`;
+
 export const BookDetailsImageWrapper = styled.div`
   position: relative;
   width: 100%;
   max-width: 400px;
-  aspect-ratio: 25/30;
+  aspect-ratio: 1/1;
   border-radius: 10px;
   background: #fff;
 `;
 
-export const RequestOwnerBtn = styled.button`
+export const RequestOwnerBtn = styled.button<{ $isApproved: boolean }>`
   font-size: 1.2rem;
   height: 50px;
   color: #fff;
@@ -19,10 +26,10 @@ export const RequestOwnerBtn = styled.button`
   font-weight: 600;
   line-height: 12px;
   border-radius: 5px;
-  background: #f27851;
-  transition: 0.3s ease-in-out;
+  background: ${(props:any)=> props.$isApproved?"#08c60b":"#f7835e"};
+  transition: all 0.3s ease-in-out;
   &:hover {
-    background: #f7835e;
+    background: ${(props:any)=> props.$isApproved?"#08c60b9e":"#f7845ea9"};
   }
 `;
 

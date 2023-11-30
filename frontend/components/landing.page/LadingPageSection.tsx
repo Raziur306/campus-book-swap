@@ -17,7 +17,7 @@ const LadingPageSection = () => {
         <NewArrival />
       </div>
 
-      <div className="mt-10 gap-10 grid sm:grid-cols-2 md:grid-cols-4 2xl:grid-cols-5  ">
+      <div className="mt-10 gap-10 grid sm:grid-cols-2 md:grid-cols-4 2xl:grid-cols-5">
         {bookList?.map((item: any, index: number) => {
           const { title, id, authorName, bookEdition, coverImg, price } = item;
           return (
@@ -33,6 +33,11 @@ const LadingPageSection = () => {
           );
         })}
       </div>
+      {bookList.length == 0 && (
+        <p className="m-auto text-center font-sans">
+          No Book Available in your campus
+        </p>
+      )}
     </div>
   );
 };

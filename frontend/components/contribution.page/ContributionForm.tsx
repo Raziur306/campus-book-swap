@@ -78,7 +78,6 @@ const ContributionForm = () => {
     formData.append("purpose", formik.values.purpose);
     formData.append("book-cover", coverPge);
 
-    toast.success("Hello world");
     const submit = () =>
       fetch(`${BASE_URL}/donate-book`, {
         method: "POST",

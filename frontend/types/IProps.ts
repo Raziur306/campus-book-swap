@@ -55,3 +55,12 @@ export interface SliderPropsType {
   coverImg: string;
   id: string;
 }
+
+export interface RequestOwnerModalPropsType {
+  handleCloseModal: () => void;
+  bookId: string;
+}
+
+export interface ChatModalPropsType {
+  handleChatModalClose: () => void;
+}
