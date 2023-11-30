@@ -29,6 +29,7 @@ export interface ActionDialogProps {
 
 export interface ViewBookDetailsDialogProps {
   handleDialogClose: () => void;
+  requestInfo: any;
 }
 
 export interface ContextChildrenPropsType {

@@ -2,14 +2,19 @@ import {
   StyledContributeInputLabel,
   StyledContributionTextArea,
   StyledContributionTextField,
+  ViewBookDetailsDialogTitleText,
 } from "@/styled/contributionStyles";
 import { ViewBookDetailsDialogProps } from "@/types";
+import { convertEdition } from "@/utils/editionConverter";
 import Image from "next/image";
 import React from "react";
 
 const ViewBookDetailsDialog = ({
+  requestInfo,
   handleDialogClose,
 }: ViewBookDetailsDialogProps) => {
+  const bookInfo = requestInfo.Book;
+
   return (
     <div className="fixed inset-0 flex items-center justify-center backdrop-blur-sm z-50">
       <div className="relative p-4 w-full max-w-4xl max-h-full ">
@@ -53,10 +58,10 @@ const ViewBookDetailsDialog = ({
               />
             </svg>
 
-            <h3 className="mb-5 text-lg font-normal text-gray-600 ">
+            <ViewBookDetailsDialogTitleText>
               The provided information is provided by the contributor of the
               book.
-            </h3>
+            </ViewBookDetailsDialogTitleText>
             <div className="flex flex-row gap-7 bg-white rounded-lg w-full text-start  p-10">
               <div className=" flex flex-col gap-7 w-full">
                 <div className="flex flex-col gap-2 w-full">
@@ -66,6 +71,7 @@ const ViewBookDetailsDialog = ({
                   <StyledContributionTextField
                     disabled
                     placeholder="Book Title"
+                    value={bookInfo?.title}
                   />
                 </div>
                 <div className="flex flex-col gap-2 w-full">
@@ -75,6 +81,7 @@ const ViewBookDetailsDialog = ({
                   <StyledContributionTextField
                     disabled
                     placeholder="Enter book edition"
+                    value={convertEdition(bookInfo?.bookEdition)}
                   />
                 </div>
                 <div className="flex flex-col gap-2 w-full">
@@ -84,6 +91,7 @@ const ViewBookDetailsDialog = ({
                   <StyledContributionTextField
                     disabled
                     placeholder="Author Name"
+                    value={bookInfo?.author.name}
                   />
                 </div>
                 <div className="flex flex-col gap-2 w-full">
@@ -93,6 +101,7 @@ const ViewBookDetailsDialog = ({
                   <StyledContributionTextField
                     disabled
                     placeholder="Enter publisher name"
+                    value={bookInfo?.publisher}
                   />
                 </div>
                 <div className="flex flex-col gap-2 w-full">
@@ -102,6 +111,7 @@ const ViewBookDetailsDialog = ({
                   <StyledContributionTextField
                     disabled
                     placeholder="Enter published year"
+                    value={bookInfo?.publishedYear}
                   />
                 </div>
               </div>
@@ -114,6 +124,7 @@ const ViewBookDetailsDialog = ({
                     disabled
                     placeholder="Enter amount"
                     type="number"
+                    value={bookInfo?.price}
                   />
                 </div>
                 <div className="flex flex-col gap-2 w-full">
@@ -123,6 +134,7 @@ const ViewBookDetailsDialog = ({
                   <StyledContributionTextArea
                     disabled
                     placeholder="Why you want to contribute..."
+                    value={bookInfo?.purpose}
                   />
                 </div>
 
@@ -131,10 +143,11 @@ const ViewBookDetailsDialog = ({
                     Uploaded Cover Page
                   </StyledContributeInputLabel>
                   <Image
+                    priority
                     alt="Book Preview"
                     width={150}
                     height={150}
-                    src={"/images/bookImg.jpg"}
+                    src={`${bookInfo?.coverImg}`}
                   />
                 </div>
               </div>

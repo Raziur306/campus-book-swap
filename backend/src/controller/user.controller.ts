@@ -395,6 +395,37 @@ const updatePassword = async (req: express.Request, res: express.Response) => {
   }
 };
 
+const getBookRequest = async (req: express.Request, res: express.Response) => {
+  try {
+    let token = req.headers.authorization;
+    token = token.split(" ")[1];
+    const decoded = jwt.verify(token, JWT_KEY) as JwtDecodedType;
+    const result = await prisma.request.findMany({
+      where: {
+        userId: decoded?.id,
+      },
+      select: {
+        id: true,
+        status: true,
+        createdAt: true,
+        Book: {
+          include: {
+            author: {
+              select: {
+                id: true,
+                name: true,
+              },
+            },
+          },
+        },
+      },
+    });
+    res.status(200).json({ response: true, result: result });
+  } catch (error) {
+    res.status(500).json({ response: false, message: error.message });
+  }
+};
+
 export {
   registerUser,
   loginUser,
@@ -406,4 +437,5 @@ export {
   getProfileData,
   updateProfile,
   updatePassword,
+  getBookRequest,
 };

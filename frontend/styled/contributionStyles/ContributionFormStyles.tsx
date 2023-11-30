@@ -84,3 +84,12 @@ export const ContributionSuccessContainer = styled.div`
   padding: 40px;
   font-family: ${(props: any) => props.theme.fonts.$poppins};
 `;
+
+export const ViewBookDetailsDialogTitleText = styled.h2`
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  margin-bottom: 1.25rem;
+  color: rgb(75 85 99 / var(--tw-text-opacity));
+  margin-bottom: 1.25rem;
+  font-family: ${(props: any) => props.theme.fonts.$poppins};
+`;
