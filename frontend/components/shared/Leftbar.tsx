@@ -8,7 +8,7 @@ import Shelf from "../../public/svg/shelf.svg";
 import Contribute from "../../public/svg/contribute.svg";
 import { useRouter, usePathname } from "next/navigation";
 import Link from "next/link";
-
+import Chat from "../../public/svg/chat";
 export const LeftBarItems = [
   {
     name: "Home",
@@ -16,13 +16,18 @@ export const LeftBarItems = [
     icon: Home,
   },
   {
+    name: "Chats",
+    route: "/chats",
+    icon: Chat,
+  },
+  {
     name: "Contribute",
     route: "/contribute",
     icon: Contribute,
   },
   {
-    name: "Pending & Requests",
-    route: "/pending-and-requests",
+    name: "My Contribution",
+    route: "/my-contribution",
     icon: Shelf,
   },
 ];

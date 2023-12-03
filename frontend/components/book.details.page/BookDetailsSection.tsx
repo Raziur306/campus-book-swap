@@ -16,19 +16,11 @@ import { RequestOwnerModal } from ".";
 import { ChatModal } from "../shared";
 
 const BookDetails = () => {
-  const [requestInfo, setRequestInfo] = useState<any>({});
   const { bookList, getAllBookCall } = useContext(CommonApiContext);
   const router = useRouter();
   const bookId = router.query.book_id;
   const selectedBook = bookList.find((item: any) => item.id == bookId);
-  const [isRequestDialogOpen, setIsRequestDialogOpen] = useState(false);
   const [isChatModalOpen, setIsChatModalOpen] = useState(false);
-
-  useEffect(() => {
-    if (selectedBook?.request.length > 0) {
-      setRequestInfo(selectedBook.request[0]);
-    }
-  }, [selectedBook]);
 
   useEffect(() => {
     if (bookList.length == 0) {
@@ -37,14 +29,7 @@ const BookDetails = () => {
   }, []);
 
   const handleRequestDialogOpen = () => {
-    if (requestInfo.status == "Approved") {
-      setIsChatModalOpen(true);
-    } else {
-      setIsRequestDialogOpen(true);
-    }
-  };
-  const handleRequestDialogClose = () => {
-    setIsRequestDialogOpen(false);
+    setIsChatModalOpen(true);
   };
 
   const handleChatModalClose = () => {
@@ -80,16 +65,8 @@ const BookDetails = () => {
                 </p>
               </div>
             </div>
-            <RequestOwnerBtn
-              $isApproved={requestInfo?.status == "Approved"}
-              disabled={requestInfo?.status == "Pending" ? true : false}
-              onClick={handleRequestDialogOpen}
-            >
-              {requestInfo?.status == "Pending"
-                ? "Pending"
-                : requestInfo?.status == "Approved"
-                ? "Chat with owner"
-                : "Request Owner"}
+            <RequestOwnerBtn onClick={handleRequestDialogOpen}>
+              Chat with Owner
             </RequestOwnerBtn>
           </div>
 
@@ -126,12 +103,6 @@ const BookDetails = () => {
           </OverViewItemBox>
         </div>
       </BookDetailsContainer>
-      {isRequestDialogOpen && (
-        <RequestOwnerModal
-          bookId={selectedBook?.id}
-          handleCloseModal={handleRequestDialogClose}
-        />
-      )}
       {isChatModalOpen && (
         <ChatModal handleChatModalClose={handleChatModalClose} />
       )}

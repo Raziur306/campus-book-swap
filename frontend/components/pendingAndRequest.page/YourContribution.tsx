@@ -1,10 +1,11 @@
-import { ContributionStyledTable } from "@/styled/pendingAndRequests.pageStyles";
+import { ContributionStyledTable } from "@/styled/myContributionPageStyles";
 import React, { useContext, useEffect, useState } from "react";
 import { PaginationComponent } from "../shared";
 import { CommonApiContext } from "@/context/CommonApiContext";
 import Image from "next/image";
 import { dateFormatter } from "@/utils/dateConveter";
 import { useRouter } from "next/router";
+import { cookies } from "@/config/Cookies";
 
 const YourContribution = () => {
   const { yourContributionList, getYourContributionCall } =
@@ -41,21 +42,12 @@ const YourContribution = () => {
               <th>Purpose</th>
               <th>Price</th>
               <th>Date</th>
-              <th>Total Request</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
             {visibleContribution.map((item: any, index: number) => {
-              const {
-                id,
-                title,
-                coverImg,
-                price,
-                purpose,
-                createdAt,
-                request,
-              } = item;
+              const { id, title, coverImg, price, purpose, createdAt } = item;
               return (
                 <tr key={index}>
                   <td>{index + 1}</td>
@@ -71,7 +63,6 @@ const YourContribution = () => {
                   <td className="w-60">{purpose}</td>
                   <td>{price}Tk</td>
                   <td>{dateFormatter(createdAt)}</td>
-                  <td className="text-center">{request.length || 0}</td>
                   <td>
                     <span
                       onClick={() => handleViewClick(id)}

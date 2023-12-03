@@ -1,4 +1,4 @@
-import { userToken } from "@/config/Cookies";
+import { cookies } from "@/config/Cookies";
 import { RequestOwnerModalContentWrapper } from "@/styled";
 import { RequestOwnerModalPropsType } from "@/types";
 import React, { useState } from "react";
@@ -10,6 +10,7 @@ const RequestOwnerModal = ({
   const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const token = cookies.get("user_token");
 
   const handleConfirmCLick = async () => {
     setIsLoading(true);
@@ -18,7 +19,7 @@ const RequestOwnerModal = ({
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          authorization: `Bearer ${userToken}`,
+          authorization: `Bearer ${token}`,
         },
       });
       if (res.ok) {

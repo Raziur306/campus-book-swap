@@ -16,7 +16,7 @@ export const BookDetailsImageWrapper = styled.div`
   background: #fff;
 `;
 
-export const RequestOwnerBtn = styled.button<{ $isApproved: boolean }>`
+export const RequestOwnerBtn = styled.button`
   font-size: 1.2rem;
   height: 50px;
   color: #fff;
@@ -26,10 +26,10 @@ export const RequestOwnerBtn = styled.button<{ $isApproved: boolean }>`
   font-weight: 600;
   line-height: 12px;
   border-radius: 5px;
-  background: ${(props:any)=> props.$isApproved?"#08c60b":"#f7835e"};
+  background: #08c60b;
   transition: all 0.3s ease-in-out;
   &:hover {
-    background: ${(props:any)=> props.$isApproved?"#08c60b9e":"#f7845ea9"};
+    background: #08c60b9e;
   }
 `;
 

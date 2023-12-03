@@ -8,10 +8,11 @@ export const middleware = async (request: NextRequest) => {
     pathname == "/" ||
     pathname == "/search" ||
     pathname == "/contribute" ||
-    pathname == "/pending-and-requests" ||
+    pathname == "/my-contribution" ||
     pathname == "/about" ||
     pathname.includes("/book-details") ||
-    pathname == "/profile";
+    pathname == "/profile" ||
+    pathname.includes("/view-your-book");
 
   if (isUserRoute) {
     if (!userToken) {
