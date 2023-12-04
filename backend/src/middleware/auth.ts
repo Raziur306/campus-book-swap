@@ -1,6 +1,8 @@
+import { prisma } from "../config";
 import dotenv from "dotenv";
 import express from "express";
 import jwt from "jsonwebtoken";
+import { JwtDecodedType } from "../types";
 dotenv.config();
 
 const auth = async (
@@ -12,8 +14,17 @@ const auth = async (
     let token = req.headers.authorization;
     if (token) {
       token = token.split(" ")[1];
-      const user =  jwt.verify(token, process.env.JWT_PRIVATE_KEY);
+      const decoded = jwt.verify(
+        token,
+        process.env.JWT_PRIVATE_KEY
+      ) as JwtDecodedType;
+      const user = await prisma.user.findFirst({
+        where: {
+          id: decoded.id,
+        },
+      });
       if (user) {
+        res.locals.user = user;
         next();
       } else {
         res.status(401).json({ status: false, message: "Unauthorized user." });

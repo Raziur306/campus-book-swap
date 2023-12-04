@@ -166,57 +166,6 @@ const contributeBook = async (req: express.Request, res: express.Response) => {
   }
 };
 
-//book request
-const requestBook = async (req: express.Request, res: express.Response) => {
-  try {
-    let token = req.headers.authorization;
-    token = token.split(" ")[1];
-
-    const decoded = jwt.verify(token, JWT_KEY) as JwtDecodedType;
-    const { bookId } = req.params;
-
-    const isUserBookOwner = await prisma.book.findFirst({
-      where: {
-        id: bookId,
-        userId: decoded?.id,
-      },
-    });
-
-    if (isUserBookOwner) {
-      return res.status(403).json({
-        status: false,
-        message: "You can't make request on your own book.",
-      });
-    }
-
-    const existingRequest = await prisma.request.findFirst({
-      where: {
-        bookId,
-        userId: decoded?.id,
-      },
-    });
-
-    if (existingRequest) {
-      return res
-        .status(409)
-        .json({ error: "Request already exists for this book and user." });
-    }
-
-    await prisma.request.create({
-      data: {
-        bookId,
-        userId: decoded?.id,
-      },
-    });
-
-    res
-      .status(201)
-      .json({ response: true, message: "Request send successfully." });
-  } catch (error) {
-    res.status(500).json({ response: false, message: error.message });
-  }
-};
-
 //get all books
 const getAllBooks = async (req: express.Request, res: express.Response) => {
   try {
@@ -245,17 +194,6 @@ const getAllBooks = async (req: express.Request, res: express.Response) => {
           },
         },
       },
-      include: {
-        request: {
-          where: {
-            userId: decoded.id,
-          },
-          select: {
-            createdAt: true,
-            status: true,
-          },
-        },
-      },
     });
 
     res.status(201).json({ response: true, result: books });
@@ -279,18 +217,6 @@ const getContribution = async (req: express.Request, res: express.Response) => {
     const books = await prisma.book.findMany({
       where: {
         userId: decoded?.id,
-      },
-      include: {
-        request: {
-          include: {
-            User: {
-              select: {
-                name: true,
-                email: true,
-              },
-            },
-          },
-        },
       },
       orderBy: {
         createdAt: "desc",
@@ -398,47 +324,14 @@ const updatePassword = async (req: express.Request, res: express.Response) => {
   }
 };
 
-const getBookRequest = async (req: express.Request, res: express.Response) => {
-  try {
-    let token = req.headers.authorization;
-    token = token.split(" ")[1];
-    const decoded = jwt.verify(token, JWT_KEY) as JwtDecodedType;
-    const result = await prisma.request.findMany({
-      where: {
-        userId: decoded?.id,
-      },
-      select: {
-        id: true,
-        status: true,
-        createdAt: true,
-        Book: {
-          include: {
-            author: {
-              select: {
-                id: true,
-                name: true,
-              },
-            },
-          },
-        },
-      },
-    });
-    res.status(200).json({ response: true, result: result });
-  } catch (error) {
-    res.status(500).json({ response: false, message: error.message });
-  }
-};
-
 export {
   registerUser,
   loginUser,
   verifyEmail,
   contributeBook,
-  requestBook,
   getAllBooks,
   getContribution,
   getProfileData,
   updateProfile,
   updatePassword,
-  getBookRequest,
 };
