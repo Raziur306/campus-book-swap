@@ -1,4 +1,5 @@
 import { cookies } from "@/config/Cookies";
+import { SocketContext } from "@/context";
 import { CommonApiContext } from "@/context/CommonApiContext";
 import {
   ConversationContainer,
@@ -9,20 +10,29 @@ import {
   ConversationWrapper,
 } from "@/styled/chat.page.styles";
 import { ConversationSectionPropsType } from "@/types";
+import { verifyToken } from "@/utils/tokenverifier";
 import Image from "next/image";
 import React, { useContext, useEffect, useRef, useState } from "react";
+import { io } from "socket.io-client";
 
 const ConversationSection = ({ receiverId }: ConversationSectionPropsType) => {
   const { converSationMessage } = useContext(CommonApiContext);
+  const { socket } = useContext(SocketContext);
   const chatBoxRef = useRef<HTMLDivElement | any>(null);
   const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
   const token = cookies.get("user_token");
   const [messages, setMessages] = useState<any>([]);
   const [newMessage, setNewMessage] = useState<string>("");
+  const [currentUser, setCurrentUser] = useState<any>({});
 
   const selectedConversation = converSationMessage.find(
     (item: any) => item.receiver.id === receiverId
   );
+
+  const decodeJWT = async () => {
+    const decoded = await verifyToken(token);
+    setCurrentUser(decoded);
+  };
 
   const getMessageCall = async () => {
     try {
@@ -83,6 +93,22 @@ const ConversationSection = ({ receiverId }: ConversationSectionPropsType) => {
       console.log("Send message error", error);
     }
   };
+
+  useEffect(() => {
+    decodeJWT();
+  }, []);
+
+  useEffect(() => {
+    socket?.on(`${currentUser.id}`, (arg: any) => {
+      if (arg) {
+        setMessages([...messages, arg]);
+      }
+    });
+
+    return () => {
+      socket?.off(currentUser.id);
+    };
+  });
 
   return (
     <ConversationContainer>

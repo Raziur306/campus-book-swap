@@ -66,6 +66,7 @@ export interface RequestOwnerModalPropsType {
 
 export interface ChatModalPropsType {
   handleChatModalClose: () => void;
+  receiverId: string;
 }
 
 export interface ChatCardPropsType {

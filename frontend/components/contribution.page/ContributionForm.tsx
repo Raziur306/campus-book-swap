@@ -56,7 +56,6 @@ const ContributionForm = () => {
     },
   });
 
-  console.log(formik.errors);
   const handleOnSubmit = async () => {
     if (!coverPge) {
       return setFileError(true);

@@ -1,3 +1,6 @@
+import { cookies } from "@/config/Cookies";
+import { SocketContext } from "@/context";
+import { CommonApiContext } from "@/context/CommonApiContext";
 import {
   ChatModalContainer,
   ChatBodyContainer,
@@ -6,9 +9,110 @@ import {
   ChatModalInputWrapper,
 } from "@/styled/common";
 import { ChatModalPropsType } from "@/types";
+import { verifyToken } from "@/utils/tokenverifier";
 import Image from "next/image";
-import React from "react";
-const ChatModal = ({ handleChatModalClose }: ChatModalPropsType) => {
+import React, { useContext, useEffect, useRef, useState } from "react";
+const ChatModal = ({
+  handleChatModalClose,
+  receiverId,
+}: ChatModalPropsType) => {
+  const { socket } = useContext(SocketContext);
+  const { conversationFetchCall, converSationMessage } =
+    useContext(CommonApiContext);
+  const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+  const token = cookies.get("user_token");
+  const [messages, setMessages] = useState<any>([]);
+  const chatBoxRef = useRef<HTMLDivElement | any>(null);
+  const [newMessage, setNewMessage] = useState("");
+  const [currentUser, setCurrentUser] = useState<any>({});
+
+  const selectedConversation = converSationMessage.find(
+    (item: any) => item.receiver.id === receiverId
+  );
+
+  const decodeJWT = async () => {
+    const decoded = await verifyToken(token);
+    setCurrentUser(decoded);
+  };
+
+  const scrollToBottom = () => {
+    try {
+      chatBoxRef.current.scrollTop = chatBoxRef.current.scrollHeight;
+    } catch (error) {}
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
+  const getAllMessage = async () => {
+    try {
+      const res = await fetch(`${BASE_URL}/message/${receiverId}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: `Bearer ${token}`,
+        },
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setMessages(data.messages);
+      }
+    } catch (error) {
+      console.log("Chat Modal Error", error);
+    }
+  };
+
+  useEffect(() => {
+    decodeJWT();
+    conversationFetchCall();
+    getAllMessage();
+  }, []);
+
+  const handleMessageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNewMessage(e.target.value);
+  };
+
+  const sendMessage = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (newMessage.length == 0) {
+      return;
+    }
+    try {
+      const res = await fetch(`${BASE_URL}/send-message`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          text: newMessage.trim(),
+          receiverId: receiverId,
+        }),
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        setMessages([...messages, data.message]);
+        setNewMessage("");
+      }
+    } catch (error) {
+      console.log("Modal message error");
+    }
+  };
+
+  useEffect(() => {
+    socket?.on(`${currentUser.id}`, (arg: any) => {
+      if (arg) {
+        setMessages([...messages, arg]);
+      }
+    });
+
+    return () => {
+      socket?.off(currentUser.id);
+    };
+  });
+
   return (
     <div className=" fixed inset-0 flex items-center justify-center backdrop-blur-sm z-50">
       <div className="relative w-full max-w-md max-h-full">
@@ -20,10 +124,13 @@ const ChatModal = ({ handleChatModalClose }: ChatModalPropsType) => {
                   className="rounded-full"
                   width={50}
                   height={50}
-                  src={"/images/default.jpg"}
+                  src={
+                    selectedConversation?.receiver.image ||
+                    "/images/default.jpg"
+                  }
                   alt={"Chat Profile"}
                 />
-                <h3>Raziur Rahaman Ronju</h3>
+                <h3>{selectedConversation?.receiver.name}</h3>
               </div>
               <button
                 onClick={() => handleChatModalClose()}
@@ -48,41 +155,32 @@ const ChatModal = ({ handleChatModalClose }: ChatModalPropsType) => {
                 <span className="sr-only">Close modal</span>
               </button>
             </div>
-            <ChatBodyContainer>
-              <SendMsg>
-                <p>Hi how are you?</p>
-              </SendMsg>
-              <ReceivedMsg>
-                <p>Hello</p>
-              </ReceivedMsg>
-              <SendMsg>
-                <p>Hi how are you?</p>
-              </SendMsg>
-              <ReceivedMsg>
-                <p>Hello</p>
-              </ReceivedMsg>
-              <SendMsg>
-                <p>Hi how are you?</p>
-              </SendMsg>
-              <ReceivedMsg>
-                <p>Hello</p>
-              </ReceivedMsg>
-              <SendMsg>
-                <p>Hi how are you?</p>
-              </SendMsg>
-              <ReceivedMsg>
-                <p>Hello</p>
-              </ReceivedMsg>
-              <SendMsg>
-                <p>Hi how are you?</p>
-              </SendMsg>
-              <ReceivedMsg>
-                <p>Hello</p>
-              </ReceivedMsg>
+            <ChatBodyContainer ref={chatBoxRef}>
+              {messages.length == 0 && <span>No conversation found</span>}
+              {messages?.map((item: any, index: number) => {
+                const { senderId, text, createdAt } = item;
+                return senderId != receiverId ? (
+                  <SendMsg key={index}>
+                    <p>{text}</p>
+                  </SendMsg>
+                ) : (
+                  <ReceivedMsg key={index}>
+                    <p>{text}</p>
+                  </ReceivedMsg>
+                );
+              })}
             </ChatBodyContainer>
-            <ChatModalInputWrapper>
-              <input type="text" placeholder="Type your message..." />
-              <button>
+            <ChatModalInputWrapper onSubmit={sendMessage}>
+              <input
+                onChange={handleMessageChange}
+                type="text"
+                placeholder="Type your message..."
+                value={newMessage}
+              />
+              <button
+                type="submit"
+                className={`${newMessage.length > 0 ? "active" : ""}`}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"

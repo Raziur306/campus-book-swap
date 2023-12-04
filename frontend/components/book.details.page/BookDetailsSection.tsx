@@ -12,7 +12,6 @@ import CheckedBox from "@/public/admin/checkedBox";
 import { useRouter } from "next/router";
 import { CommonApiContext } from "@/context/CommonApiContext";
 import { convertEdition } from "@/utils/editionConverter";
-import { RequestOwnerModal } from ".";
 import { ChatModal } from "../shared";
 
 const BookDetails = () => {
@@ -104,7 +103,10 @@ const BookDetails = () => {
         </div>
       </BookDetailsContainer>
       {isChatModalOpen && (
-        <ChatModal handleChatModalClose={handleChatModalClose} />
+        <ChatModal
+          receiverId={selectedBook.userId}
+          handleChatModalClose={handleChatModalClose}
+        />
       )}
     </>
   );

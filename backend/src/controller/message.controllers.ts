@@ -1,4 +1,4 @@
-import { prisma } from "../config";
+import { io, prisma } from "../config";
 import express from "express";
 
 const sendMessage = async (req: express.Request, res: express.Response) => {
@@ -12,6 +12,7 @@ const sendMessage = async (req: express.Request, res: express.Response) => {
         receiverId: receiverId,
       },
     });
+    io.emit(`${receiverId}`, message);
     res.status(201).json({ message });
   } catch (error) {
     res.status(500).json({ message: error.message });

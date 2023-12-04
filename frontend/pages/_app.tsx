@@ -4,6 +4,7 @@ import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import { Toaster } from "react-hot-toast";
 import { PageLoader } from "@/components/shared";
+import { SocketContextProvider } from "@/context";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -17,9 +18,11 @@ function MyApp({ Component, pageProps }: AppProps) {
           }}
         />
         <PageLoader />
-        <CommonApiContextProvider>
-          <Component {...pageProps} />
-        </CommonApiContextProvider>
+        <SocketContextProvider>
+          <CommonApiContextProvider>
+            <Component {...pageProps} />
+          </CommonApiContextProvider>
+        </SocketContextProvider>
       </CommonApiContextProvider>
     </Theme>
   );
