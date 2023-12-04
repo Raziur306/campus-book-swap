@@ -16,6 +16,7 @@ model User {
   bio              String?
   image            String?
   phone            String?
+  role             String?   @default("user")
   verified         Boolean   @default(false)
   book             Book[]
   sentMessages     Message[] @relation("sentMessages")

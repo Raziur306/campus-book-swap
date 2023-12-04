@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { verifyToken } from "./utils/tokenverifier";
 export const middleware = async (request: NextRequest) => {
   const { pathname } = request.nextUrl;
 
@@ -29,6 +30,16 @@ export const middleware = async (request: NextRequest) => {
 
   if (isLoginSignUpRoute) {
     if (userToken) {
+      return NextResponse.redirect(new URL("/", request.nextUrl));
+    }
+  }
+
+  const isAdminRoute = pathname.includes("/admin");
+  if (isAdminRoute) {
+    const user = await verifyToken(`${userToken}`);
+    if (user && user.role == "admin") {
+      return NextResponse.next();
+    } else {
       return NextResponse.redirect(new URL("/", request.nextUrl));
     }
   }

@@ -74,7 +74,10 @@ const loginUser = async (req: express.Request, res: express.Response) => {
         .json({ response: false, message: "User not found." });
     }
 
-    const token = jwt.sign({ id: exitingUser.id, email }, JWT_KEY);
+    const token = jwt.sign(
+      { id: exitingUser.id, email, role: exitingUser.role },
+      JWT_KEY
+    );
 
     res.status(200).json({ response: true, token });
   } catch (error) {
