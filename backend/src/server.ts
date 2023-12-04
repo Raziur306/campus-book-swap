@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 
 import { app } from "./config";
-import { userRouter } from "./routes";
+import { adminRouter, userRouter } from "./routes";
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "./config/firebase";
 
@@ -14,6 +14,8 @@ app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 app.use(cors());
 
 app.use("/api", userRouter);
+
+app.use("/api/admin", adminRouter);
 
 //default response
 app.use("*", (req: express.Request, res: express.Response) => {

@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { PaginationComponent } from "../shared";
 import { CommonApiContext } from "@/context/CommonApiContext";
 import Image from "next/image";
-import { dateFormatter } from "@/utils/dateConveter";
+import { dateFormatter } from "@/utils/formartDate";
 import { useRouter } from "next/router";
 import { cookies } from "@/config/Cookies";
 

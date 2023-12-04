@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Dashboard from "@/public/admin/dashboard";
 import {
   MenuItemLogoutStyle,
@@ -8,10 +8,12 @@ import {
 import Logout from "@/public/admin/logout";
 import Box from "@/public/admin/box";
 import CheckedBox from "@/public/admin/checkedBox";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { AdminTopBar } from ".";
+import { CommonApiContext } from "@/context/CommonApiContext";
+import { cookies } from "@/config/Cookies";
 
 const SideBar = ({
   children,
@@ -20,16 +22,28 @@ const SideBar = ({
   children: React.ReactNode;
   topBarTitle: string;
 }) => {
+  const { profileInfo, getProfileInfoCall } = useContext(CommonApiContext);
   const path = usePathname();
   const [isDrawerOpen, setIsDrawerOpen] = useState(true);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!profileInfo) {
+      getProfileInfoCall();
+    }
+  }, []);
 
   useEffect(() => {
     setIsDrawerOpen(false);
   }, [path]);
 
-
   const handleDrawerOpen = () => {
     setIsDrawerOpen(!isDrawerOpen);
+  };
+
+  const handleLogoutClick = () => {
+    cookies.remove("user_token");
+    router.refresh();
   };
 
   return (
@@ -41,9 +55,9 @@ const SideBar = ({
             height={50}
             className="rounded-full"
             alt="Admin Profile"
-            src={"/admin/avatar.png"}
+            src={profileInfo?.image || "/images/default.jpg"}
           />
-          <span>Allie Atieno</span>
+          <span>{profileInfo?.name || ""}</span>
         </PersonInfoContainer>
 
         <Link href={"/admin"}>
@@ -59,15 +73,10 @@ const SideBar = ({
             }`}
           >
             <Box />
-            <span>Products List</span>
+            <span>Books</span>
           </MenuItemWrapper>
         </Link>
-
-        <MenuItemWrapper className={`${path == "admin/order" ? "active" : ""}`}>
-          <CheckedBox />
-          <span>Order</span>
-        </MenuItemWrapper>
-        <MenuItemLogoutStyle>
+        <MenuItemLogoutStyle onClick={handleLogoutClick}>
           <Logout />
           <span>Log out</span>
         </MenuItemLogoutStyle>
