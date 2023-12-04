@@ -67,3 +67,20 @@ export interface RequestOwnerModalPropsType {
 export interface ChatModalPropsType {
   handleChatModalClose: () => void;
 }
+
+export interface ChatCardPropsType {
+  name: string;
+  image: string;
+  text: string;
+  isSelected: boolean;
+  handleSelect: (receiverId: string) => void;
+  receiverId: string;
+}
+
+export interface ChatSectionPropsType {
+  getReceiverId: (receiverId: string) => void;
+}
+
+export interface ConversationSectionPropsType {
+  receiverId?: string;
+}

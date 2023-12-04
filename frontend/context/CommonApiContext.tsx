@@ -1,7 +1,6 @@
 import { cookies } from "@/config/Cookies";
 import { CommonApiContextPropsType, ContextChildrenPropsType } from "@/types";
 import React, { ReactNode, createContext, useState } from "react";
-
 export const CommonApiContext = createContext<CommonApiContextPropsType | any>(
   {}
 );
@@ -14,6 +13,8 @@ export const CommonApiContextProvider = ({
   const [bookList, setBookList] = useState<any>([]);
   const [profileInfo, setProfileInfo] = useState<any>();
   const [yourContributionList, setYourContributionList] = useState<any>([]);
+  const [converSationMessage, setConverSationMessage] = useState<any>([]);
+
 
   const getAllBookCall = async () => {
     try {
@@ -68,6 +69,24 @@ export const CommonApiContextProvider = ({
     }
   };
 
+  const conversationFetchCall = async () => {
+    try {
+      const res = await fetch(`${BASE_URL}/conversation`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/jsonc",
+          authorization: `Bearer ${token}`,
+        },
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setConverSationMessage(data.conversation);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <CommonApiContext.Provider
       value={{
@@ -77,6 +96,8 @@ export const CommonApiContextProvider = ({
         profileInfo,
         yourContributionList,
         getYourContributionCall,
+        conversationFetchCall,
+        converSationMessage,
       }}
     >
       {children}

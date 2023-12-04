@@ -3,9 +3,18 @@ import styled from "styled-components";
 export const ConversationContainer = styled.div`
   width: 70%;
   height: 100%;
+  min-height: 81vh;
   padding: 15px;
   border-radius: 10px;
   background: #fff;
+  display: flex;
+  flex-direction: column;
+  & span {
+    font-size: 1rem;
+    font-family: ${(props: any) => props.theme.fonts.$poppins};
+    color: #808080a7;
+    margin: auto;
+  }
 `;
 
 export const ConversationProfileWrapper = styled.div`
@@ -33,7 +42,7 @@ export const ConversationWrapper = styled.div`
   scroll-behavior: auto;
 `;
 
-export const ConversationInputFieldWrapper = styled.div`
+export const ConversationInputFieldWrapper = styled.form`
   display: flex;
   flex-direction: row;
   gap: 20px;
@@ -58,12 +67,17 @@ export const ConversationInputFieldWrapper = styled.div`
     & svg {
       transform: rotate(-30deg);
     }
+    &.active {
+      background-color: #030373;
+      color: white;
+    }
   }
 `;
 
 const ConversationTilesStyle = styled.div`
   display: flex;
   & p {
+    min-height: 40px;
     font-family: ${(props: any) => props.theme.fonts.$poppins};
     text-align: center;
     min-width: 50px;

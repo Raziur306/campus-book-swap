@@ -2,36 +2,45 @@ import {
   ChatSectionContainer,
   ChatSectionWrapper,
 } from "@/styled/chat.page.styles";
-import React, { useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ChatCard } from ".";
-import { io } from "socket.io-client";
+import { cookies } from "@/config/Cookies";
+import { CommonApiContext } from "@/context/CommonApiContext";
+import { ChatSectionPropsType } from "@/types";
 
-const ChatList = [
-  {
-    name: "Jonathan",
-    message: "Hello How are you?",
-    image: "/images/default.jpg",
-  },
-  {
-    name: "Jonathan",
-    message: "Hello How are you?",
-    image: "/images/default.jpg",
-  },
-];
-
-const ChatSection = () => {
-  const END_POINT = process.env.NEXT_PUBLIC_SERVER_END_POINT;
+const ChatSection = ({ getReceiverId }: ChatSectionPropsType) => {
+  const { conversationFetchCall, converSationMessage } =
+    useContext(CommonApiContext);
+  const [selectedReceiverId, setSelectedReceiverId] = useState<any>("");
 
   useEffect(() => {
-    io(`${END_POINT}`);
+    conversationFetchCall();
   }, []);
+
+  const handleSelect = (id: string) => {
+    if (selectedReceiverId != id) {
+      getReceiverId(id);
+      setSelectedReceiverId(id);
+    }
+  };
 
   return (
     <ChatSectionContainer>
       <h1>Chats</h1>
       <ChatSectionWrapper>
-        {ChatList.map((item: any, index: number) => {
-          return <ChatCard key={index} />;
+        {converSationMessage.map((item: any, index: number) => {
+          const { image, name, id } = item.receiver;
+          return (
+            <ChatCard
+              receiverId={id}
+              handleSelect={handleSelect}
+              isSelected={selectedReceiverId == id}
+              text={item.text}
+              name={name}
+              image={image}
+              key={index}
+            />
+          );
         })}
       </ChatSectionWrapper>
     </ChatSectionContainer>
