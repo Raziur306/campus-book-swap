@@ -1,3 +1,4 @@
+import { generateReport } from "../utils";
 import { prisma } from "../config";
 import express from "express";
 const getStatisticInfo = async (
@@ -50,4 +51,37 @@ const getUsers = async (req: express.Request, res: express.Response) => {
   }
 };
 
-export { getStatisticInfo, getUsers };
+const getGeneratedReport = async (req: express.Request, res: express.Response) => {
+  try {
+    const user = res.locals.user;
+    if (user.role != "admin") {
+      return res.status(401).json({ message: "Unauthorized user" });
+    }
+
+    const totalUsers = await prisma.user.count();
+    const totalBooks = await prisma.book.count();
+    const approvedBooks = await prisma.book.count({
+      where: {
+        status: "Approved",
+      },
+    });
+    const pendingBooks = await prisma.book.count({
+      where: {
+        status: "Pending",
+      },
+    });
+
+    const reportLink = await generateReport(
+      totalBooks,
+      approvedBooks,
+      pendingBooks,
+      totalUsers
+    );
+
+    res.status(200).json({ report_link: reportLink });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export { getStatisticInfo, getUsers, getGeneratedReport };
