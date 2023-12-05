@@ -2,7 +2,10 @@ import express from "express";
 import bcrypt from "bcrypt";
 import { prisma } from "../config";
 import jwt from "jsonwebtoken";
-import { sendVerificationEmail } from "./email.controller";
+import {
+  sendRestPasswordEmail,
+  sendVerificationEmail,
+} from "./email.controller";
 import { JwtDecodedType } from "types";
 import { v4 as uuidv4 } from "uuid";
 import {
@@ -327,6 +330,65 @@ const updatePassword = async (req: express.Request, res: express.Response) => {
   }
 };
 
+const resetPasswordRequest = async (
+  req: express.Request,
+  res: express.Response
+) => {
+  try {
+    const { email } = req.body;
+    const existingUser = await prisma.user.findFirst({
+      where: {
+        email: email,
+      },
+    });
+
+    if (!existingUser) {
+      return res.json(404).json({ message: "No account found." });
+    }
+
+    await sendRestPasswordEmail(
+      existingUser.id,
+      existingUser.email,
+      existingUser.name
+    );
+
+    res.status(200).json({ message: "Rest password email send successfully" });
+  } catch (error) {
+    res.status(500).json({ response: false, message: error.message });
+  }
+};
+
+const resetPassword = async (req: express.Request, res: express.Response) => {
+  try {
+    const { userId } = req.params;
+    const existingUser = await prisma.user.findFirst({
+      where: {
+        id: userId,
+      },
+    });
+
+    if (!existingUser) {
+      return res.json(404).json({ message: "User not not found" });
+    }
+
+    const { password } = req.body;
+
+    const hashedPassword = await bcrypt.hash(password, saltRound);
+
+    await prisma.user.update({
+      where: {
+        id: userId,
+      },
+      data: {
+        password: hashedPassword,
+      },
+    });
+
+    res.status(201).json({ message: "Password reset successfully" });
+  } catch (error) {
+    res.status(500).json({ response: false, message: error.message });
+  }
+};
 export {
   registerUser,
   loginUser,
@@ -337,4 +399,6 @@ export {
   getProfileData,
   updateProfile,
   updatePassword,
+  resetPasswordRequest,
+  resetPassword,
 };

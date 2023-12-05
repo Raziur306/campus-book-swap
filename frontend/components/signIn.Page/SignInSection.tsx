@@ -9,6 +9,7 @@ import {
 } from "@/styled";
 import { CookiesExpires } from "@/utils/Task";
 import { useFormik } from "formik";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React from "react";
 import toast from "react-hot-toast";
@@ -100,8 +101,7 @@ const SignInSection = () => {
               onChange={formik.handleChange}
               type="email"
               $error={
-                formik.errors.password != undefined &&
-                formik.touched.password == true
+                formik.errors.email != undefined && formik.touched.email == true
               }
             />
             {formik.errors.email != undefined &&
@@ -139,7 +139,9 @@ const SignInSection = () => {
               />
               <label>Remember Me</label>
             </div>
-            <StyledForgetPassText>Forgot password?</StyledForgetPassText>
+            <Link href={"/forget-password"}>
+              <StyledForgetPassText>Forgot password?</StyledForgetPassText>
+            </Link>
           </div>
           <StyledSignInBtn type="button" onClick={() => formik.handleSubmit()}>
             Sign In

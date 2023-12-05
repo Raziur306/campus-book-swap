@@ -14,6 +14,8 @@ import {
   sendMessage,
   getMessage,
   conversation,
+  resetPasswordRequest,
+  resetPassword,
 } from "../controller";
 
 import express from "express";
@@ -41,6 +43,10 @@ userRouter.post("/send-message", auth, sendMessage);
 userRouter.get("/message/:userId", auth, getMessage);
 
 userRouter.get("/conversation", auth, conversation);
+
+userRouter.post("/forget-password", resetPasswordRequest);
+
+userRouter.post("/reset-password/:userId", resetPassword);
 
 //upload file and store contribute data
 const storage = multer.memoryStorage();

@@ -26,7 +26,11 @@ export const middleware = async (request: NextRequest) => {
   if (pathname.includes("/email-verification") && userToken) {
     return NextResponse.redirect(new URL("/", request.nextUrl));
   }
-  const isLoginSignUpRoute = pathname == "/sign-in" || pathname == "/sign-up";
+  const isLoginSignUpRoute =
+    pathname == "/sign-in" ||
+    pathname == "/sign-up" ||
+    pathname == "/email-verification" ||
+    pathname.includes("/reset-password");
 
   if (isLoginSignUpRoute) {
     if (userToken) {
@@ -46,5 +50,5 @@ export const middleware = async (request: NextRequest) => {
 };
 
 export const config = {
-  matcher: ["/:path*", "/admin/:path*"],
+  matcher: ["/:path*"],
 };

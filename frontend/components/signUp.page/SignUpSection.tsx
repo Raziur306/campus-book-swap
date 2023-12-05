@@ -76,7 +76,7 @@ const SignUpSection = () => {
             return emailDomain && emailDomain.toLowerCase().endsWith("edu");
           }
         ),
-      password: string().required(),
+      password: string().required().min(4),
       confirmPassword: string()
         .required()
         .oneOf([ref("password")], "Passwords must match"),
