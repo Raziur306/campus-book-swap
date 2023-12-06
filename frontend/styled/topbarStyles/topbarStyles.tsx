@@ -4,11 +4,12 @@ import styled, { keyframes } from "styled-components";
 export const StyledTopBarContainer = styled.div``;
 
 export const StyledTopBarSearch = styled.input`
+  font-family: ${(props: any) => props.theme.fonts.$poppins};
   border-radius: 40px;
   font-size: 1.25rem;
   background: #fff;
   box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
-  padding: 0.7rem 2rem 0.7rem 1rem;
+  padding: 0.7rem 2.3rem 0.7rem 1rem;
   background-image: url("./svg/searchOrange.svg");
   background-repeat: no-repeat;
   background-position: 95% center;
@@ -122,5 +123,33 @@ export const StyledFloatingMenuItem = styled.div`
     & svg {
       color: white;
     }
+  }
+`;
+
+export const SearchResultContentCardWrapper = styled.div`
+  width: 100%;
+  font-family: ${(props: any) => props.theme.fonts.$poppins};
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
+  position: relative;
+  &:hover {
+    background: #80808064;
+  }
+  &:after {
+    width: 100%;
+    height: 1px;
+    content: "";
+    background: #80808064;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+  & p {
+    font-size: 0.8rem;
+    color: gray;
   }
 `;
