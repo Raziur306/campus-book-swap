@@ -26,6 +26,7 @@ const SideBar = ({
   const path = usePathname();
   const router = useRouter();
 
+
   useEffect(() => {
     if (!profileInfo) {
       getProfileInfoCall();
@@ -57,11 +58,9 @@ const SideBar = ({
             <span>Dashboard</span>
           </MenuItemWrapper>
         </Link>
-        <Link href={"/admin/product-list/1"}>
+        <Link href={"/admin/book-list"}>
           <MenuItemWrapper
-            className={`${
-              path?.includes("admin/product-list/") ? "active" : ""
-            }`}
+            className={`${path?.includes("/admin/book-list") ? "active" : ""}`}
           >
             <Box />
             <span>Books</span>

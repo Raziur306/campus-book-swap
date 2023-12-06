@@ -114,4 +114,127 @@ const recentBooks = async (req: express.Request, res: express.Response) => {
   }
 };
 
-export { getStatisticInfo, getUsers, getGeneratedReport, recentBooks };
+const getAllBooksAdmin = async (
+  req: express.Request,
+  res: express.Response
+) => {
+  try {
+    const user = res.locals.user;
+    if (user.role != "admin") {
+      return res.status(401).json({ message: "Unauthorized user" });
+    }
+
+    const books = await prisma.book.findMany({
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+
+    res.status(200).json({ books });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+const getPendingBooks = async (req: express.Request, res: express.Response) => {
+  try {
+    const user = res.locals.user;
+    if (user.role != "admin") {
+      return res.status(401).json({ message: "Unauthorized user" });
+    }
+
+    const books = await prisma.book.findMany({
+      where: {
+        status: "Pending",
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+    res.status(200).json({ books });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+const getApprovedBooks = async (
+  req: express.Request,
+  res: express.Response
+) => {
+  try {
+    const user = res.locals.user;
+    if (user.role != "admin") {
+      return res.status(401).json({ message: "Unauthorized user" });
+    }
+
+    const books = await prisma.book.findMany({
+      where: {
+        status: "Approved",
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+    res.status(200).json({ books });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+const deleteBook = async (req: express.Request, res: express.Response) => {
+  try {
+    const user = res.locals.user;
+    if (user.role != "admin") {
+      return res.status(401).json({ message: "Unauthorized user" });
+    }
+
+    const { bookId } = req.params;
+    await prisma.book.delete({
+      where: {
+        id: bookId,
+      },
+    });
+
+    res.status(202).json({ message: "Book deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+const updateBookStatus = async (
+  req: express.Request,
+  res: express.Response
+) => {
+  try {
+    const user = res.locals.user;
+    if (user.role != "admin") {
+      return res.status(401).json({ message: "Unauthorized user" });
+    }
+
+    const { bookId } = req.params;
+    const { status } = req.body;
+    await prisma.book.update({
+      where: {
+        id: bookId,
+      },
+      data: {
+        status: status,
+      },
+    });
+    res.status(202).json({ message: "Book rejected successfully" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export {
+  getStatisticInfo,
+  getUsers,
+  getGeneratedReport,
+  recentBooks,
+  getAllBooksAdmin,
+  getPendingBooks,
+  getApprovedBooks,
+  deleteBook,
+  updateBookStatus,
+};
