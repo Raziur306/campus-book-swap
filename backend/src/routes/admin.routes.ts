@@ -8,6 +8,7 @@ import {
   getUsers,
   recentBooks,
   updateBookStatus,
+  deleteUser
 } from "../controller";
 import express from "express";
 import auth from "../middleware/auth";
@@ -32,5 +33,7 @@ adminRouter.get("/approved-books", auth, getApprovedBooks);
 adminRouter.post("/delete-book/:bookId", auth, deleteBook);
 
 adminRouter.post("/update-book-status/:bookId", auth, updateBookStatus);
+
+adminRouter.post("/delete-user/:userId", auth, deleteUser);
 
 export { adminRouter };

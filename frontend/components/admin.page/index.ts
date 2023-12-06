@@ -9,3 +9,5 @@ export { default as PendingBooksSection } from "./PendingBooksSection";
 export { default as ApprovedBooks } from "./ApprovedBooks";
 export { default as DeleteBookModal } from "./DeleteBookModal";
 export { default as UpdateBookStatusModal } from "./UpdateBookStatusModal";
+export { default as UsersListSection } from "./UsersListSection";
+export { default as DeleteUserModal } from "./DeleteUserModal";

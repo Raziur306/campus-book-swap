@@ -39,8 +39,11 @@ const getUsers = async (req: express.Request, res: express.Response) => {
         createdAt: "desc",
       },
       select: {
+        id: true,
         name: true,
         image: true,
+        verified: true,
+        email: true,
         createdAt: true,
       },
       take: 5,
@@ -227,6 +230,27 @@ const updateBookStatus = async (
   }
 };
 
+const deleteUser = async (req: express.Request, res: express.Response) => {
+  try {
+    const user = res.locals.user;
+    if (user.role != "admin") {
+      return res.status(401).json({ message: "Unauthorized user" });
+    }
+
+    const { userId } = req.params;
+
+    await prisma.user.delete({
+      where: {
+        id: userId,
+      },
+    });
+
+    res.status(202).json({ message: "User deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 export {
   getStatisticInfo,
   getUsers,
@@ -237,4 +261,5 @@ export {
   getApprovedBooks,
   deleteBook,
   updateBookStatus,
+  deleteUser,
 };

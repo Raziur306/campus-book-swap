@@ -3,3 +3,4 @@ export * from "./AdminStyles";
 export * from "./DashboardStyles";
 export * from "./SideBarStyles";
 export * from "./AllBooksSectionStyles";
+export * from "./UsersPage.styles";

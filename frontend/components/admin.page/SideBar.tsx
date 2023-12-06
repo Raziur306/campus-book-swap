@@ -14,6 +14,7 @@ import Image from "next/image";
 import { AdminTopBar } from ".";
 import { CommonApiContext } from "@/context/CommonApiContext";
 import { cookies } from "@/config/Cookies";
+import Group from "@/public/admin/group";
 
 const SideBar = ({
   children,
@@ -25,7 +26,6 @@ const SideBar = ({
   const { profileInfo, getProfileInfoCall } = useContext(CommonApiContext);
   const path = usePathname();
   const router = useRouter();
-
 
   useEffect(() => {
     if (!profileInfo) {
@@ -66,13 +66,11 @@ const SideBar = ({
             <span>Books</span>
           </MenuItemWrapper>
         </Link>
-        <Link href={"/admin/product-list/1"}>
+        <Link href={"/admin/users-list"}>
           <MenuItemWrapper
-            className={`${
-              path?.includes("admin/product-list/") ? "active" : ""
-            }`}
+            className={`${path?.includes("/admin/users-list") ? "active" : ""}`}
           >
-            <Box />
+            <Group />
             <span>Users List</span>
           </MenuItemWrapper>
         </Link>
