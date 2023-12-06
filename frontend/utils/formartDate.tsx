@@ -13,8 +13,6 @@ export const formatTimeDistance = (targetTime: string) => {
     const hours: number = Math.floor(minutes / 60);
     const days: number = Math.floor(hours / 24);
   
-    console.log("day", days);
-  
     if (days > 0) {
       return `${days} ${days === 1 ? "day" : "days"}`;
     } else if (hours > 0) {

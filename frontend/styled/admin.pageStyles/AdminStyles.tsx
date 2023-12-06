@@ -19,7 +19,14 @@ export const AdminTopBarContainer = styled.div`
   background: #fff;
   box-shadow: 3px 3px 14px 8px rgba(0, 0, 0, 0.03);
   font-family: ${(props: any) => props.theme.fonts.$poppins};
-  & svg {
-    color: red;
+  & button {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    background: #f00202;
+    color: #fff;
+    padding: 5px;
+    border-radius: 3px;
+    font-size: 0.8rem;
   }
 `;

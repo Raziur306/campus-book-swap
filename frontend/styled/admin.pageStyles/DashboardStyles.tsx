@@ -55,8 +55,9 @@ export const DashboardCardStatusWrapper = styled.div`
     & svg {
       transform: rotate(180deg);
       & path {
-        fill: #E8505B;
-        stroke:#E8505B;
+        fill: #e8505b;
+        stroke: #e8505b;
+      }
     }
   }
 `;
@@ -96,6 +97,9 @@ export const LargeCardSubContainer = styled.div`
     font-style: normal;
     font-weight: 500;
     line-height: normal;
+  }
+  & span {
+    font-weight: bold;
   }
   & h3 {
     color: #263238;
@@ -152,7 +156,7 @@ export const RecentUserWrapper = styled.div<{ $isLastItem: boolean }>`
     font-family: ${(props: any) => props.theme.fonts.$poppins};
     font-size: 13px;
     font-style: normal;
-    font-weight: 500;
+    font-weight: 600;
     line-height: normal;
   }
 

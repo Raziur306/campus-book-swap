@@ -51,7 +51,10 @@ const getUsers = async (req: express.Request, res: express.Response) => {
   }
 };
 
-const getGeneratedReport = async (req: express.Request, res: express.Response) => {
+const getGeneratedReport = async (
+  req: express.Request,
+  res: express.Response
+) => {
   try {
     const user = res.locals.user;
     if (user.role != "admin") {
@@ -84,4 +87,31 @@ const getGeneratedReport = async (req: express.Request, res: express.Response) =
   }
 };
 
-export { getStatisticInfo, getUsers, getGeneratedReport };
+const recentBooks = async (req: express.Request, res: express.Response) => {
+  try {
+    const user = res.locals.user;
+    if (user.role != "admin") {
+      return res.status(401).json({ message: "Unauthorized user" });
+    }
+
+    const books = await prisma.book.findMany({
+      orderBy: {
+        createdAt: "desc",
+      },
+      take: 5,
+      include: {
+        author: {
+          select: {
+            name: true,
+          },
+        },
+      },
+    });
+
+    res.status(200).json({ books });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export { getStatisticInfo, getUsers, getGeneratedReport, recentBooks };

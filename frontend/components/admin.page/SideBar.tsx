@@ -24,7 +24,6 @@ const SideBar = ({
 }) => {
   const { profileInfo, getProfileInfoCall } = useContext(CommonApiContext);
   const path = usePathname();
-  const [isDrawerOpen, setIsDrawerOpen] = useState(true);
   const router = useRouter();
 
   useEffect(() => {
@@ -32,14 +31,6 @@ const SideBar = ({
       getProfileInfoCall();
     }
   }, []);
-
-  useEffect(() => {
-    setIsDrawerOpen(false);
-  }, [path]);
-
-  const handleDrawerOpen = () => {
-    setIsDrawerOpen(!isDrawerOpen);
-  };
 
   const handleLogoutClick = () => {
     cookies.remove("user_token");
@@ -76,13 +67,23 @@ const SideBar = ({
             <span>Books</span>
           </MenuItemWrapper>
         </Link>
+        <Link href={"/admin/product-list/1"}>
+          <MenuItemWrapper
+            className={`${
+              path?.includes("admin/product-list/") ? "active" : ""
+            }`}
+          >
+            <Box />
+            <span>Users List</span>
+          </MenuItemWrapper>
+        </Link>
         <MenuItemLogoutStyle onClick={handleLogoutClick}>
           <Logout />
           <span>Log out</span>
         </MenuItemLogoutStyle>
       </div>
       <div className="w-full h-full min-h-screen bg-[#DEEAEB] p-5 xl:p-10 flex flex-col gap-10">
-        <AdminTopBar handleDrawerOpen={handleDrawerOpen} title={topBarTitle} />
+        <AdminTopBar title={topBarTitle} />
         {children}
       </div>
     </div>
