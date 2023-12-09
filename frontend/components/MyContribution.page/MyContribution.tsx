@@ -6,11 +6,17 @@ import Image from "next/image";
 import { dateFormatter } from "@/utils/formartDate";
 import { useRouter } from "next/router";
 import { cookies } from "@/config/Cookies";
+import { ActionDialog } from ".";
+import ViewBookDetailsDialog from "./ViewBookDetailsDialog";
 
-const YourContribution = () => {
+const MyContribution = () => {
   const { yourContributionList, getYourContributionCall } =
     useContext(CommonApiContext);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
+  const [isBookInfoModalOpen, setIsBookInfoModalOpen] =
+    useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const [selectedBookIndex, setSelectedBookIndex] = useState<number>(0);
   const dataPerPage = 10;
   const offset = (currentPage - 1) * dataPerPage;
   const visibleContribution = yourContributionList.slice(
@@ -23,13 +29,34 @@ const YourContribution = () => {
     getYourContributionCall();
   }, []);
 
+  useEffect(() => {
+    if (!isDeleteModalOpen) {
+      getYourContributionCall();
+    }
+  }, [isDeleteModalOpen]);
+
   const handleCurrentPage = (index: number) => {
     setCurrentPage(index);
   };
 
-  const handleViewClick = (id: string) => {
-    router.push(`/view-your-book/${id}`);
+  const handleViewClick = (index: number) => {
+    setSelectedBookIndex(index);
+    setIsBookInfoModalOpen(true);
   };
+
+  const handleDeleteClick = (index: number) => {
+    setSelectedBookIndex(index);
+    setIsDeleteModalOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setIsDeleteModalOpen(false);
+  };
+
+  const handleBookInfoModalClose = () => {
+    setIsBookInfoModalOpen(false);
+  };
+
   return (
     <>
       <div className="w-full h-full flex flex-col gap-10">
@@ -42,12 +69,14 @@ const YourContribution = () => {
               <th>Purpose</th>
               <th>Price</th>
               <th>Date</th>
+              <th>Status</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
             {visibleContribution.map((item: any, index: number) => {
-              const { id, title, coverImg, price, purpose, createdAt } = item;
+              const { id, title, coverImg, price, purpose, createdAt, status } =
+                item;
               return (
                 <tr key={index}>
                   <td>{index + 1}</td>
@@ -64,12 +93,23 @@ const YourContribution = () => {
                   <td>{price}Tk</td>
                   <td>{dateFormatter(createdAt)}</td>
                   <td>
-                    <span
-                      onClick={() => handleViewClick(id)}
-                      className={"view"}
-                    >
-                      View
-                    </span>
+                    <span className={`${status}`}>{status}</span>
+                  </td>
+                  <td>
+                    <div className="flex flex-row gap-2">
+                      <span
+                        onClick={() => handleViewClick(index)}
+                        className={"view"}
+                      >
+                        View
+                      </span>
+                      <span
+                        onClick={() => handleDeleteClick(index)}
+                        className={"delete"}
+                      >
+                        Delete
+                      </span>
+                    </div>
                   </td>
                 </tr>
               );
@@ -83,8 +123,20 @@ const YourContribution = () => {
           getCurrentPage={handleCurrentPage}
         />
       </div>
+      {isDeleteModalOpen && (
+        <ActionDialog
+          bookId={visibleContribution[selectedBookIndex].id}
+          handleModalClose={handleModalClose}
+        />
+      )}
+      {isBookInfoModalOpen && (
+        <ViewBookDetailsDialog
+          bookInfo={visibleContribution[selectedBookIndex]}
+          handleBookInfoModalClose={handleBookInfoModalClose}
+        />
+      )}
     </>
   );
 };
 
-export default YourContribution;
+export default MyContribution;

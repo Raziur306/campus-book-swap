@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const BookCardContainer = styled.div`
   cursor: pointer;
   width: 100%;
+  height: 100%;
   max-width: 15rem;
   background: #fff;
   display: flex;

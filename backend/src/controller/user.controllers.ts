@@ -389,6 +389,25 @@ const resetPassword = async (req: express.Request, res: express.Response) => {
     res.status(500).json({ response: false, message: error.message });
   }
 };
+
+const deleteMyBook = async (req: express.Request, res: express.Response) => {
+  try {
+    const { bookId } = req.params;
+    const user = res.locals.user;
+
+    await prisma.book.delete({
+      where: {
+        id: bookId,
+        userId: user.id,
+      },
+    });
+
+    res.status(202).json({ message: "Deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 export {
   registerUser,
   loginUser,
@@ -401,4 +420,5 @@ export {
   updatePassword,
   resetPasswordRequest,
   resetPassword,
+  deleteMyBook,
 };

@@ -4,23 +4,22 @@ import {
   StyledContributionTextField,
   ViewBookDetailsDialogTitleText,
 } from "@/styled/contributionStyles";
-import { ViewBookDetailsDialogProps } from "@/types";
+import { ViewBookDetailsModalProps } from "@/types";
 import { convertEdition } from "@/utils/editionConverter";
 import Image from "next/image";
 import React from "react";
 
 const ViewBookDetailsDialog = ({
-  requestInfo,
-  handleDialogClose,
-}: ViewBookDetailsDialogProps) => {
-  const bookInfo = requestInfo.Book;
+  bookInfo,
+  handleBookInfoModalClose,
+}: ViewBookDetailsModalProps) => {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center backdrop-blur-sm z-50">
       <div className="relative p-4 w-full max-w-4xl max-h-full ">
         <div className="relative bg-white rounded-lg shadow ">
           <button
-            onClick={() => handleDialogClose()}
+            onClick={() => handleBookInfoModalClose()}
             type="button"
             className="absolute top-3 end-2.5 text-gray-600 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
             data-modal-hide="popup-modal"
@@ -91,7 +90,7 @@ const ViewBookDetailsDialog = ({
                   <StyledContributionTextField
                     disabled
                     placeholder="Author Name"
-                    value={bookInfo?.author.name}
+                    value={bookInfo?.authorName}
                   />
                 </div>
                 <div className="flex flex-col gap-2 w-full">

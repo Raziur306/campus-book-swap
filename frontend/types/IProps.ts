@@ -23,13 +23,14 @@ export interface ViewDetailDialogProps {
   handleDialogClose: () => void;
 }
 
-export interface ActionDialogProps {
-  handleDialogClose: () => void;
+export interface DeleteBookModalPropsType {
+  handleModalClose: () => void;
+  bookId: string;
 }
 
-export interface ViewBookDetailsDialogProps {
-  handleDialogClose: () => void;
-  requestInfo: any;
+export interface ViewBookDetailsModalProps {
+  handleBookInfoModalClose: () => void;
+  bookInfo: any;
 }
 
 export interface ContextChildrenPropsType {

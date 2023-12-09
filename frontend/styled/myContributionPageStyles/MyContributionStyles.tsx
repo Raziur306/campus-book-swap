@@ -90,14 +90,17 @@ export const ContributionStyledTable = styled.table`
         }
       }
       &.Pending {
-        background: #ff8c003d;
         color: #ff8c00e4;
-        cursor: pointer;
-        cursor: pointer;
+      }
+      &.Rejected {
+        color: #9a0000e2;
+      }
+      &.Approved {
+        color: #228105e2;
       }
       &.view {
-        background: #fa7b547c;
-        color: #2b00ffaa;
+        background: #00800031;
+        color: green;
         cursor: pointer;
         cursor: pointer;
         transition: all 0.3s ease-in-out;
@@ -106,13 +109,13 @@ export const ContributionStyledTable = styled.table`
         }
       }
       &.rejected {
-        background: #ff000041;
-        color: red;
+        background: #ff000089;
+        color: #ff0f0f;
         cursor: pointer;
       }
-      &.chat {
-        background: #00800031;
-        color: green;
+      &.delete {
+        background: #d904045a;
+        color: #d90000;
         cursor: pointer;
         transition: all 0.3s ease-in-out;
         &:hover {

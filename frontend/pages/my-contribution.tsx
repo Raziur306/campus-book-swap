@@ -1,4 +1,4 @@
-import { YourContribution } from "@/components/pendingAndRequest.page";
+import { YourContribution } from "@/components/myContribution.page";
 import { Topbar } from "@/components/shared";
 import Leftbar from "@/components/shared/Leftbar";
 import SharedLayout from "@/layout/SharedLayout";

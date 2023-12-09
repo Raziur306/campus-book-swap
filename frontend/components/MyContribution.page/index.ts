@@ -1,2 +1,2 @@
-export { default as MyContributionCard } from "./MyContributionCard";
-export { default as MyContributionList } from "./MyContributionList";
+export { default as YourContribution } from "./MyContribution";
+export { default as ActionDialog } from "./ActionDialog";
