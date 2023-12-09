@@ -75,13 +75,10 @@ export interface ChatCardPropsType {
   text: string;
   isSelected: boolean;
   handleSelect: (receiverId: string) => void;
-  receiverId: string;
-}
-
-export interface ChatSectionPropsType {
-  getReceiverId: (receiverId: string) => void;
+  lastMessageAt: string;
+  conversationId: string;
 }
 
 export interface ConversationSectionPropsType {
-  receiverId?: string;
+  conversationId?: string;
 }

@@ -21,6 +21,12 @@ export const ChatSectionWrapper = styled.div`
   min-height: 74vh;
   max-height: 74vh;
   overflow-y: auto;
+
+  & .not-found {
+    font-family: ${(props: any) => props.theme.fonts.$poppins};
+    height: 100%;
+    margin: auto;
+  }
 `;
 
 export const ChatCardWrapper = styled.div`
@@ -45,8 +51,13 @@ export const ChatCardWrapper = styled.div`
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 1;
+    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
+    width: 100%;
+  }
+  & span {
+    font-family: ${(props: any) => props.theme.fonts.$poppins};
+    width: 40%;
   }
   &.active {
     background: #8080805e;

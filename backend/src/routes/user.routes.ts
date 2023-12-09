@@ -12,10 +12,11 @@ import {
   updateProfile,
   updatePassword,
   sendMessage,
-  getMessage,
+  getSingleConversationMessage,
   conversation,
   resetPasswordRequest,
   resetPassword,
+  findConversationByUserId,
 } from "../controller";
 
 import express from "express";
@@ -40,9 +41,11 @@ userRouter.get("/contribution", auth, getContribution);
 
 userRouter.post("/send-message", auth, sendMessage);
 
-userRouter.get("/message/:userId", auth, getMessage);
+userRouter.get("/single-conversation-message/:conversationId", auth, getSingleConversationMessage);
 
 userRouter.get("/conversation", auth, conversation);
+
+userRouter.get("/conversation/:receiverId", auth, findConversationByUserId);
 
 userRouter.post("/forget-password", resetPasswordRequest);
 

@@ -23,26 +23,36 @@ export const ChatBodyContainer = styled.div`
 
 const MessageTilesStyle = styled.div`
   display: flex;
+  flex-direction: column;
+  width: 100%;
   & p {
     min-height: 40px;
-    text-align: center;
+    font-family: ${(props: any) => props.theme.fonts.$poppins};
+    text-align: start;
     min-width: 50px;
     width: fit-content;
     background: #1f1fee;
     color: #fff;
-    padding: 10px 15px;
+    padding: 15px 20px;
     border-radius: 100px;
   }
 `;
 
 export const SendMsg = styled(MessageTilesStyle)`
+  margin-left: auto;
   justify-content: right;
+  & p {
+    max-width: 80%;
+    margin-left: auto;
+  }
 `;
 
 export const ReceivedMsg = styled(MessageTilesStyle)`
   justify-content: start;
+  margin-right: auto;
   & p {
     background: gray;
+    max-width: 70%;
   }
 `;
 

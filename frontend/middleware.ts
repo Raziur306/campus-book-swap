@@ -13,7 +13,8 @@ export const middleware = async (request: NextRequest) => {
     pathname == "/about" ||
     pathname.includes("/book-details") ||
     pathname == "/profile" ||
-    pathname.includes("/view-your-book");
+    pathname.includes("/view-your-book") ||
+    pathname == "/chats";
 
   if (isUserRoute) {
     if (!userToken) {

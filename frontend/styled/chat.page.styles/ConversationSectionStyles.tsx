@@ -76,26 +76,35 @@ export const ConversationInputFieldWrapper = styled.form`
 
 const ConversationTilesStyle = styled.div`
   display: flex;
+  flex-direction: column;
+  width: 100%;
   & p {
     min-height: 40px;
     font-family: ${(props: any) => props.theme.fonts.$poppins};
-    text-align: center;
+    text-align: start;
     min-width: 50px;
     width: fit-content;
     background: #1f1fee;
     color: #fff;
-    padding: 10px 15px;
+    padding: 15px 20px;
     border-radius: 100px;
   }
 `;
 
 export const ConversationSendMsg = styled(ConversationTilesStyle)`
+  margin-left: auto;
   justify-content: right;
+  & p {
+    max-width: 80%;
+    margin-left: auto;
+  }
 `;
 
 export const ConversationReceivedMsg = styled(ConversationTilesStyle)`
   justify-content: start;
+  margin-right: auto;
   & p {
     background: gray;
+    max-width: 70%;
   }
 `;

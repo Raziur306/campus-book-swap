@@ -15,7 +15,6 @@ export const CommonApiContextProvider = ({
   const [yourContributionList, setYourContributionList] = useState<any>([]);
   const [converSationMessage, setConverSationMessage] = useState<any>([]);
 
-
   const getAllBookCall = async () => {
     try {
       const res = await fetch(`${BASE_URL}/books`, {
@@ -79,8 +78,7 @@ export const CommonApiContextProvider = ({
         },
       });
       if (res.ok) {
-        const data = await res.json();
-        setConverSationMessage(data.conversation);
+        setConverSationMessage((await res.json()).conversations);
       }
     } catch (error) {
       console.log(error);

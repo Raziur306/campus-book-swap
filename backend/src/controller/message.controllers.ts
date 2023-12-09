@@ -5,70 +5,206 @@ const sendMessage = async (req: express.Request, res: express.Response) => {
   try {
     const user = res.locals.user;
     const { text, receiverId } = req.body;
-    const message = await prisma.message.create({
+    let conversationId = req.body.conversationId;
+
+
+    //create new message with conversation ORM
+    const newMessage = await prisma.message.create({
       data: {
-        text: text,
         senderId: user.id,
-        receiverId: receiverId,
+        text,
+        conversationId,
       },
     });
-    io.emit(`${receiverId}`, message);
-    res.status(201).json({ message });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
 
-const getMessage = async (req: express.Request, res: express.Response) => {
-  try {
-    const user = res.locals.user;
-    const { userId } = req.params;
-    const allMessages = await prisma.message.findMany({
+    //update conversation with current timestamp
+    await prisma.conversation.update({
       where: {
-        OR: [
-          { senderId: userId, receiverId: user.id },
-          { senderId: user.id, receiverId: userId },
-        ],
+        id: conversationId,
       },
-      orderBy: {
-        createdAt: "asc",
+      data: {
+        lastMessageAt: new Date(),
       },
     });
-    res.status(200).json({ messages: allMessages });
+
+    //socket chat trigger
+    io.emit(conversationId, newMessage);
+
+    res.status(201).json({ newMessage });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
+//find all conversation belongs to the user
 const conversation = async (req: express.Request, res: express.Response) => {
   try {
     const user = res.locals.user;
-    const conversations = await prisma.message.findMany({
+
+    const conversations = await prisma.conversation.findMany({
       where: {
-        OR: [{ senderId: user.id }, { receiverId: user.id }],
-        receiverId: {
-          not: user.id,
+        userIds: {
+          has: user.id,
+        },
+        messages: {
+          some: {},
         },
       },
-      orderBy: {
-        createdAt: "desc",
-      },
-      distinct: ["senderId", "receiverId"],
-      include: {
-        receiver: {
+      select: {
+        id: true,
+        createdAt: true,
+        lastMessageAt: true,
+        users: {
+          where: {
+            id: {
+              not: user.id,
+            },
+          },
           select: {
             id: true,
             name: true,
             image: true,
           },
         },
+        messages: {
+          select: {
+            id: true,
+            text: true,
+            createdAt: true,
+            senderId: true,
+            sender: {
+              select: {
+                id: true,
+              },
+            },
+          },
+          orderBy: {
+            createdAt: "desc",
+          },
+          take: 1,
+        },
       },
     });
 
-    res.status(200).json({ conversation: conversations });
+    res.status(200).json({ conversations });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
-export { sendMessage, getMessage, conversation };
+const getSingleConversationMessage = async (
+  req: express.Request,
+  res: express.Response
+) => {
+  try {
+    const user = res.locals.user;
+    const { conversationId } = req.params;
+    const conversation = await prisma.conversation.findFirst({
+      where: {
+        id: conversationId,
+      },
+      select: {
+        id: true,
+        lastMessageAt: true,
+        createdAt: true,
+        users: {
+          where: {
+            id: {
+              not: user.id,
+            },
+          },
+          select: {
+            id: true,
+            name: true,
+            image: true,
+          },
+        },
+        messages: {
+          select: {
+            id: true,
+            text: true,
+            createdAt: true,
+            senderId: true,
+            sender: {
+              select: {
+                id: true,
+              },
+            },
+          },
+          orderBy: {
+            createdAt: "asc",
+          },
+        },
+      },
+    });
+
+    res.status(200).json({ conversation });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+const findConversationByUserId = async (
+  req: express.Request,
+  res: express.Response
+) => {
+  try {
+    const user = res.locals.user;
+    const { receiverId } = req.params;
+
+    let conversation: any = await prisma.conversation.findFirst({
+      where: {
+        userIds: {
+          hasEvery: [user.id, receiverId],
+        },
+      },
+      include: {
+        users: {
+          where: {
+            id: {
+              not: user.id,
+            },
+          },
+          select: {
+            name: true,
+            image: true,
+          },
+        },
+        messages: {
+          select: {
+            id: true,
+            text: true,
+            createdAt: true,
+            senderId: true,
+            sender: {
+              select: {
+                id: true,
+              },
+            },
+          },
+          orderBy: {
+            createdAt: "asc",
+          },
+        },
+      },
+    });
+
+    if (!conversation) {
+      conversation = await prisma.conversation.create({
+        data: {
+          userIds: [user.id, receiverId],
+        },
+      });
+    }
+    res.status(200).json(conversation);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export {
+  sendMessage,
+  getSingleConversationMessage,
+  conversation,
+  findConversationByUserId,
+};

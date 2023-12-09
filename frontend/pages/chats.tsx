@@ -5,15 +5,15 @@ import SharedLayout from "@/layout/SharedLayout";
 import React, { useState } from "react";
 
 const Chats = () => {
-  const [receiverId, setReceiverId] = useState<any>("");
-  const getReceiverId = (id: string) => {
-    setReceiverId(id);
+  const [conversationId, setConversationId] = useState<any>("");
+  const getConversationId = (id: string) => {
+    setConversationId(id);
   };
   return (
     <SharedLayout title="Chats" TopBar={<Topbar />} SideBar={<Leftbar />}>
       <div className="flex flex-row gap-10 m-10">
-        <ChatSection getReceiverId={getReceiverId} />
-        <ConversationSection receiverId={receiverId} />
+        <ConversationSection getConversationId={getConversationId} />
+        <ChatSection conversationId={conversationId} />
       </div>
     </SharedLayout>
   );
