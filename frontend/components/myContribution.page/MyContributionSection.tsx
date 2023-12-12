@@ -5,11 +5,9 @@ import { CommonApiContext } from "@/context/CommonApiContext";
 import Image from "next/image";
 import { dateFormatter } from "@/utils/formartDate";
 import { useRouter } from "next/router";
-import { cookies } from "@/config/Cookies";
-import ActionDialog from "./ActionDialog";
-import ViewBookDetailsDialog from "./ViewBookDetailsDialog";
+import { ActionDialog, ViewBookDetailsDialog } from ".";
 
-const MyContributionSection = () => {
+const MyContribution = () => {
   const { yourContributionList, getYourContributionCall } =
     useContext(CommonApiContext);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
@@ -139,4 +137,4 @@ const MyContributionSection = () => {
   );
 };
 
-export default MyContributionSection;
+export default MyContribution;
