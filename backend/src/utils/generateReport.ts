@@ -105,7 +105,7 @@ const generateReport = (
   textInRowSecond(doc, `${pendingBooks}`, 192);
   textInRowSecond(doc, `${totalUser}`, 212);
 
-  const outputPath = path.join(__dirname, "output.pdf");
+  const outputPath = path.join(__dirname, "/../public/pdfs/overview-report.pdf");
   doc.pipe(fs.createWriteStream(outputPath));
   doc.end();
   return outputPath;

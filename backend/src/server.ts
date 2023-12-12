@@ -5,6 +5,7 @@ import { app } from "./config";
 import { adminRouter, userRouter } from "./routes";
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "./config/firebase";
+import path from "path";
 
 initializeApp(firebaseConfig);
 
@@ -17,7 +18,12 @@ app.use("/api", userRouter);
 
 app.use("/api/admin", adminRouter);
 
-//default response
+//route for pdf
+const pdfDir = path.join(__dirname, "/public/pdfs");
+app.use(express.static(pdfDir));
+app.use("/pdfs/",  express.static(pdfDir));
+
+
 app.use("*", (req: express.Request, res: express.Response) => {
   res.status(200).json({ message: "Server is running" });
 });

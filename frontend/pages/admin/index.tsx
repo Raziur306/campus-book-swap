@@ -18,12 +18,12 @@ const Dashboard = () => {
   return (
     <SideBar topBarTitle="Dashboard">
       <StatisticsCards />
-      <div className="grid grid-cols-1 xl:grid-cols-3 gap-5">
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-5">
         <RecentBooksCard />
-        <LargeCardContainer>
+        {/* <LargeCardContainer>
           <h2>Weekly Visitors</h2>
           <VisitorsChart />
-        </LargeCardContainer>
+        </LargeCardContainer> */}
         <RecentUserCard />
       </div>
     </SideBar>

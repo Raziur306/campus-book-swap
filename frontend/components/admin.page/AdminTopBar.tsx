@@ -3,7 +3,7 @@ import { AdminTopBarContainer, AdminTopBarTextStyle } from "@/styled";
 import Head from "next/head";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import React from "react";
+import React, { useState } from "react";
 import toast from "react-hot-toast";
 
 const AdminTopBar = ({ title }: { title: string }) => {
@@ -12,7 +12,7 @@ const AdminTopBar = ({ title }: { title: string }) => {
     try {
       const token = cookies.get("user_token");
       const fetchCall = () =>
-        fetch(`/api/download-report`, {
+        fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/admin/generate-report`, {
           headers: {
             "Content-Type": "application/json",
             authorization: `Bearer ${token}`,
@@ -26,12 +26,24 @@ const AdminTopBar = ({ title }: { title: string }) => {
           if (!res.ok) {
             throw new Error("Something went wrong");
           }
-          return <b>Report generated successful</b>;
+          downloadPdf();
+          return <b>Report generated successfully</b>;
         },
         error: (err) => <b>{err.toString()}</b>,
       });
     } catch (error) {
       console.log("Report error");
+    }
+  };
+
+  const downloadPdf = async () => {
+    try {
+      const link = document.createElement("a");
+      link.href = `${process.env.NEXT_PUBLIC_SERVER_END_POINT}/overview-report.pdf`;
+      link.download = "report.pdf";
+      link.click();
+    } catch (error) {
+      console.log("Downloading PDF Error", error);
     }
   };
 

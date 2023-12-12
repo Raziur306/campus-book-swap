@@ -66,7 +66,7 @@ export const LargeCardContainer = styled.div`
   display: flex;
   flex-direction: column;
   background: white;
-  padding: 16px;
+  padding: 25px;
   border-radius: 6px;
   box-shadow: 0px 4px 7px rgba(6, 22, 33, 0.13),
     0px 13px 22px rgba(0, 30, 43, 0.12);
