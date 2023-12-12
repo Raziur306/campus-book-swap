@@ -1,4 +1,4 @@
-import { MyContributionSection } from "@/components/myContribution.page";
+import MyContributionSection from "@/components/myContribution.page/MyContributionSection";
 import { Topbar } from "@/components/shared";
 import Leftbar from "@/components/shared/Leftbar";
 import SharedLayout from "@/layout/SharedLayout";
