@@ -6,7 +6,7 @@ import Image from "next/image";
 import { dateFormatter } from "@/utils/formartDate";
 import { useRouter } from "next/router";
 import { cookies } from "@/config/Cookies";
-import { ActionDialog } from ".";
+import { ActionDialog } from "./";
 import ViewBookDetailsDialog from "./ViewBookDetailsDialog";
 
 const MyContributionSection = () => {
