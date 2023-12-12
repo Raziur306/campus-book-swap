@@ -1,4 +1,4 @@
-import { YourContribution } from "@/components/myContribution.page";
+import { MyContributionSection } from "@/components/myContribution.page";
 import { Topbar } from "@/components/shared";
 import Leftbar from "@/components/shared/Leftbar";
 import SharedLayout from "@/layout/SharedLayout";
@@ -20,7 +20,7 @@ const MyContribution = () => {
           <PendingPageMenuWrapper>
             <li className={"active"}> My Contribution </li>
           </PendingPageMenuWrapper>
-          <YourContribution />
+          <MyContributionSection />
         </PendingAndRequestPageContainer>
       </div>
     </SharedLayout>

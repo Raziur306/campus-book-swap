@@ -9,7 +9,7 @@ import { cookies } from "@/config/Cookies";
 import { ActionDialog } from ".";
 import ViewBookDetailsDialog from "./ViewBookDetailsDialog";
 
-const MyContribution = () => {
+const MyContributionSection = () => {
   const { yourContributionList, getYourContributionCall } =
     useContext(CommonApiContext);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
@@ -139,4 +139,4 @@ const MyContribution = () => {
   );
 };
 
-export default MyContribution;
+export default MyContributionSection;
