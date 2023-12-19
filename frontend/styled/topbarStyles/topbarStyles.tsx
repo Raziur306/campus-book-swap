@@ -152,4 +152,9 @@ export const SearchResultContentCardWrapper = styled.div`
     font-size: 0.8rem;
     color: gray;
   }
+  & span {
+    font-size: 0.8rem;
+    color: #fa7c54;
+    font-weight: 600;
+  }
 `;

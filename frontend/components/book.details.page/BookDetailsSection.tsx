@@ -49,19 +49,23 @@ const BookDetails = () => {
                 By <span className="underline">{selectedBook?.authorName}</span>
               </p>
             </div>
-            <div className="flex flex-row gap-10">
+            <div className="flex flex-col gap-6">
+              <div className="flex flex-col gap-2">
+                {selectedBook?.price != 0 && (
+                  <p className="text-black text-xl">{selectedBook?.price} Tk</p>
+                )}
+                {selectedBook?.price == 0 && (
+                  <p className=" text-white bg-green-600 p-2 w-fit rounded-md">
+                    You can take it free of cost
+                  </p>
+                )}
+              </div>
               <div className="flex flex-col gap-3">
                 <p className="font-bold">Availability</p>
                 <div className="flex flex-row gap-2 items-center">
                   <CheckedBox />
                   <p>Hard Copy</p>
                 </div>
-              </div>
-              <div className="flex flex-col gap-2 items-center">
-                <p className="font-bold">Status</p>
-                <p className="bg-[#42BB4E] text-white p-3 rounded-md">
-                  In Stock
-                </p>
               </div>
             </div>
             <RequestOwnerBtn onClick={handleRequestDialogOpen}>

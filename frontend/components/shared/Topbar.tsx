@@ -160,7 +160,7 @@ const TopBar = () => {
           {!isLoading && (
             <div className="flex flex-col">
               {filteredBookList.map((book: any, index: number) => {
-                const { id, title, authorName, coverImg } = book;
+                const { id, title, authorName, coverImg, price } = book;
                 return (
                   <SearchResultContentCardWrapper
                     onClick={() => handleBookItemClick(id)}
@@ -169,6 +169,7 @@ const TopBar = () => {
                     <Image width={50} height={50} src={coverImg} alt={title} />
                     <div className="flex flex-col gap-1">
                       <h3>{title}</h3>
+                      <span>{price} Tk</span>
                       <p>{authorName}</p>
                     </div>
                   </SearchResultContentCardWrapper>
