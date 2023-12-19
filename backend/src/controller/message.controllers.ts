@@ -7,7 +7,6 @@ const sendMessage = async (req: express.Request, res: express.Response) => {
     const { text, receiverId } = req.body;
     let conversationId = req.body.conversationId;
 
-
     //create new message with conversation ORM
     const newMessage = await prisma.message.create({
       data: {
@@ -36,7 +35,7 @@ const sendMessage = async (req: express.Request, res: express.Response) => {
   }
 };
 
-//find all conversation belongs to the user
+//find all conversation belongs a the user
 const conversation = async (req: express.Request, res: express.Response) => {
   try {
     const user = res.locals.user;
@@ -49,6 +48,9 @@ const conversation = async (req: express.Request, res: express.Response) => {
         messages: {
           some: {},
         },
+      },
+      orderBy: {
+        lastMessageAt: "desc",
       },
       select: {
         id: true,

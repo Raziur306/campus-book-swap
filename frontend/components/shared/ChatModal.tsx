@@ -1,5 +1,5 @@
 import { cookies } from "@/config/Cookies";
-import { SocketContext } from "@/context";
+import { socket } from "@/config/Socket";
 import { CommonApiContext } from "@/context/CommonApiContext";
 import Spinner from "@/public/svg/spinner";
 import {
@@ -17,7 +17,6 @@ const ChatModal = ({
   handleChatModalClose,
   receiverId,
 }: ChatModalPropsType) => {
-  const { socket } = useContext(SocketContext);
   const [conversation, setConversation] = useState<any>({});
   const token = cookies.get("user_token");
   const [messages, setMessages] = useState<any>([]);

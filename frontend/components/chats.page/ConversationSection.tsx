@@ -5,6 +5,7 @@ import {
 import React, { useContext, useEffect, useState } from "react";
 import { ConversationCard } from ".";
 import { CommonApiContext } from "@/context/CommonApiContext";
+import { socket } from "@/config/Socket";
 
 const ChatSection = ({
   getConversationId,
@@ -25,6 +26,16 @@ const ChatSection = ({
       getConversationId(conversationId);
     }
   };
+
+  useEffect(() => {
+    try {
+      socket.onAny(() => {
+        conversationFetchCall();
+      });
+    } catch (error) {
+      console.log("Trigger conversation with latest message", error);
+    }
+  });
 
   return (
     <ChatSectionContainer>

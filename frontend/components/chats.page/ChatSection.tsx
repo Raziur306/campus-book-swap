@@ -1,5 +1,5 @@
 import { cookies } from "@/config/Cookies";
-import { SocketContext } from "@/context";
+import { socket } from "@/config/Socket";
 import { CommonApiContext } from "@/context/CommonApiContext";
 import Spinner from "@/public/svg/spinner";
 import {
@@ -20,7 +20,6 @@ import { io } from "socket.io-client";
 const ConversationSection = ({
   conversationId,
 }: ConversationSectionPropsType) => {
-  const { socket } = useContext(SocketContext);
   const chatBoxRef = useRef<HTMLDivElement | any>(null);
   const token = cookies.get("user_token");
   const [messages, setMessages] = useState<any>([]);
