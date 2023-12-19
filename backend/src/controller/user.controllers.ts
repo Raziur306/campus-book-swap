@@ -255,9 +255,15 @@ const getProfileData = async (req: express.Request, res: express.Response) => {
       },
     });
 
-    res.status(201).json({ response: true, result: data });
+    const books = await prisma.book.count({
+      where: {
+        userId: decoded?.id,
+      },
+    });
+
+    res.status(201).json({ result: data, books });
   } catch (error) {
-    res.status(500).json({ response: false, message: error.message });
+    res.status(500).json({ message: error.message });
   }
 };
 

@@ -57,7 +57,7 @@ export const ChatCardWrapper = styled.div`
   }
   & span {
     font-family: ${(props: any) => props.theme.fonts.$poppins};
-    width: 40%;
+    width: 50%;
   }
   &.active {
     background: #8080805e;

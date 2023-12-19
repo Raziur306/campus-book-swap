@@ -51,7 +51,7 @@ const AccountSetting = () => {
   });
 
   useEffect(() => {
-    formik.setValues(profileInfo);
+    formik.setValues(profileInfo.result);
   }, [profileInfo]);
 
   const updateProfile = async (value: Object) => {
@@ -131,7 +131,7 @@ const AccountSetting = () => {
             <Image
               fill
               alt="Profile"
-              src={`${formik.values.image || "/images/default.jpg"}`}
+              src={`${formik.values?.image || "/images/default.jpg"}`}
               className="rounded-full"
               sizes={"(max-width: 768px) 100vh, 96px"}
             />
@@ -144,7 +144,7 @@ const AccountSetting = () => {
               <div className="bg-[#FFF] p-3 rounded-lg">
                 <Book />
               </div>
-              <p className="text-white text-4xl">120</p>
+              <p className="text-white text-4xl">{profileInfo?.books}</p>
             </div>
             <p className="text-white text-3xl">Requested</p>
           </SettingsCardWrapper>
@@ -174,7 +174,7 @@ const AccountSetting = () => {
               disabled={isDisable}
               placeholder="Full name"
               type="text"
-              value={formik.values.name}
+              value={formik.values?.name}
               name="name"
               onChange={formik.handleChange}
               $error={
@@ -193,7 +193,7 @@ const AccountSetting = () => {
             </StyledSettingInputLabel>
             <StyledSettingsTextField
               disabled={isDisable}
-              value={formik.values.email}
+              value={formik.values?.email}
               placeholder="example@iubat.edu"
               type="email"
               name="email"
@@ -219,7 +219,7 @@ const AccountSetting = () => {
               disabled={isDisable}
               placeholder="Enter your University student #ID"
               type="number"
-              value={formik.values.studentId}
+              value={formik.values?.studentId}
               name="studentId"
               onChange={formik.handleChange}
               onWheel={(e: any) => e.target.blur()}
@@ -244,7 +244,7 @@ const AccountSetting = () => {
               disabled={isDisable}
               placeholder="Enter your phone number"
               type="number"
-              value={formik.values.phone}
+              value={formik.values?.phone}
               name="phone"
               onChange={formik.handleChange}
               onWheel={(e: any) => e.target.blur()}
@@ -266,7 +266,7 @@ const AccountSetting = () => {
           <StyledSettingsBioTextArea
             disabled={isDisable}
             placeholder="Write about you."
-            value={formik.values.bio}
+            value={formik.values?.bio}
             name="bio"
             onChange={formik.handleChange}
             $error={

@@ -208,11 +208,13 @@ const TopBar = () => {
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             priority
             className=" max-w-[2.5rem] max-h-[2.5rem] rounded-full"
-            src={profileInfo?.image || "/images/default.jpg"}
+            src={profileInfo.result?.image || "/images/default.jpg"}
             alt="Rounded avatar"
           />
         </StyledTopBarAvatarWrapper>
-        <StyledTopBarProfileText>{profileInfo?.name}</StyledTopBarProfileText>
+        <StyledTopBarProfileText>
+          {profileInfo.result?.name}
+        </StyledTopBarProfileText>
         <ArrowDown className={"mr-[1rem] ml-[1rem] rotate-0 transition"} />
         <StyledFloatingMenuContainer $isFloatingMenuOpen={isOpen}>
           <Link href="/profile">

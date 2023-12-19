@@ -11,7 +11,7 @@ export const CommonApiContextProvider = ({
   const token = cookies.get("user_token");
   const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
   const [bookList, setBookList] = useState<any>([]);
-  const [profileInfo, setProfileInfo] = useState<any>();
+  const [profileInfo, setProfileInfo] = useState<any>({});
   const [yourContributionList, setYourContributionList] = useState<any>([]);
   const [converSationMessage, setConverSationMessage] = useState<any>([]);
 
@@ -43,7 +43,7 @@ export const CommonApiContextProvider = ({
       });
       if (res.ok) {
         const data = await res.json();
-        setProfileInfo(data.result);
+        setProfileInfo(data);
       }
     } catch (error) {
       console.log("Fetching profile info", error);
