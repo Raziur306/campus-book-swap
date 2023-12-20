@@ -17,7 +17,7 @@ const SliderBookCard = ({ id, coverImg }: SliderPropsType) => {
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           alt="Book Image"
           src={coverImg}
-          className="bg-white p-4 rounded-md drop-shadow-md"
+          className="bg-white rounded-md drop-shadow-md"
         />
       </SliderBookCardContainer>
     </>

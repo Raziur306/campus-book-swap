@@ -29,7 +29,7 @@ const CustomSlider = ({ slidesToShow }: PropsType) => {
   const [isHovered, setIsHovered] = useState(false);
   const sliderRef = useRef(null);
   const visibleBooks = bookList.slice(0, 0 + 10);
-  const totalSlides = 10;
+  const totalSlides = visibleBooks?.length > 5 ? visibleBooks.length : 6;
 
   const nextSlide = () => {
     setCurrentIndex((prevIndex) => {

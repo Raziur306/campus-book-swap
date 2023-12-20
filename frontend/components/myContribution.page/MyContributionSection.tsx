@@ -7,7 +7,7 @@ import { dateFormatter } from "@/utils/formartDate";
 import { useRouter } from "next/router";
 import { ActionDialog, ViewBookDetailsDialog } from ".";
 
-const MyContribution = () => {
+const MyContributionSection = () => {
   const { yourContributionList, getYourContributionCall } =
     useContext(CommonApiContext);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
@@ -15,7 +15,7 @@ const MyContribution = () => {
     useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedBookIndex, setSelectedBookIndex] = useState<number>(0);
-  const dataPerPage = 10;
+  const dataPerPage = 5;
   const offset = (currentPage - 1) * dataPerPage;
   const visibleContribution = yourContributionList.slice(
     offset,
@@ -137,4 +137,4 @@ const MyContribution = () => {
   );
 };
 
-export default MyContribution;
+export default MyContributionSection;

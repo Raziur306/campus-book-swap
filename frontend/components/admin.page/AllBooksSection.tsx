@@ -16,7 +16,7 @@ const AllBooksSection = () => {
     useState<boolean>(false);
   const [status, setStatus] = useState<string>("");
   const [currentPage, setCurrentPage] = useState(1);
-  const dataPerPage = 10;
+  const dataPerPage = 5;
   const offset = (currentPage - 1) * dataPerPage;
   const visibleContribution = bookList.slice(offset, offset + dataPerPage);
 
@@ -107,6 +107,7 @@ const AllBooksSection = () => {
                       height={70}
                       alt={"title"}
                       src={`${coverImg}`}
+                      sizes={"(max-width:768px) 50vh, 100vh"}
                     />
                   </td>
                   <td>{title}</td>

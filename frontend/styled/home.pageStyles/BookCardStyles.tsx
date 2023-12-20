@@ -4,26 +4,25 @@ export const BookCardContainer = styled.div`
   cursor: pointer;
   width: 100%;
   height: 100%;
-  max-width: 15rem;
   background: #fff;
   display: flex;
-  padding: 1rem 0.9375rem 0.8125rem 0.9375rem;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   border-radius: 0.625rem;
+  overflow: hidden;
   gap: 0.75rem;
-  box-shadow: 1px 2px 10px black;
+  box-shadow: 1px 2px 10px #00000065;
   transition: transform 0.2s;
   &:hover {
-    transform: scale(1.1);
+    transform: scale(1.02);
   }
 `;
 
 export const BookImageWrapper = styled.div`
   width: 100%;
-  max-width: 12rem;
-  height: 14rem;
+  max-width: 100%;
+  height: 100%;
   position: relative;
   align-items: center;
   aspect-ratio: 1/1;
@@ -69,5 +68,8 @@ export const StyledInfoTextWrapper = styled.div`
     background: #0aba0a;
     padding: 5px;
     border-radius: 5px;
+  }
+  & .price {
+    padding: 5px;
   }
 `;

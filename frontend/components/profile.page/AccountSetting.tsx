@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import Donation from "@/public/Settings/Donation";
-import Book from "@/public/Settings/Book";
+import Group from "@/public/Settings/Group";
 import EditPen from "@/public/Settings/EditPen";
 import {
   AccountEditPenWrapper,
@@ -142,18 +142,18 @@ const AccountSetting = () => {
           <SettingsCardWrapper className="bg-[#F27851]">
             <div className="flex flex-row items-center gap-5">
               <div className="bg-[#FFF] p-3 rounded-lg">
-                <Book />
+                <Group />
               </div>
-              <p className="text-white text-4xl">{profileInfo?.books}</p>
+              <p className="text-white text-4xl">{profileInfo?.connections}</p>
             </div>
-            <p className="text-white text-3xl">Requested</p>
+            <p className="text-white text-3xl">Connections</p>
           </SettingsCardWrapper>
           <SettingsCardWrapper className="bg-[#926CFF]">
             <div className="flex flex-row items-center gap-5">
               <div className="bg-[#FFF] p-3 rounded-lg">
                 <Donation />
               </div>
-              <p className="text-white text-4xl">120</p>
+              <p className="text-white text-4xl">{profileInfo?.books}</p>
             </div>
             <p className="text-white text-3xl">Contribution</p>
           </SettingsCardWrapper>

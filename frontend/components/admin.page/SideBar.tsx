@@ -28,9 +28,7 @@ const SideBar = ({
   const router = useRouter();
 
   useEffect(() => {
-    if (!profileInfo) {
-      getProfileInfoCall();
-    }
+    getProfileInfoCall();
   }, []);
 
   const handleLogoutClick = () => {
@@ -40,44 +38,50 @@ const SideBar = ({
 
   return (
     <div className="w-full h-full flex flex-row">
-      <div className=" flex-col gap-5 w-[40%] xl:w-[15%]  ml-3 mr-4 hidden md:flex">
-        <PersonInfoContainer>
-          <Image
-            width={50}
-            height={50}
-            className="rounded-full"
-            alt="Admin Profile"
-            src={profileInfo?.image || "/images/default.jpg"}
-          />
-          <span>{profileInfo?.name || ""}</span>
-        </PersonInfoContainer>
+      <div className="bg-white  w-[20%] min-w-[250px]">
+        <div className=" flex-col w-[40%] xl:w-[15%] gap-5 ml-3 mr-4 hidden md:flex fixed">
+          <PersonInfoContainer>
+            <Image
+              width={50}
+              height={50}
+              className="rounded-full"
+              alt="Admin Profile"
+              src={profileInfo.result?.image || "/images/default.jpg"}
+            />
+            <span>{profileInfo.result?.name || ""}</span>
+          </PersonInfoContainer>
 
-        <Link href={"/admin"}>
-          <MenuItemWrapper className={`${path == "/admin" ? "active" : ""}`}>
-            <Dashboard />
-            <span>Dashboard</span>
-          </MenuItemWrapper>
-        </Link>
-        <Link href={"/admin/book-list"}>
-          <MenuItemWrapper
-            className={`${path?.includes("/admin/book-list") ? "active" : ""}`}
-          >
-            <Box />
-            <span>Books</span>
-          </MenuItemWrapper>
-        </Link>
-        <Link href={"/admin/users-list"}>
-          <MenuItemWrapper
-            className={`${path?.includes("/admin/users-list") ? "active" : ""}`}
-          >
-            <Group />
-            <span>Users List</span>
-          </MenuItemWrapper>
-        </Link>
-        <MenuItemLogoutStyle onClick={handleLogoutClick}>
-          <Logout />
-          <span>Log out</span>
-        </MenuItemLogoutStyle>
+          <Link href={"/admin"}>
+            <MenuItemWrapper className={`${path == "/admin" ? "active" : ""}`}>
+              <Dashboard />
+              <span>Dashboard</span>
+            </MenuItemWrapper>
+          </Link>
+          <Link href={"/admin/book-list"}>
+            <MenuItemWrapper
+              className={`${
+                path?.includes("/admin/book-list") ? "active" : ""
+              }`}
+            >
+              <Box />
+              <span>Books</span>
+            </MenuItemWrapper>
+          </Link>
+          <Link href={"/admin/users-list"}>
+            <MenuItemWrapper
+              className={`${
+                path?.includes("/admin/users-list") ? "active" : ""
+              }`}
+            >
+              <Group />
+              <span>Users List</span>
+            </MenuItemWrapper>
+          </Link>
+          <MenuItemLogoutStyle onClick={handleLogoutClick}>
+            <Logout />
+            <span>Log out</span>
+          </MenuItemLogoutStyle>
+        </div>
       </div>
       <div className="w-full h-full min-h-screen bg-[#DEEAEB] p-5 xl:p-10 flex flex-col gap-10">
         <AdminTopBar title={topBarTitle} />

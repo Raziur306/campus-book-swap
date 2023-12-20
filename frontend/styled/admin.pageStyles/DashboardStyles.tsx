@@ -79,7 +79,7 @@ export const LargeCardContainer = styled.div`
   }
   & h2 {
     color: #263238;
-    font-size: 1rem;
+    font-size: 1.2rem;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
@@ -103,7 +103,7 @@ export const LargeCardSubContainer = styled.div`
   }
   & h3 {
     color: #263238;
-    font-size: 0.8125rem;
+    font-size: 0.9125rem;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
@@ -145,7 +145,7 @@ export const RecentUserWrapper = styled.div<{ $isLastItem: boolean }>`
     color: #7f7f82;
     text-align: center;
     font-family: ${(props: any) => props.theme.fonts.$poppins};
-    font-size: 13px;
+    font-size: 0.9rem;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
@@ -154,7 +154,7 @@ export const RecentUserWrapper = styled.div<{ $isLastItem: boolean }>`
   & span {
     color: #263238;
     font-family: ${(props: any) => props.theme.fonts.$poppins};
-    font-size: 13px;
+    font-size: 0.831rem;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
