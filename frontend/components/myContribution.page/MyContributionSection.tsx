@@ -5,7 +5,7 @@ import { CommonApiContext } from "@/context/CommonApiContext";
 import Image from "next/image";
 import { dateFormatter } from "@/utils/formartDate";
 import { useRouter } from "next/router";
-import { ActionDialog, ViewBookDetailsDialog } from ".";
+import { ActionDialog, ViewBookDetailsDialog } from "./";
 
 const MyContributionSection = () => {
   const { yourContributionList, getYourContributionCall } =

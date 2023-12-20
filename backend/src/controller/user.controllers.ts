@@ -14,6 +14,7 @@ import {
   ref,
   uploadBytesResumable,
 } from "firebase/storage";
+import { conversation } from "./message.controllers";
 
 const JWT_KEY = process.env.JWT_PRIVATE_KEY;
 const saltRound = 10;
@@ -261,7 +262,18 @@ const getProfileData = async (req: express.Request, res: express.Response) => {
       },
     });
 
-    res.status(201).json({ result: data, books });
+    const connections = await prisma.conversation.count({
+      where: {
+        userIds: {
+          has: decoded?.id,
+        },
+        messages: {
+          some: {},
+        },
+      },
+    });
+
+    res.status(201).json({ result: data, books, connections });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
