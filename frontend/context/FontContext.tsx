@@ -53,10 +53,14 @@ const lightTheme = {
 //   fonts: lightTheme.fonts,
 //   fontSizes: lightTheme.fontSizes,
 // };
+interface FontContextProps {
+  children: React.ReactNode;
+}
+
 
 export const ThemeContext = createContext({ theme: lightTheme });
 
-const Theme = ({ children }: { children: React.ReactNode }) => {
+const Theme:React.FC<FontContextProps> = ({ children }: { children: React.ReactNode }) => {
   return (
     <ThemeContext.Provider value={{ theme: lightTheme }}>
       <ThemeProvider theme={lightTheme}>{children}</ThemeProvider>
