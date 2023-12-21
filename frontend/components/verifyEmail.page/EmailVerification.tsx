@@ -44,7 +44,7 @@ const EmailVerification = () => {
 
   useEffect(() => {
     verificationCall();
-  }, []);
+  }, [userId]);
 
   return (
     <StyledVerifyContainer>
