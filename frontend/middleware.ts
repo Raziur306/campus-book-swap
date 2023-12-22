@@ -14,7 +14,8 @@ export const middleware = async (request: NextRequest) => {
     pathname.includes("/book-details") ||
     pathname == "/profile" ||
     pathname.includes("/view-your-book") ||
-    pathname == "/chats";
+    pathname == "/chats" ||
+    pathname == "/faq";
 
   if (isUserRoute) {
     if (!userToken) {

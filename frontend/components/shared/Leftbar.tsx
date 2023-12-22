@@ -61,8 +61,8 @@ const Leftbar = () => {
         <Link className="hover:text-gray-500" href={"/about"}>
           About{" "}
         </Link>
-        <Link className="hover:text-gray-500" href={"/support"}>
-          Support
+        <Link className="hover:text-gray-500" href={"/faq"}>
+          FAQ
         </Link>
         <Link className="hover:text-gray-500" href={"/terms&condition"}>
           Terms & Condition
