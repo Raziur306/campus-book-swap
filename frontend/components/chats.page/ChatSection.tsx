@@ -15,7 +15,6 @@ import { formatChatTimestamp } from "@/utils/formartDate";
 import { verifyToken } from "@/utils/tokenverifier";
 import Image from "next/image";
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { io } from "socket.io-client";
 
 const ConversationSection = ({
   conversationId,
@@ -100,7 +99,7 @@ const ConversationSection = ({
       );
       if (res.ok) {
         setNewMessage("");
-        const data = await res.json();
+         const data = await res.json();
         setMessages([...messages, data.newMessage]);
       }
     } catch (error) {

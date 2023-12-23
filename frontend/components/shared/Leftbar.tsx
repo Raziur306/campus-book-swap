@@ -1,7 +1,7 @@
 import { StyledSubTitleText, StyledTitleText } from "@/styled/common";
 import { LeftbarContainer, StyledMenuDiv } from "@/styled/leftbarStyles";
 import Image from "next/image";
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Home from "../../public/svg/home.svg";
 import Search from "../../public/svg/search.svg";
 import Shelf from "../../public/svg/shelf.svg";
@@ -9,32 +9,89 @@ import Contribute from "../../public/svg/contribute.svg";
 import { useRouter, usePathname } from "next/navigation";
 import Link from "next/link";
 import Chat from "../../public/svg/chat";
-export const LeftBarItems = [
-  {
-    name: "Home",
-    route: "/",
-    icon: Home,
-  },
-  {
-    name: "Chats",
-    route: "/chats",
-    icon: Chat,
-  },
-  {
-    name: "Contribute",
-    route: "/contribute",
-    icon: Contribute,
-  },
-  {
-    name: "My Contribution",
-    route: "/my-contribution",
-    icon: Shelf,
-  },
-];
+import { cookies } from "@/config/Cookies";
+import { verifyToken } from "@/utils/tokenverifier";
+import { socket } from "@/config/Socket";
 
 const Leftbar = () => {
   const router = useRouter();
   const pathName = usePathname();
+  const [notification, setNotification] = useState<number>(0);
+  const [currentUser, setCurrentUser] = useState<any>({});
+  const token = cookies.get("user_token");
+  const isInChatRoute = pathName === "/chats";
+
+  const decodeJWT = async () => {
+    const decoded = await verifyToken(token);
+    setCurrentUser(decoded);
+  };
+
+  const notificationCall = async () => {
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/notification`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (res.ok) {
+        setNotification((await res.json())?.chat_notification);
+      }
+    } catch (error) {
+      console.log("Fetching notification error", error);
+    }
+  };
+
+  useEffect(() => {
+    decodeJWT();
+    notificationCall();
+  }, []);
+
+  useEffect(() => {
+    try {
+      if (currentUser && !isInChatRoute) {
+        socket?.on(`${currentUser.id}`, (arg: any) => {
+          notificationCall();
+        });
+      }
+      return () => {
+        socket?.off(currentUser.id);
+      };
+    } catch (error) {
+      console.log("Socket.io notification trigger error", error);
+    }
+  });
+
+  useEffect(() => {
+    const resetNotification = async () => {
+      try {
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/reset-notification`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+              authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        if (res.ok) {
+          console.log("notification removed");
+          setNotification(0);
+        }
+      } catch (error) {
+        console.log("Fetching notification error", error);
+      }
+    };
+
+    if (isInChatRoute) {
+      resetNotification();
+    }
+  }, [isInChatRoute]);
 
   return (
     <LeftbarContainer className="md:hidden lg:flex lg:flex-col md:w-0 ">
@@ -43,18 +100,38 @@ const Leftbar = () => {
       </StyledTitleText>
       <StyledSubTitleText>Swap</StyledSubTitleText>
       <div className={"flex flex-col gap-8 mt-20"}>
-        {LeftBarItems.map((item, index) => {
-          return (
-            <StyledMenuDiv
-              onClick={() => router.push(item.route)}
-              className={pathName == item.route ? "active" : ""}
-              key={index}
-            >
-              <item.icon />
-              <p>{item.name}</p>
-            </StyledMenuDiv>
-          );
-        })}
+        <StyledMenuDiv
+          onClick={() => router.push("/")}
+          className={pathName == "/" ? "active" : ""}
+        >
+          <Home />
+          <p>Home</p>
+        </StyledMenuDiv>
+        <StyledMenuDiv
+          onClick={() => router.push("/chats")}
+          className={isInChatRoute ? "active" : ""}
+        >
+          <Chat />
+          <p className="chat-text">
+            Chats
+            {!isInChatRoute && notification > 0 && <span>{notification}</span>}
+          </p>
+        </StyledMenuDiv>
+
+        <StyledMenuDiv
+          onClick={() => router.push("/contribute")}
+          className={pathName == "/contribute" ? "active" : ""}
+        >
+          <Contribute />
+          <p>Contribute</p>
+        </StyledMenuDiv>
+        <StyledMenuDiv
+          onClick={() => router.push("/my-contribution")}
+          className={pathName == "/my-contribution" ? "active" : ""}
+        >
+          <Shelf />
+          <p>My Contribution</p>
+        </StyledMenuDiv>
       </div>
 
       <div className="flex flex-col mt-auto mb-10 gap-3">

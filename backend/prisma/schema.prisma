@@ -8,21 +8,22 @@ datasource db {
 }
 
 model User {
-  id              String         @id @default(auto()) @map("_id") @db.ObjectId
-  name            String?
-  email           String         @unique
-  studentId       Int?
-  password        String?
-  bio             String?
-  image           String?
-  phone           String?
-  createdAt       DateTime?      @default(now())
-  role            String?        @default("user")
-  verified        Boolean        @default(false)
-  book            Book[]
-  conversationIds String[]       @db.ObjectId
-  conversations   Conversation[] @relation(fields: [conversationIds], references: [id])
-  messages        Message[]
+  id                String         @id @default(auto()) @map("_id") @db.ObjectId
+  name              String?
+  email             String         @unique
+  studentId         Int?
+  password          String?
+  bio               String?
+  image             String?
+  phone             String?
+  createdAt         DateTime?      @default(now())
+  role              String?        @default("user")
+  verified          Boolean        @default(false)
+  book              Book[]
+  conversationIds   String[]       @db.ObjectId
+  conversations     Conversation[] @relation(fields: [conversationIds], references: [id])
+  messages          Message[]
+  chat_notification Int?           @default(0)
 }
 
 model Book {

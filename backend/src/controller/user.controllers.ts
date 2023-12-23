@@ -426,6 +426,43 @@ const deleteMyBook = async (req: express.Request, res: express.Response) => {
   }
 };
 
+const getNotification = async (req: express.Request, res: express.Response) => {
+  try {
+    const user = res.locals.user;
+    const data = await prisma.user.findFirst({
+      where: {
+        id: user.id,
+      },
+      select: {
+        chat_notification: true,
+      },
+    });
+    res.status(200).json(data);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+const resetNotification = async (
+  req: express.Request,
+  res: express.Response
+) => {
+  try {
+    const user = res.locals.user;
+    await prisma.user.update({
+      where: {
+        id: user.id,
+      },
+      data: {
+        chat_notification: 0,
+      },
+    });
+    res.status(201).json({ message: "Notification rest successful" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 export {
   registerUser,
   loginUser,
@@ -439,4 +476,6 @@ export {
   resetPasswordRequest,
   resetPassword,
   deleteMyBook,
+  getNotification,
+  resetNotification,
 };

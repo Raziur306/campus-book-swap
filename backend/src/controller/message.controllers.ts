@@ -4,7 +4,7 @@ import express from "express";
 const sendMessage = async (req: express.Request, res: express.Response) => {
   try {
     const user = res.locals.user;
-    const { text, receiverId } = req.body;
+    const { text } = req.body;
     let conversationId = req.body.conversationId;
 
     //create new message with conversation ORM
@@ -17,7 +17,7 @@ const sendMessage = async (req: express.Request, res: express.Response) => {
     });
 
     //update conversation with current timestamp
-    await prisma.conversation.update({
+    const conversation = await prisma.conversation.update({
       where: {
         id: conversationId,
       },
@@ -25,9 +25,24 @@ const sendMessage = async (req: express.Request, res: express.Response) => {
         lastMessageAt: new Date(),
       },
     });
-
     //socket chat trigger
     io.emit(conversationId, newMessage);
+
+    const receiverId = conversation.userIds.filter((item: any) => {
+      return item !== user.id;
+    });
+
+    //update notification
+     await prisma.user.update({
+      where: {
+        id: receiverId[0],
+      },
+      data: {
+        chat_notification: { increment: 1 },
+      },
+    });
+
+    io.emit(receiverId[0], "Notification socket.io trigger");
 
     res.status(201).json({ newMessage });
   } catch (error) {

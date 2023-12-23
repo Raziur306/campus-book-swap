@@ -18,6 +18,8 @@ import {
   resetPassword,
   findConversationByUserId,
   deleteMyBook,
+  resetNotification,
+  getNotification,
 } from "../controller";
 
 import express from "express";
@@ -52,7 +54,11 @@ userRouter.post("/forget-password", resetPasswordRequest);
 
 userRouter.post("/reset-password/:userId", resetPassword);
 
-userRouter.delete('/delete-book/:bookId', auth, deleteMyBook)
+userRouter.delete('/delete-book/:bookId', auth, deleteMyBook);
+
+userRouter.put('/reset-notification', auth, resetNotification);
+
+userRouter.get('/notification', auth, getNotification);
 
 //upload file and store contribute data
 const storage = multer.memoryStorage();

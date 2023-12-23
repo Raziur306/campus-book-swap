@@ -34,6 +34,7 @@ export const LeftbarContainer = styled.div`
 `;
 
 export const StyledMenuDiv = styled.div`
+  width: fit-content;
   display: flex;
   flex-direction: row;
   gap: 1rem;
@@ -57,6 +58,17 @@ export const StyledMenuDiv = styled.div`
 
   & p {
     position: relative;
+    & span {
+      width: 23px;
+      height: 23px;
+      position: absolute;
+      top: -5px;
+      text-align: center;
+      font-size: 0.8rem;
+      background: red;
+      color: white;
+      border-radius: 50%;
+    }
     &:after {
       content: "";
       width: 0%;
@@ -67,9 +79,9 @@ export const StyledMenuDiv = styled.div`
       bottom: 0;
       transition: 0.3s ease-in-out;
     }
-    &:hover{
-      &:after{
-        width:100%;
+    &:hover {
+      &:after {
+        width: 100%;
       }
     }
   }
