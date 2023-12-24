@@ -55,7 +55,21 @@ export const StyledMenuDiv = styled.div`
     font-weight: 400;
     line-height: normal;
   }
-
+  &:after {
+    content: "";
+    width: 0%;
+    height: 1.8px;
+    background: #fa7c54;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    transition: 0.3s ease-in-out;
+  }
+  &:hover {
+    &:after {
+      width: 100%;
+    }
+  }
   & p {
     position: relative;
     & span {
@@ -68,21 +82,6 @@ export const StyledMenuDiv = styled.div`
       background: red;
       color: white;
       border-radius: 50%;
-    }
-    &:after {
-      content: "";
-      width: 0%;
-      height: 1.7px;
-      background: #fa7c54;
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      transition: 0.3s ease-in-out;
-    }
-    &:hover {
-      &:after {
-        width: 100%;
-      }
     }
   }
 `;

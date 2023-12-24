@@ -5,4 +5,4 @@ export { default as BookCard } from "./BookCard";
 export { default as PaginationComponent } from "./PaginationComponent";
 export * from "./next-button";
 export { default as ChatModal } from "./ChatModal";
-export{default as ReminderModal} from './ReminderModal'
+export { default as ReminderModal } from "./ReminderModal";

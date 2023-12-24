@@ -80,7 +80,6 @@ const Leftbar = () => {
           }
         );
         if (res.ok) {
-          console.log("notification removed");
           setNotification(0);
         }
       } catch (error) {
@@ -134,16 +133,19 @@ const Leftbar = () => {
         </StyledMenuDiv>
       </div>
 
-      <div className="flex flex-col mt-auto mb-10 gap-3">
-        <Link className="hover:text-gray-500" href={"/about"}>
-          About{" "}
-        </Link>
+      <div className="flex flex-col mt-auto gap-3">
         <Link className="hover:text-gray-500" href={"/faq"}>
           FAQ
         </Link>
-        <Link className="hover:text-gray-500" href={"/terms&condition"}>
-          Terms & Condition
+        <Link className="hover:text-gray-500" href={"/about"}>
+          About
         </Link>
+        <Link className="hover:text-gray-500" href={"/privacy-policy"}>
+          Privacy Policy
+        </Link>
+        <span className="mt-10 text-sm text-gray-600">
+          © 2023 All Rights Reserved.
+        </span>
       </div>
     </LeftbarContainer>
   );

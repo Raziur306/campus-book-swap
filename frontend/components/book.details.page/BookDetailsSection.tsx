@@ -85,7 +85,7 @@ const BookDetails = () => {
           <BookMenuItemP>OverView</BookMenuItemP>
         </div>
 
-        <div className="grid grid-cols-4 gap-5 mt-5">
+        <div className="grid grid-cols-3 gap-5 mt-5">
           <OverViewItemBox>
             <p className="font-semibold text-gray-600">Publish Date</p>
             <p className="font-semibold">{selectedBook?.publishedYear}</p>
@@ -93,10 +93,6 @@ const BookDetails = () => {
           <OverViewItemBox>
             <p className="font-semibold text-gray-600">Publisher</p>
             <p className="font-semibold">{selectedBook?.publisher}</p>
-          </OverViewItemBox>
-          <OverViewItemBox>
-            <p className="font-semibold text-gray-600">Number of Request</p>
-            <p className="font-semibold">0</p>
           </OverViewItemBox>
           <OverViewItemBox>
             <p className="font-semibold text-gray-600">Edition</p>

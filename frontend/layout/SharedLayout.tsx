@@ -15,21 +15,15 @@ export default function SharedLayout({
         <title>{`${title} | Campus Book Swap`}</title>
         <meta name="description" content={description} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link
-          rel="icon"
-          type="image/*"
-          href="/main-logo.jpg"
-        />
+        <link rel="icon" type="image/*" href="/main-logo.jpg" />
       </Head>
       <div className="flex gap-5 bg-gray-200 items-start">
         {SideBar}
-        <div className="w-full overflow-hidden">
+        <div className="w-full overflow-y-auto relative">
           <nav> {TopBar}</nav>
           <main>{children}</main>
         </div>
       </div>
-
-      {/* <footer></footer> */}
     </>
   );
 }
