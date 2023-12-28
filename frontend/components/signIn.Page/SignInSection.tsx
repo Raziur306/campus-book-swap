@@ -56,7 +56,7 @@ const SignInSection = () => {
     const data = await res.json();
     const rememberMe = values?.rememberMe || false;
     cookies.set("user_token", data.token, {
-      expires: rememberMe ? undefined : CookiesExpires,
+      expires: rememberMe ? CookiesExpires : undefined,
     });
     router.push("/");
   };

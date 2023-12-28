@@ -33,7 +33,7 @@ const SideBar = ({
 
   const handleLogoutClick = () => {
     cookies.remove("user_token");
-    router.refresh();
+    router.push("/sign-in");
   };
 
   return (
