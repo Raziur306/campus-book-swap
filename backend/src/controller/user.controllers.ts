@@ -113,9 +113,7 @@ const verifyEmail = async (req: express.Request, res: express.Response) => {
 //contribute books
 const contributeBook = async (req: express.Request, res: express.Response) => {
   try {
-    let token = req.headers.authorization;
-    token = token.split(" ").pop();
-    const { id } = jwt.verify(token, JWT_KEY) as JwtDecodedType;
+    const user = res.locals.user;
 
     const file = req.file;
     if (!file) {
@@ -161,7 +159,7 @@ const contributeBook = async (req: express.Request, res: express.Response) => {
         price: Number(price),
         purpose: purpose,
         coverImg: downloadUrl,
-        userId: "655cf417e0f39cb02b7f1ff2",
+        userId: user.id,
       },
     });
 
@@ -176,12 +174,9 @@ const contributeBook = async (req: express.Request, res: express.Response) => {
 //get all books
 const getAllBooks = async (req: express.Request, res: express.Response) => {
   try {
-    let token = req.headers.authorization;
-    token = token.split(" ")[1];
+    const { user } = res.locals;
 
-    const decoded = jwt.verify(token, JWT_KEY) as JwtDecodedType;
-
-    const userEmail = decoded?.email || "";
+    const userEmail = user?.email || "";
     const userDomain = userEmail.split("@")[1];
 
     const books = await prisma.book.findMany({
@@ -190,7 +185,7 @@ const getAllBooks = async (req: express.Request, res: express.Response) => {
       },
       where: {
         userId: {
-          not: decoded?.id,
+          not: user?.id,
         },
         status: {
           not: "Pending",
@@ -212,18 +207,15 @@ const getAllBooks = async (req: express.Request, res: express.Response) => {
 //user contribution
 const getContribution = async (req: express.Request, res: express.Response) => {
   try {
-    let token = req.headers.authorization;
-    token = token.split(" ")[1];
+    const { user } = res.locals;
 
-    const decoded = jwt.verify(token, JWT_KEY) as JwtDecodedType;
-
-    if (!decoded?.id) {
+    if (!user?.id) {
       return res.status(403).json({ status: false, message: "Access denied." });
     }
 
     const books = await prisma.book.findMany({
       where: {
-        userId: decoded?.id,
+        userId: user?.id,
       },
       orderBy: {
         createdAt: "desc",
@@ -238,13 +230,10 @@ const getContribution = async (req: express.Request, res: express.Response) => {
 
 const getProfileData = async (req: express.Request, res: express.Response) => {
   try {
-    let token = req.headers.authorization;
-    token = token.split(" ")[1];
-    const decoded = jwt.verify(token, JWT_KEY) as JwtDecodedType;
-
+    const { user } = res.locals;
     const data = await prisma.user.findFirst({
       where: {
-        id: decoded.id,
+        id: user.id,
       },
       select: {
         name: true,
@@ -258,14 +247,14 @@ const getProfileData = async (req: express.Request, res: express.Response) => {
 
     const books = await prisma.book.count({
       where: {
-        userId: decoded?.id,
+        userId: user?.id,
       },
     });
 
     const connections = await prisma.conversation.count({
       where: {
         userIds: {
-          has: decoded?.id,
+          has: user?.id,
         },
         messages: {
           some: {},
@@ -308,14 +297,11 @@ const updateProfile = async (req: express.Request, res: express.Response) => {
 
 const updatePassword = async (req: express.Request, res: express.Response) => {
   try {
-    let token = req.headers.authorization;
-    token = token.split(" ")[1];
-
-    const decoded = jwt.verify(token, JWT_KEY) as JwtDecodedType;
+    const { user } = res.locals;
 
     const exitingUser = await prisma.user.findFirst({
       where: {
-        id: decoded.id,
+        id: user.id,
       },
     });
 
@@ -333,7 +319,7 @@ const updatePassword = async (req: express.Request, res: express.Response) => {
 
     await prisma.user.update({
       where: {
-        id: decoded.id,
+        id: user.id,
       },
       data: {
         password: hashedPassword,
