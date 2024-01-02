@@ -98,7 +98,7 @@ const ChatModal = ({
       if (res.ok) {
         setNewMessage("");
         const data = await res.json();
-        setMessages([...messages, data.message]);
+        setMessages([...messages, data.newMessage]);
       }
     } catch (error) {
       console.log("Modal message error");
@@ -121,7 +121,6 @@ const ChatModal = ({
     }
   });
 
-  console.log(messages);
 
   return (
     <div className=" fixed inset-0 flex items-center justify-center backdrop-blur-sm z-50">
