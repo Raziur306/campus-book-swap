@@ -83,3 +83,8 @@ export interface ChatCardPropsType {
 export interface ConversationSectionPropsType {
   conversationId?: string;
 }
+
+export interface ConversationReportModalPropsType {
+  handleModalClose: () => void;
+  conversationId?: string;
+}

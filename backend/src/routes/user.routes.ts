@@ -20,6 +20,7 @@ import {
   deleteMyBook,
   resetNotification,
   getNotification,
+  reportConversation,
 } from "../controller";
 
 import express from "express";
@@ -59,6 +60,8 @@ userRouter.delete('/delete-book/:bookId', auth, deleteMyBook);
 userRouter.put('/reset-notification', auth, resetNotification);
 
 userRouter.get('/notification', auth, getNotification);
+
+userRouter.post('/report-conversation/:conversationId', auth, reportConversation)
 
 //upload file and store contribute data
 const storage = multer.memoryStorage();

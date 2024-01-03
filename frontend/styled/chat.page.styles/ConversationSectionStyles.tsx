@@ -108,3 +108,16 @@ export const ConversationReceivedMsg = styled(ConversationTilesStyle)`
     max-width: 70%;
   }
 `;
+
+export const ConversationReport = styled.button`
+  margin-left: auto;
+  padding: 8px;
+  font-family: ${(props: any) => props.theme.fonts.$poppins};
+  background: red;
+  border-radius: 5px;
+  color: #fff;
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    background: #ff0000c6;
+  }
+`;

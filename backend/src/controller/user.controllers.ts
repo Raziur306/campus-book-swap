@@ -449,6 +449,25 @@ const resetNotification = async (
   }
 };
 
+const reportConversation = async (
+  req: express.Request,
+  res: express.Response
+) => {
+  try {
+    const { conversationId } = req.params;
+    const { user } = res.locals;
+    await prisma.report.create({
+      data: {
+        conversationId,
+        reporterId: user.id,
+      },
+    });
+    res.status(201).json({ message: "Report submitted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 export {
   registerUser,
   loginUser,
@@ -464,4 +483,5 @@ export {
   deleteMyBook,
   getNotification,
   resetNotification,
+  reportConversation,
 };
