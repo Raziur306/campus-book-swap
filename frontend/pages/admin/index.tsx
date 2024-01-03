@@ -5,7 +5,6 @@ import {
   RecentUserCard,
   SideBar,
   StatisticsCards,
-  VisitorsChart,
 } from "@/components/admin.page";
 import { LargeCardContainer, LargeCardSubContainer } from "@/styled";
 

@@ -15,6 +15,7 @@ import { AdminTopBar } from ".";
 import { CommonApiContext } from "@/context/CommonApiContext";
 import { cookies } from "@/config/Cookies";
 import Group from "@/public/admin/group";
+import Flag from "@/public/admin/flag";
 
 const SideBar = ({
   children,
@@ -75,6 +76,16 @@ const SideBar = ({
             >
               <Group />
               <span>Users List</span>
+            </MenuItemWrapper>
+          </Link>
+          <Link href={"/admin/complains"}>
+            <MenuItemWrapper
+              className={`${
+                path?.includes("/admin/complains") ? "active" : ""
+              }`}
+            >
+              <Flag />
+              <span>Complains</span>
             </MenuItemWrapper>
           </Link>
           <MenuItemLogoutStyle onClick={handleLogoutClick}>

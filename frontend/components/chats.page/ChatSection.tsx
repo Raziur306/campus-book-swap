@@ -76,7 +76,7 @@ const ConversationSection = ({
     scrollToBottom();
   }, [messages]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setNewMessage(e.target.value);
   };
 
@@ -183,7 +183,7 @@ const ConversationSection = ({
             </ConversationWrapper>
             {!isLoading && (
               <ConversationInputFieldWrapper onSubmit={sendMessage}>
-                <input
+                <textarea
                   value={newMessage}
                   onChange={handleChange}
                   placeholder="Enter message..."
@@ -214,7 +214,7 @@ const ConversationSection = ({
       </ConversationContainer>
       {isReportModalOpen && (
         <ReportModal
-        conversationId={conversationId}
+          conversationId={conversationId}
           handleModalClose={handleReportModalClose}
         />
       )}

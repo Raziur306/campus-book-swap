@@ -3,7 +3,7 @@ import React from "react";
 
 const ViewDetailsDialog = ({ handleDialogClose }: ViewDetailDialogProps) => {
   return (
-    <div className="fixed inset-0 flex items-center justify-center backdrop-blur-sm z-50">
+    <div className="fixed inset-0 flex items-center justify-center bg-black/40 z-50">
       <div className="relative p-4 w-full max-w-md max-h-full ">
         <div className="relative bg-white rounded-lg shadow ">
           <button

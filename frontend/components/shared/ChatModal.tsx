@@ -70,7 +70,7 @@ const ChatModal = ({
     getConversation();
   }, []);
 
-  const handleMessageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleMessageChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setNewMessage(e.target.value);
   };
 
@@ -121,13 +121,12 @@ const ChatModal = ({
     }
   });
 
-
   return (
-    <div className=" fixed inset-0 flex items-center justify-center backdrop-blur-sm z-50">
-      <div className="relative w-full max-w-md max-h-full">
-        <div className="relative bg-gray-200 rounded-lg shadow min-h-36 overflow-hidden">
+    <div className=" fixed inset-0 flex items-center justify-center bg-black/40 z-50">
+      <div className="relative w-full max-w-xl max-h-full">
+        <div className="relative bg-white rounded-lg shadow min-h-36 overflow-hidden">
           <ChatModalContainer>
-            <div className="flex flex-row items-center justify-between bg-white p-2">
+            <div className="flex flex-row items-center justify-between bg-[#f66539] p-2">
               {!isLoading && (
                 <div className="flex flex-row gap-2 items-center">
                   <Image
@@ -137,13 +136,13 @@ const ChatModal = ({
                     src={receiverInfo?.image || "/images/default.jpg"}
                     alt={"Chat Profile"}
                   />
-                  <h3>{receiverInfo?.name}</h3>
+                  <h3 className="text-white">{receiverInfo?.name}</h3>
                 </div>
               )}
               <button
                 onClick={() => handleChatModalClose()}
                 type="button"
-                className="ml-auto text-gray-600 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8  inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                className="border-2 bg-white ml-auto text-gray-600 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8  inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
               >
                 <svg
                   className="w-3 h-3"
@@ -191,9 +190,8 @@ const ChatModal = ({
             </ChatBodyContainer>
             {!isLoading && (
               <ChatModalInputWrapper onSubmit={sendMessage}>
-                <input
+                <textarea
                   onChange={handleMessageChange}
-                  type="text"
                   placeholder="Type your message..."
                   value={newMessage}
                 />

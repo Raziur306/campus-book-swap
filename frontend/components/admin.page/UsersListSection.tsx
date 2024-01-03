@@ -86,7 +86,7 @@ const UsersListSection = () => {
                       height={50}
                       className="rounded-full"
                       alt="User Profile"
-                      src={image || "/images/default.jpg"}
+                      src={image ? image : "/images/default.jpg"}
                     />
                   </td>
                   <td>{name}</td>

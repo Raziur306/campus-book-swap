@@ -67,6 +67,7 @@ model Message {
 model Report {
   id             String       @id @default(auto()) @map("_id") @db.ObjectId
   reporterId     String       @db.ObjectId
+  createdAt      DateTime     @default(now())
   conversationId String       @db.ObjectId
   conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
   reporter       User         @relation(fields: [reporterId], references: [id], onDelete: Cascade)

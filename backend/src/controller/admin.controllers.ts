@@ -251,6 +251,43 @@ const deleteUser = async (req: express.Request, res: express.Response) => {
   }
 };
 
+const getComplain = async (req: express.Request, res: express.Response) => {
+  try {
+    const { user } = res.locals;
+    if (user.role != "admin") {
+      return res.status(401).json({ message: "Unauthorized user" });
+    }
+    const data = await prisma.report.findMany({
+      include: {
+        conversation: {
+          select: {
+            users: {
+              select: {
+                name: true,
+                id: true,
+              },
+            },
+            messages: {
+              select: {
+                id: true,
+                text: true,
+                createdAt: true,
+                senderId: true,
+              },
+              orderBy: {
+                createdAt: "asc",
+              },
+            },
+          },
+        },
+      },
+    });
+    res.status(200).json(data);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 export {
   getStatisticInfo,
   getUsers,
@@ -262,4 +299,5 @@ export {
   deleteBook,
   updateBookStatus,
   deleteUser,
+  getComplain,
 };

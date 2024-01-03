@@ -23,9 +23,12 @@ export const ConversationProfileWrapper = styled.div`
   flex-direction: row;
   align-items: center;
   gap: 10px;
+  background: #fa7b54b9;
+  border-radius: 10px;
   & h3 {
     font-family: ${(props: any) => props.theme.fonts.$poppins};
     font-weight: 600;
+    color: #fff;
   }
 `;
 
@@ -35,7 +38,7 @@ export const ConversationWrapper = styled.div`
   gap: 10px;
   padding: 20px;
   border-radius: 10px;
-  background: #80808020;
+  background: #fff;
   min-height: 60vh;
   max-height: 60vh;
   overflow-y: auto;
@@ -48,14 +51,18 @@ export const ConversationInputFieldWrapper = styled.form`
   gap: 20px;
   background: #fff;
   padding: 15px;
-  & input {
+  & textarea {
     width: 100%;
-    min-height: 60px;
-    border: 1px solid gray;
-    padding: 10px 15px;
+    max-height: 65px;
     border-radius: 50px;
     font-size: 1.3rem;
     font-family: ${(props: any) => props.theme.fonts.$poppins};
+    background: #80808022;
+    outline: none;
+    resize: none;
+    padding-bottom: 0.875rem;
+    padding-top: 0.875rem;
+    padding-left: 1.5rem;
   }
   & button {
     border-radius: 10px;

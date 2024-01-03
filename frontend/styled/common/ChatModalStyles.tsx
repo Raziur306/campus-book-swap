@@ -7,8 +7,8 @@ export const ChatModalContainer = styled.div`
 
 export const ChatBodyContainer = styled.div`
   padding: 15px;
-  max-height: 300px;
-  min-height: 300px;
+  max-height: 500px;
+  min-height: 500px;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
@@ -62,11 +62,16 @@ export const ChatModalInputWrapper = styled.form`
   gap: 20px;
   background: #fff;
   padding: 15px;
-  & input {
+  & textarea {
     width: 100%;
-    border: 1px solid gray;
-    padding: 10px 15px;
-    border-radius: 50px;
+    height: 52px;
+    border-radius: 25px;
+    background: #80808022;
+    outline: none;
+    resize: none;
+    padding-bottom: 0.875rem;
+    padding-top: 0.875rem;
+    padding-left: 1rem;
   }
   & button {
     border-radius: 10px;

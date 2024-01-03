@@ -88,3 +88,9 @@ export interface ConversationReportModalPropsType {
   handleModalClose: () => void;
   conversationId?: string;
 }
+
+export interface ReportChatModalPropsType {
+  messages: any[];
+  handleChatModalClose: () => void;
+  reporterId: string;
+}
