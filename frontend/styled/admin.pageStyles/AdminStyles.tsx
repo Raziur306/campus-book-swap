@@ -29,4 +29,14 @@ export const AdminTopBarContainer = styled.div`
     border-radius: 3px;
     font-size: 0.8rem;
   }
+  & a {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    background: #f00202;
+    color: #fff;
+    padding: 5px;
+    border-radius: 3px;
+    font-size: 0.8rem;
+  }
 `;

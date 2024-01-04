@@ -1,6 +1,7 @@
 import { generateReport } from "../utils";
 import { prisma } from "../config";
 import express from "express";
+import { count } from "console";
 const getStatisticInfo = async (
   req: express.Request,
   res: express.Response
@@ -281,8 +282,68 @@ const getComplain = async (req: express.Request, res: express.Response) => {
           },
         },
       },
+      orderBy: {
+        createdAt: "desc",
+      },
     });
     res.status(200).json(data);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+const bookReportByUser = async (
+  req: express.Request,
+  res: express.Response
+) => {
+  try {
+    const { user } = res.locals;
+    if (user.role != "admin") {
+      return res.status(401).json({ message: "Unauthorized user" });
+    }
+
+    const data = await prisma.user.findMany({
+      select: {
+        book: true,
+        id: true,
+        name: true,
+      },
+    });
+
+    let total = 0;
+
+    const book_report = data.map((user) => {
+      const counts = {
+        approved: 0,
+        pending: 0,
+        rejected: 0,
+      };
+      user.book.forEach((book) => {
+        switch (book.status) {
+          case "Approved": {
+            counts.approved += 1;
+            break;
+          }
+          case "Pending": {
+            counts.pending += 1;
+            break;
+          }
+          case "Rejected": {
+            counts.rejected += 1;
+            break;
+          }
+        }
+      });
+
+      total += counts.approved + counts.rejected + counts.approved;
+
+      return {
+        id: user.id,
+        name: user.name,
+        counts,
+      };
+    });
+    res.status(200).json({ book_report, total });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -300,4 +361,5 @@ export {
   updateBookStatus,
   deleteUser,
   getComplain,
+  bookReportByUser,
 };

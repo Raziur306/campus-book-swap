@@ -32,8 +32,8 @@ const SideBar = ({
     getProfileInfoCall();
   }, []);
 
-  const handleLogoutClick = () => {
-    cookies.remove("user_token");
+  const handleLogoutClick = async () => {
+    await cookies.remove("user_token");
     router.push("/sign-in");
   };
 

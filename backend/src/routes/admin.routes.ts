@@ -10,6 +10,7 @@ import {
   updateBookStatus,
   deleteUser,
   getComplain,
+  bookReportByUser,
 } from "../controller";
 import express from "express";
 import auth from "../middleware/auth";
@@ -38,5 +39,7 @@ adminRouter.post("/update-book-status/:bookId", auth, updateBookStatus);
 adminRouter.post("/delete-user/:userId", auth, deleteUser);
 
 adminRouter.get("/complain", auth, getComplain);
+
+adminRouter.get("/report-by-user", auth, bookReportByUser);
 
 export { adminRouter };
