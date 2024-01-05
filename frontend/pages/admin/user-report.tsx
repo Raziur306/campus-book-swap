@@ -1,15 +1,11 @@
 import { cookies } from "@/config/Cookies";
-import {
-  ReportStyledTable,
-  ReportTitleHeroContainer,
-  ReportTitleTextWrapper,
-} from "@/styled/reportByUser.PageStyles";
+import { ReportStyledTable, ReportTitleHeroContainer, ReportTitleTextWrapper } from "@/styled/userReport.PageStyles";
 import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
-const ReportByUser = () => {
+const UserReport = () => {
   const token = cookies.get("user_token");
   const router = useRouter();
   const [reportData, setReportData] = useState<any>();
@@ -53,8 +49,6 @@ const ReportByUser = () => {
 
     fetchData();
   }, []);
-
-  console.log(reportData);
 
   return (
     <>
@@ -120,4 +114,4 @@ const ReportByUser = () => {
   );
 };
 
-export default ReportByUser;
+export default UserReport;
