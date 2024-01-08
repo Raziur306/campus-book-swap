@@ -9,6 +9,7 @@ import {
 import { JwtDecodedType } from "types";
 import { v4 as uuidv4 } from "uuid";
 import {
+  deleteObject,
   getDownloadURL,
   getStorage,
   ref,
@@ -399,12 +400,17 @@ const deleteMyBook = async (req: express.Request, res: express.Response) => {
     const { bookId } = req.params;
     const user = res.locals.user;
 
-    await prisma.book.delete({
+    const data = await prisma.book.delete({
       where: {
         id: bookId,
         userId: user.id,
       },
     });
+
+    const storage = getStorage();
+    const fileRef = ref(storage, data.coverImg);
+
+    await deleteObject(fileRef);
 
     res.status(202).json({ message: "Deleted successfully" });
   } catch (error) {
