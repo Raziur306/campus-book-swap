@@ -91,7 +91,7 @@ const UsersListSection = () => {
                   </td>
                   <td>{name}</td>
                   <td>{email}</td>
-                  <td>{verified ? "Verified" : "Not Verified"}</td>
+                  <td className={`${verified ? "verified" : "not-verified"}`}>{verified ? "Verified" : "Not Verified"}</td>
                   <td>
                     <button onClick={() => handleUserDeleteClick(id)}>
                       Delete User

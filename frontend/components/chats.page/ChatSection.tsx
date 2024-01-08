@@ -41,7 +41,9 @@ const ConversationSection = ({
       setMessages(conversation.messages);
       setReceiverInfo(conversation.users[0]);
       setIsLoading(false);
-    } catch (error) {}
+    } catch (error) {
+      console.log("Chat section error", error);
+    }
   }, [conversation]);
 
   const getConversationMessage = async () => {
@@ -128,6 +130,7 @@ const ConversationSection = ({
       console.log("Socket io msg trigger error", error);
     }
   });
+
 
   const handleReportBtnClick = () => {
     setIsReportModalOpen(true);

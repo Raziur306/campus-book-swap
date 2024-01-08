@@ -6,6 +6,7 @@ import Image from "next/image";
 import { dateFormatter } from "@/utils/formartDate";
 import { cookies } from "@/config/Cookies";
 import { DeleteBookModal, UpdateBookStatusModal } from ".";
+import ViewBookDetailsModal from "./ViewBookDetailsModal";
 
 const AllBooksSection = () => {
   const token = cookies.get("user_token");
@@ -14,6 +15,8 @@ const AllBooksSection = () => {
   const [selectedBookId, setSelectedBookId] = useState<string>("");
   const [isUpdateStatusModalOpen, setIsUpdateStatusModalOpen] =
     useState<boolean>(false);
+  const [isViewBookModalOpen, setIsViewBookModalOpen] = useState(false);
+  const [selectedBookIndex, setSelectedBookIndex] = useState(0);
   const [status, setStatus] = useState<string>("");
   const [currentPage, setCurrentPage] = useState(1);
   const dataPerPage = 5;
@@ -52,7 +55,14 @@ const AllBooksSection = () => {
     setCurrentPage(index);
   };
 
-  const handleClickView = (id: string) => {};
+  const handleClickView = (index: number) => {
+    setSelectedBookIndex(index);
+    setIsViewBookModalOpen(true);
+  };
+
+  const handleViewModalClose = () => {
+    setIsViewBookModalOpen(false);
+  };
 
   const handleDeleteClick = (id: string) => {
     setSelectedBookId(id);
@@ -118,7 +128,7 @@ const AllBooksSection = () => {
                   <td>
                     <div className="flex flex-row  gap-2">
                       <span
-                        onClick={() => handleClickView(id)}
+                        onClick={() => handleClickView(index)}
                         className={"view"}
                       >
                         View
@@ -175,6 +185,12 @@ const AllBooksSection = () => {
           status={status}
           bookId={selectedBookId}
           handleModalClose={handleModalClose}
+        />
+      )}
+      {isViewBookModalOpen && (
+        <ViewBookDetailsModal
+          handleBookInfoModalClose={handleViewModalClose}
+          bookInfo={visibleContribution[selectedBookIndex]}
         />
       )}
     </>

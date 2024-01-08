@@ -5,11 +5,14 @@ import { PaginationComponent } from "../shared";
 import { cookies } from "@/config/Cookies";
 import { dateFormatter } from "@/utils/formartDate";
 import { DeleteBookModal, UpdateBookStatusModal } from ".";
+import ViewBookDetailsModal from "./ViewBookDetailsModal";
 
 const PendingBooksSection = () => {
   const token = cookies.get("user_token");
   const [bookList, setBookList] = useState<any>([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [isViewBookModalOpen, setIsViewBookModalOpen] = useState(false);
+  const [selectedBookIndex, setSelectedBookIndex] = useState(0);
   const dataPerPage = 5;
   const offset = (currentPage - 1) * dataPerPage;
   const visibleContribution = bookList.slice(offset, offset + dataPerPage);
@@ -51,7 +54,14 @@ const PendingBooksSection = () => {
     setCurrentPage(index);
   };
 
-  const handleClickView = (id: string) => {};
+  const handleClickView = (index: number) => {
+    setSelectedBookIndex(index);
+    setIsViewBookModalOpen(true);
+  };
+
+  const handleViewModalClose = () => {
+    setIsViewBookModalOpen(false);
+  };
 
   const handleDeleteClick = (id: string) => {
     setSelectedBookId(id);
@@ -116,7 +126,7 @@ const PendingBooksSection = () => {
                   <td>
                     <div className="flex flex-row  gap-2">
                       <span
-                        onClick={() => handleClickView(id)}
+                        onClick={() => handleClickView(index)}
                         className={"view"}
                       >
                         View
@@ -169,6 +179,12 @@ const PendingBooksSection = () => {
           status={status}
           bookId={selectedBookId}
           handleModalClose={handleModalClose}
+        />
+      )}
+      {isViewBookModalOpen && (
+        <ViewBookDetailsModal
+          handleBookInfoModalClose={handleViewModalClose}
+          bookInfo={visibleContribution[selectedBookIndex]}
         />
       )}
     </>

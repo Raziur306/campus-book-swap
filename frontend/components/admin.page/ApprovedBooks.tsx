@@ -5,6 +5,7 @@ import { cookies } from "@/config/Cookies";
 import { BooksInDetailsTable } from "@/styled";
 import Image from "next/image";
 import { DeleteBookModal } from ".";
+import ViewBookDetailsModal from "./ViewBookDetailsModal";
 
 const ApprovedBooks = () => {
   const token = cookies.get("user_token");
@@ -12,6 +13,8 @@ const ApprovedBooks = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [selectedBookId, setSelectedBookId] = useState<string>("");
+  const [isViewBookModalOpen, setIsViewBookModalOpen] = useState(false);
+  const [selectedBookIndex, setSelectedBookIndex] = useState(0);
   const dataPerPage = 5;
   const offset = (currentPage - 1) * dataPerPage;
   const visibleContribution = bookList.slice(offset, offset + dataPerPage);
@@ -48,6 +51,15 @@ const ApprovedBooks = () => {
 
   const handleCurrentPage = (index: number) => {
     setCurrentPage(index);
+  };
+
+  const handleClickView = (index: number) => {
+    setSelectedBookIndex(index);
+    setIsViewBookModalOpen(true);
+  };
+
+  const handleViewModalClose = () => {
+    setIsViewBookModalOpen(false);
   };
 
   const handleDeleteClick = (id: string) => {
@@ -104,12 +116,20 @@ const ApprovedBooks = () => {
                   <td>{price}Tk</td>
                   <td>{dateFormatter(createdAt)}</td>
                   <td>
-                    <span
-                      onClick={() => handleDeleteClick(id)}
-                      className={"delete"}
-                    >
-                      Delete
-                    </span>
+                    <div className="flex flex-row gap-1">
+                      <span
+                        onClick={() => handleClickView(index)}
+                        className={"view"}
+                      >
+                        View
+                      </span>
+                      <span
+                        onClick={() => handleDeleteClick(id)}
+                        className={"delete"}
+                      >
+                        Delete
+                      </span>
+                    </div>
                   </td>
                 </tr>
               );
@@ -127,6 +147,12 @@ const ApprovedBooks = () => {
         <DeleteBookModal
           bookId={selectedBookId}
           handleModalClose={handleModalClose}
+        />
+      )}
+      {isViewBookModalOpen && (
+        <ViewBookDetailsModal
+          handleBookInfoModalClose={handleViewModalClose}
+          bookInfo={visibleContribution[selectedBookIndex]}
         />
       )}
     </>

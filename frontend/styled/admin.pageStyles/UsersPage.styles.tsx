@@ -61,6 +61,12 @@ export const UsersStyledTable = styled.table`
     text-align: start;
     font-weight: 400;
     font-size: 1rem;
+    &.verified {
+      color: green;
+    }
+    &.not-verified {
+      color: red;
+    }
     & button {
       padding: 10px 15px;
       border-radius: 20px;

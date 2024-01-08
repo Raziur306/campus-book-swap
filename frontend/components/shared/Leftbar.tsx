@@ -94,10 +94,12 @@ const Leftbar = () => {
 
   return (
     <LeftbarContainer className="md:hidden lg:flex lg:flex-col md:w-0 ">
-      <StyledTitleText>
-        Campus <span>Book</span>
-      </StyledTitleText>
-      <StyledSubTitleText>Swap</StyledSubTitleText>
+      <Link href={"/"}>
+        <StyledTitleText>
+          Campus <span>Book</span>
+        </StyledTitleText>
+        <StyledSubTitleText>Swap</StyledSubTitleText>
+      </Link>
       <div className={"flex flex-col gap-8 mt-20"}>
         <StyledMenuDiv
           onClick={() => router.push("/")}
@@ -144,7 +146,7 @@ const Leftbar = () => {
           Privacy Policy
         </Link>
         <span className="mt-10 text-sm text-gray-600">
-          © 2023 All Rights Reserved.
+          © {new Date().getFullYear()} All Rights Reserved.
         </span>
       </div>
     </LeftbarContainer>
